@@ -16,10 +16,10 @@
 #""
 ## (Comments)
 #Sample Feature Definition Template
-@gui
+@Practice
 Feature: This is my first feature file that is for testing only
 
-  @gui
+  @Practice
   Scenario Outline: Test for a login function
     Given I open URL <url>
     When I Get the title of the website for test case <testCase>

@@ -34,12 +34,12 @@ Feature: Login test for different envs
     And I click menu <menuXPath>
     And I wait for "1" seconds
     Then I click menu <logoutXPath>
-    And I wait for "1" seconds
+    And I wait for "2" seconds
     And Quit the driver
 
     Examples: 
       | testCase | url      | expTitle          | userName     | password          | userNameXPath      | passwordXPath     | loginButtonXPath | userRealName | curUserXPath      | fileName            | menuXPath            | logoutXPath  |
-      | "001"    | "prod"   | "智检 - 工程现场管理协作平台" | "zhijianjt"  | "zhijian2017"     | "prodUsrNameXPath" | "prodUsrPswXPath" | "prodLoginBtn"   | "智检管理员"      | "prodCurUsrXPath" | "zhijian_login_001" | "prodCurUsrDropDown" | "prodLogout" |
-      | "002"    | "longhu" | "龙湖集团 - 龙建"       | "longhu"     | "longhu2018"      | "lhUsrNameXPath"   | "lhUsrPswXPath"   | "lhLoginBtn"     | "龙湖集团管理员"    | "prodCurUsrXPath" | "zhijian_login_002" | "prodCurUsrDropDown" | "prodLogout" |
-      | "003"    | "zl"     | "中梁控股集团"          | "zhongliang" | "zhongliang@2018" | "zlUsrNameXPath"   | "zlUsrPswXPath"   | "zlLoginBtn"     | "中梁"         | "prodCurUsrXPath" | "zhijian_login_003" | "prodCurUsrDropDown" | "prodLogout" |
-      | "004"    | "gzb"    | "中国能建"            | "gzb"        | "gzb@2018"        | "gzbUsrNameXPath"  | "gzbUsrPswXPath"  | "gzbLoginBtn"    | "葛洲坝总部管理员"   | "prodCurUsrXPath" | "zhijian_login_004" | "prodCurUsrDropDown" | "prodLogout" |
+      #| "001"    | "prod"   | "智检 - 工程现场管理协作平台" | "zhijianjt"  | "zhijian2017"     | "prodUsrNameXPath" | "prodUsrPswXPath" | "prodLoginBtn"   | "智检管理员"      | "prodCurUsrXPath" | "zhijian_login_001" | "prodCurUsrDropDown" | "prodLogout" |
+      #| "002"    | "longhu" | "龙湖集团 - 龙建"       | "longhu"     | "longhu2018"      | "lhUsrNameXPath"   | "lhUsrPswXPath"   | "lhLoginBtn"     | "龙湖集团管理员"    | "prodCurUsrXPath" | "zhijian_login_002" | "prodCurUsrDropDown" | "prodLogout" |
+      | "003"    | "zl"     | "中梁控股集团"          | "zhongliang" | "zhongliang@2018" | "zlUsrNameXPath"   | "zlUsrPswXPath"   | "zlLoginBtn"     | "中梁"         | "zlCurUsrXPath" | "zhijian_login_003" | "zlCurUsrDropDown" | "prodLogout" |
+      #| "004"    | "gzb"    | "葛洲坝地产"            | "gzb"        | "gzb@2018"        | "gzbUsrNameXPath"  | "gzbUsrPswXPath"  | "gzbLoginBtn"    | "葛洲坝总部管理员"   | "prodCurUsrXPath" | "zhijian_login_004" | "prodCurUsrDropDown" | "prodLogout" |

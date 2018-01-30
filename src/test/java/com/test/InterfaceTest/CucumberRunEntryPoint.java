@@ -13,8 +13,8 @@ import cucumber.api.junit.Cucumber;
 		//plugin = {"pretty", "html:src/main/resources/CucumberReports/html", "json:src/main/resources/CucumberReports/json/cucumber.json", "junit:target/junit"}, 
 		plugin = {"pretty", "html:target/cucumber", "json:target/cucumber.json"}, 
 		features = {"src/main/resources/Features/"},
-	    glue = {""}
-		//tags = {"@interface"}
+	    glue = {""},
+		tags = {"@gui"}
 		)
 
 public class CucumberRunEntryPoint {
