@@ -21,9 +21,9 @@ public class WebUtil {
 	static Logger log = Logger.getLogger("WebUtil.class");
 	
 	//protected WebDriver driver = SelectBrowser.selectIE();
-	//protected WebDriver driver = SelectBrowser.selectChrome();
+	protected WebDriver driver = SelectBrowser.selectChrome();
 	//protected ScreenCaptureHtmlUnitDriver driver = SelectBrowser.selectGhost();
-	protected WebDriver driver = SelectBrowser.selectChromeHeadless();
+	//protected WebDriver driver = SelectBrowser.selectChromeHeadless();
 	
 	public Boolean isElementPresent(String xPath) throws InterruptedException {
 		By path = By.xpath(xPath); 
