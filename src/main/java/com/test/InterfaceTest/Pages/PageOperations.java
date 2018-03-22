@@ -33,7 +33,7 @@ public class PageOperations {
 	
 	@FindBy(how = How.ID, id = "su")
 	WebElement frontPageSearchButton;
-	private String configPath = "/Configuration/zhijian.properties";
+	private String configPath = "/Configuration/GUI_zhijian.properties";
 	
 //	protected WebDriver driver;
 //	

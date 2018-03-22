@@ -28,7 +28,7 @@ public class GetConfigProperties {
 	}
 	
 //	public static void main (String[] argus) throws IOException {
-//		log.info(getValue("/Configuration/zhijian.properties","prodUsrNameXPath"));
+//		log.info(getValue("/Configuration/AppApi_zhijian.properties","deviceIdLength"));
 //	}
 
 }

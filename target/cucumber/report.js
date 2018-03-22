@@ -1,4 +1,4 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("Gui/ZhijianLogin.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("Gui/GUI_ZJLogin.feature");
 formatter.feature({
   "comments": [
     {
@@ -142,12 +142,12 @@ formatter.step({
 });
 formatter.step({
   "line": 32,
-  "name": "I verify \u003cuserRealName\u003e can be found in \u003ccurUserXPath\u003e",
+  "name": "Capture the current page and save it as \u003cfileName\u003e",
   "keyword": "Then "
 });
 formatter.step({
   "line": 33,
-  "name": "Capture the current page and save it as \u003cfileName\u003e",
+  "name": "I verify \u003cuserRealName\u003e can be found in \u003ccurUserXPath\u003e",
   "keyword": "Then "
 });
 formatter.step({
@@ -205,12 +205,12 @@ formatter.examples({
         "\"001\"",
         "\"prod\"",
         "\"智检 - 工程现场管理协作平台\"",
-        "\"zhijianjt\"",
-        "\"zhijian2017\"",
+        "\"kentestgrp10\"",
+        "\"12345678\"",
         "\"prodUsrNameXPath\"",
         "\"prodUsrPswXPath\"",
         "\"prodLoginBtn\"",
-        "\"智检管理员\"",
+        "\"kentestgrp10\"",
         "\"prodCurUsrXPath\"",
         "\"zhijian_login_001\"",
         "\"prodCurUsrDropDown\"",
@@ -280,7 +280,7 @@ formatter.examples({
   "keyword": "Examples"
 });
 formatter.before({
-  "duration": 248775,
+  "duration": 254520,
   "status": "passed"
 });
 formatter.scenario({
@@ -329,7 +329,7 @@ formatter.step({
 });
 formatter.step({
   "line": 28,
-  "name": "I input \"zhijianjt\" into \"prodUsrNameXPath\"",
+  "name": "I input \"kentestgrp10\" into \"prodUsrNameXPath\"",
   "matchedColumns": [
     3,
     5
@@ -338,7 +338,7 @@ formatter.step({
 });
 formatter.step({
   "line": 29,
-  "name": "I input \"zhijian2017\" into \"prodUsrPswXPath\"",
+  "name": "I input \"12345678\" into \"prodUsrPswXPath\"",
   "matchedColumns": [
     4,
     6
@@ -360,18 +360,18 @@ formatter.step({
 });
 formatter.step({
   "line": 32,
-  "name": "I verify \"智检管理员\" can be found in \"prodCurUsrXPath\"",
+  "name": "Capture the current page and save it as \"zhijian_login_001\"",
   "matchedColumns": [
-    8,
-    9
+    10
   ],
   "keyword": "Then "
 });
 formatter.step({
   "line": 33,
-  "name": "Capture the current page and save it as \"zhijian_login_001\"",
+  "name": "I verify \"kentestgrp10\" can be found in \"prodCurUsrXPath\"",
   "matchedColumns": [
-    10
+    8,
+    9
   ],
   "keyword": "Then "
 });
@@ -416,7 +416,7 @@ formatter.match({
   "location": "PageOperations.i_open_URL(String)"
 });
 formatter.result({
-  "duration": 5460320855,
+  "duration": 4974902676,
   "status": "passed"
 });
 formatter.match({
@@ -429,7 +429,7 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 1000774653,
+  "duration": 1002776322,
   "status": "passed"
 });
 formatter.match({
@@ -442,7 +442,7 @@ formatter.match({
   "location": "PageOperations.i_Get_the_title_of_the_website_for_test_case(String)"
 });
 formatter.result({
-  "duration": 25642394,
+  "duration": 39353322,
   "status": "passed"
 });
 formatter.match({
@@ -459,41 +459,41 @@ formatter.match({
   "location": "PageOperations.verify_the_title_value_is_correct_as_expected_for_test_case(String,String)"
 });
 formatter.result({
-  "duration": 4223033,
+  "duration": 4552626,
   "status": "passed"
 });
 formatter.match({
   "arguments": [
     {
-      "val": "zhijianjt",
+      "val": "kentestgrp10",
       "offset": 9
     },
     {
       "val": "prodUsrNameXPath",
-      "offset": 26
+      "offset": 29
     }
   ],
   "location": "PageOperations.i_input_into(String,String)"
 });
 formatter.result({
-  "duration": 282314700,
+  "duration": 242073649,
   "status": "passed"
 });
 formatter.match({
   "arguments": [
     {
-      "val": "zhijian2017",
+      "val": "12345678",
       "offset": 9
     },
     {
       "val": "prodUsrPswXPath",
-      "offset": 28
+      "offset": 25
     }
   ],
   "location": "PageOperations.i_input_into(String,String)"
 });
 formatter.result({
-  "duration": 200820058,
+  "duration": 197651683,
   "status": "passed"
 });
 formatter.match({
@@ -506,7 +506,7 @@ formatter.match({
   "location": "PageOperations.i_click_button(String)"
 });
 formatter.result({
-  "duration": 122974539,
+  "duration": 126812584,
   "status": "passed"
 });
 formatter.match({
@@ -519,24 +519,7 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 2000865379,
-  "status": "passed"
-});
-formatter.match({
-  "arguments": [
-    {
-      "val": "智检管理员",
-      "offset": 10
-    },
-    {
-      "val": "prodCurUsrXPath",
-      "offset": 34
-    }
-  ],
-  "location": "PageOperations.i_verify_can_be_found_in(String,String)"
-});
-formatter.result({
-  "duration": 114134783,
+  "duration": 2000812822,
   "status": "passed"
 });
 formatter.match({
@@ -549,7 +532,24 @@ formatter.match({
   "location": "PageOperations.capture_the_current_page_and_save_it_as(String)"
 });
 formatter.result({
-  "duration": 451146525,
+  "duration": 372639173,
+  "status": "passed"
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "kentestgrp10",
+      "offset": 10
+    },
+    {
+      "val": "prodCurUsrXPath",
+      "offset": 41
+    }
+  ],
+  "location": "PageOperations.i_verify_can_be_found_in(String,String)"
+});
+formatter.result({
+  "duration": 81803578,
   "status": "passed"
 });
 formatter.match({
@@ -562,7 +562,7 @@ formatter.match({
   "location": "PageOperations.i_click_menu(String)"
 });
 formatter.result({
-  "duration": 105341006,
+  "duration": 102949272,
   "status": "passed"
 });
 formatter.match({
@@ -575,7 +575,7 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 1000791895,
+  "duration": 1000682688,
   "status": "passed"
 });
 formatter.match({
@@ -588,7 +588,7 @@ formatter.match({
   "location": "PageOperations.i_click_menu(String)"
 });
 formatter.result({
-  "duration": 132599211,
+  "duration": 106616414,
   "status": "passed"
 });
 formatter.match({
@@ -601,22 +601,22 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 2001110871,
+  "duration": 2000825548,
   "status": "passed"
 });
 formatter.match({
   "location": "PageOperations.quit_the_driver()"
 });
 formatter.result({
-  "duration": 138722138,
+  "duration": 95770985,
   "status": "passed"
 });
 formatter.after({
-  "duration": 144093,
+  "duration": 150249,
   "status": "passed"
 });
 formatter.before({
-  "duration": 79231,
+  "duration": 79640,
   "status": "passed"
 });
 formatter.scenario({
@@ -696,18 +696,18 @@ formatter.step({
 });
 formatter.step({
   "line": 32,
-  "name": "I verify \"龙湖集团管理员\" can be found in \"prodCurUsrXPath\"",
+  "name": "Capture the current page and save it as \"zhijian_login_002\"",
   "matchedColumns": [
-    8,
-    9
+    10
   ],
   "keyword": "Then "
 });
 formatter.step({
   "line": 33,
-  "name": "Capture the current page and save it as \"zhijian_login_002\"",
+  "name": "I verify \"龙湖集团管理员\" can be found in \"prodCurUsrXPath\"",
   "matchedColumns": [
-    10
+    8,
+    9
   ],
   "keyword": "Then "
 });
@@ -752,7 +752,7 @@ formatter.match({
   "location": "PageOperations.i_open_URL(String)"
 });
 formatter.result({
-  "duration": 4559422758,
+  "duration": 4060729726,
   "status": "passed"
 });
 formatter.match({
@@ -765,7 +765,7 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 1000856347,
+  "duration": 1000795581,
   "status": "passed"
 });
 formatter.match({
@@ -778,7 +778,7 @@ formatter.match({
   "location": "PageOperations.i_Get_the_title_of_the_website_for_test_case(String)"
 });
 formatter.result({
-  "duration": 28341572,
+  "duration": 21021718,
   "status": "passed"
 });
 formatter.match({
@@ -795,7 +795,7 @@ formatter.match({
   "location": "PageOperations.verify_the_title_value_is_correct_as_expected_for_test_case(String,String)"
 });
 formatter.result({
-  "duration": 197871,
+  "duration": 217984,
   "status": "passed"
 });
 formatter.match({
@@ -812,7 +812,7 @@ formatter.match({
   "location": "PageOperations.i_input_into(String,String)"
 });
 formatter.result({
-  "duration": 199635704,
+  "duration": 178426384,
   "status": "passed"
 });
 formatter.match({
@@ -829,7 +829,7 @@ formatter.match({
   "location": "PageOperations.i_input_into(String,String)"
 });
 formatter.result({
-  "duration": 221864612,
+  "duration": 211629762,
   "status": "passed"
 });
 formatter.match({
@@ -842,7 +842,7 @@ formatter.match({
   "location": "PageOperations.i_click_button(String)"
 });
 formatter.result({
-  "duration": 131563056,
+  "duration": 120148673,
   "status": "passed"
 });
 formatter.match({
@@ -855,7 +855,20 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 2000635076,
+  "duration": 2000682689,
+  "status": "passed"
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "zhijian_login_002",
+      "offset": 41
+    }
+  ],
+  "location": "PageOperations.capture_the_current_page_and_save_it_as(String)"
+});
+formatter.result({
+  "duration": 365580755,
   "status": "passed"
 });
 formatter.match({
@@ -872,20 +885,7 @@ formatter.match({
   "location": "PageOperations.i_verify_can_be_found_in(String,String)"
 });
 formatter.result({
-  "duration": 121197802,
-  "status": "passed"
-});
-formatter.match({
-  "arguments": [
-    {
-      "val": "zhijian_login_002",
-      "offset": 41
-    }
-  ],
-  "location": "PageOperations.capture_the_current_page_and_save_it_as(String)"
-});
-formatter.result({
-  "duration": 404804824,
+  "duration": 123887655,
   "status": "passed"
 });
 formatter.match({
@@ -898,7 +898,7 @@ formatter.match({
   "location": "PageOperations.i_click_menu(String)"
 });
 formatter.result({
-  "duration": 138411783,
+  "duration": 111756078,
   "status": "passed"
 });
 formatter.match({
@@ -911,7 +911,7 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 1000669971,
+  "duration": 1000801328,
   "status": "passed"
 });
 formatter.match({
@@ -924,7 +924,7 @@ formatter.match({
   "location": "PageOperations.i_click_menu(String)"
 });
 formatter.result({
-  "duration": 180108845,
+  "duration": 121905272,
   "status": "passed"
 });
 formatter.match({
@@ -937,22 +937,22 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 2000334575,
+  "duration": 2000979492,
   "status": "passed"
 });
 formatter.match({
   "location": "PageOperations.quit_the_driver()"
 });
 formatter.result({
-  "duration": 126775557,
+  "duration": 47326369,
   "status": "passed"
 });
 formatter.after({
-  "duration": 48031,
+  "duration": 55830,
   "status": "passed"
 });
 formatter.before({
-  "duration": 67326,
+  "duration": 77998,
   "status": "passed"
 });
 formatter.scenario({
@@ -1032,18 +1032,18 @@ formatter.step({
 });
 formatter.step({
   "line": 32,
-  "name": "I verify \"中梁\" can be found in \"zlCurUsrXPath\"",
+  "name": "Capture the current page and save it as \"zhijian_login_003\"",
   "matchedColumns": [
-    8,
-    9
+    10
   ],
   "keyword": "Then "
 });
 formatter.step({
   "line": 33,
-  "name": "Capture the current page and save it as \"zhijian_login_003\"",
+  "name": "I verify \"中梁\" can be found in \"zlCurUsrXPath\"",
   "matchedColumns": [
-    10
+    8,
+    9
   ],
   "keyword": "Then "
 });
@@ -1088,7 +1088,7 @@ formatter.match({
   "location": "PageOperations.i_open_URL(String)"
 });
 formatter.result({
-  "duration": 4521417924,
+  "duration": 4537805470,
   "status": "passed"
 });
 formatter.match({
@@ -1101,7 +1101,7 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 1002119932,
+  "duration": 1001637549,
   "status": "passed"
 });
 formatter.match({
@@ -1114,7 +1114,7 @@ formatter.match({
   "location": "PageOperations.i_Get_the_title_of_the_website_for_test_case(String)"
 });
 formatter.result({
-  "duration": 16258287,
+  "duration": 24333352,
   "status": "passed"
 });
 formatter.match({
@@ -1131,7 +1131,7 @@ formatter.match({
   "location": "PageOperations.verify_the_title_value_is_correct_as_expected_for_test_case(String,String)"
 });
 formatter.result({
-  "duration": 116999,
+  "duration": 798044,
   "status": "passed"
 });
 formatter.match({
@@ -1148,7 +1148,7 @@ formatter.match({
   "location": "PageOperations.i_input_into(String,String)"
 });
 formatter.result({
-  "duration": 236944292,
+  "duration": 259518949,
   "status": "passed"
 });
 formatter.match({
@@ -1165,7 +1165,7 @@ formatter.match({
   "location": "PageOperations.i_input_into(String,String)"
 });
 formatter.result({
-  "duration": 239265790,
+  "duration": 229816454,
   "status": "passed"
 });
 formatter.match({
@@ -1178,7 +1178,7 @@ formatter.match({
   "location": "PageOperations.i_click_button(String)"
 });
 formatter.result({
-  "duration": 112872841,
+  "duration": 121890494,
   "status": "passed"
 });
 formatter.match({
@@ -1191,7 +1191,20 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 2000479488,
+  "duration": 2000823085,
+  "status": "passed"
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "zhijian_login_003",
+      "offset": 41
+    }
+  ],
+  "location": "PageOperations.capture_the_current_page_and_save_it_as(String)"
+});
+formatter.result({
+  "duration": 380819530,
   "status": "passed"
 });
 formatter.match({
@@ -1208,20 +1221,7 @@ formatter.match({
   "location": "PageOperations.i_verify_can_be_found_in(String,String)"
 });
 formatter.result({
-  "duration": 95344400,
-  "status": "passed"
-});
-formatter.match({
-  "arguments": [
-    {
-      "val": "zhijian_login_003",
-      "offset": 41
-    }
-  ],
-  "location": "PageOperations.capture_the_current_page_and_save_it_as(String)"
-});
-formatter.result({
-  "duration": 422933035,
+  "duration": 77824445,
   "status": "passed"
 });
 formatter.match({
@@ -1234,7 +1234,7 @@ formatter.match({
   "location": "PageOperations.i_click_menu(String)"
 });
 formatter.result({
-  "duration": 98612151,
+  "duration": 98330964,
   "status": "passed"
 });
 formatter.match({
@@ -1247,7 +1247,7 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 1000330059,
+  "duration": 1000307887,
   "status": "passed"
 });
 formatter.match({
@@ -1260,7 +1260,7 @@ formatter.match({
   "location": "PageOperations.i_click_menu(String)"
 });
 formatter.result({
-  "duration": 134107878,
+  "duration": 148078969,
   "status": "passed"
 });
 formatter.match({
@@ -1273,22 +1273,22 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 2000283260,
+  "duration": 2000693362,
   "status": "passed"
 });
 formatter.match({
   "location": "PageOperations.quit_the_driver()"
 });
 formatter.result({
-  "duration": 2322181248,
+  "duration": 92811162,
   "status": "passed"
 });
 formatter.after({
-  "duration": 91136,
+  "duration": 42283,
   "status": "passed"
 });
 formatter.before({
-  "duration": 88673,
+  "duration": 48031,
   "status": "passed"
 });
 formatter.scenario({
@@ -1368,18 +1368,18 @@ formatter.step({
 });
 formatter.step({
   "line": 32,
-  "name": "I verify \"地产总部管理员\" can be found in \"prodCurUsrXPath\"",
+  "name": "Capture the current page and save it as \"zhijian_login_004\"",
   "matchedColumns": [
-    8,
-    9
+    10
   ],
   "keyword": "Then "
 });
 formatter.step({
   "line": 33,
-  "name": "Capture the current page and save it as \"zhijian_login_004\"",
+  "name": "I verify \"地产总部管理员\" can be found in \"prodCurUsrXPath\"",
   "matchedColumns": [
-    10
+    8,
+    9
   ],
   "keyword": "Then "
 });
@@ -1424,7 +1424,7 @@ formatter.match({
   "location": "PageOperations.i_open_URL(String)"
 });
 formatter.result({
-  "duration": 4467397833,
+  "duration": 3890831816,
   "status": "passed"
 });
 formatter.match({
@@ -1437,7 +1437,7 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 1000582119,
+  "duration": 1000565692,
   "status": "passed"
 });
 formatter.match({
@@ -1450,7 +1450,7 @@ formatter.match({
   "location": "PageOperations.i_Get_the_title_of_the_website_for_test_case(String)"
 });
 formatter.result({
-  "duration": 14632212,
+  "duration": 18838592,
   "status": "passed"
 });
 formatter.match({
@@ -1467,7 +1467,7 @@ formatter.match({
   "location": "PageOperations.verify_the_title_value_is_correct_as_expected_for_test_case(String,String)"
 });
 formatter.result({
-  "duration": 250007,
+  "duration": 190890,
   "status": "passed"
 });
 formatter.match({
@@ -1484,7 +1484,7 @@ formatter.match({
   "location": "PageOperations.i_input_into(String,String)"
 });
 formatter.result({
-  "duration": 191011472,
+  "duration": 160450697,
   "status": "passed"
 });
 formatter.match({
@@ -1501,7 +1501,7 @@ formatter.match({
   "location": "PageOperations.i_input_into(String,String)"
 });
 formatter.result({
-  "duration": 190398562,
+  "duration": 186541470,
   "status": "passed"
 });
 formatter.match({
@@ -1514,7 +1514,7 @@ formatter.match({
   "location": "PageOperations.i_click_button(String)"
 });
 formatter.result({
-  "duration": 121296738,
+  "duration": 123994389,
   "status": "passed"
 });
 formatter.match({
@@ -1527,7 +1527,20 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 2000511099,
+  "duration": 2001625645,
+  "status": "passed"
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "zhijian_login_004",
+      "offset": 41
+    }
+  ],
+  "location": "PageOperations.capture_the_current_page_and_save_it_as(String)"
+});
+formatter.result({
+  "duration": 394451544,
   "status": "passed"
 });
 formatter.match({
@@ -1544,20 +1557,7 @@ formatter.match({
   "location": "PageOperations.i_verify_can_be_found_in(String,String)"
 });
 formatter.result({
-  "duration": 105789706,
-  "status": "passed"
-});
-formatter.match({
-  "arguments": [
-    {
-      "val": "zhijian_login_004",
-      "offset": 41
-    }
-  ],
-  "location": "PageOperations.capture_the_current_page_and_save_it_as(String)"
-});
-formatter.result({
-  "duration": 487312222,
+  "duration": 79941476,
   "status": "passed"
 });
 formatter.match({
@@ -1570,7 +1570,7 @@ formatter.match({
   "location": "PageOperations.i_click_menu(String)"
 });
 formatter.result({
-  "duration": 94428528,
+  "duration": 104302745,
   "status": "passed"
 });
 formatter.match({
@@ -1583,7 +1583,7 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 1000764801,
+  "duration": 1000276688,
   "status": "passed"
 });
 formatter.match({
@@ -1596,7 +1596,7 @@ formatter.match({
   "location": "PageOperations.i_click_menu(String)"
 });
 formatter.result({
-  "duration": 126811271,
+  "duration": 133807780,
   "status": "passed"
 });
 formatter.match({
@@ -1609,18 +1609,685 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 2000884673,
+  "duration": 2000502882,
   "status": "passed"
 });
 formatter.match({
   "location": "PageOperations.quit_the_driver()"
 });
 formatter.result({
-  "duration": 2159444844,
+  "duration": 79291219,
   "status": "passed"
 });
 formatter.after({
-  "duration": 69788,
+  "duration": 79641,
+  "status": "passed"
+});
+formatter.uri("Interface/AppApi_ZJLogin.feature");
+formatter.feature({
+  "comments": [
+    {
+      "line": 1,
+      "value": "#Author: your.email@your.domain.com"
+    },
+    {
+      "line": 2,
+      "value": "#Keywords Summary :"
+    },
+    {
+      "line": 3,
+      "value": "#Feature: List of scenarios."
+    },
+    {
+      "line": 4,
+      "value": "#Scenario: Business rule through list of steps with arguments."
+    },
+    {
+      "line": 5,
+      "value": "#Given: Some precondition step"
+    },
+    {
+      "line": 6,
+      "value": "#When: Some key actions"
+    },
+    {
+      "line": 7,
+      "value": "#Then: To observe outcomes or validation"
+    },
+    {
+      "line": 8,
+      "value": "#And,But: To enumerate more Given,When,Then steps"
+    },
+    {
+      "line": 9,
+      "value": "#Scenario Outline: List of steps for data-driven as an Examples and \u003cplaceholder\u003e"
+    },
+    {
+      "line": 10,
+      "value": "#Examples: Container for s table"
+    },
+    {
+      "line": 11,
+      "value": "#Background: List of steps run before each of the scenarios"
+    },
+    {
+      "line": 12,
+      "value": "#\"\"\" (Doc Strings)"
+    },
+    {
+      "line": 13,
+      "value": "#| (Data Tables)"
+    },
+    {
+      "line": 14,
+      "value": "#@ (Tags/Labels):To group Scenarios"
+    },
+    {
+      "line": 15,
+      "value": "#\u003c\u003e (placeholder)"
+    },
+    {
+      "line": 16,
+      "value": "#\"\""
+    },
+    {
+      "line": 17,
+      "value": "## (Comments)"
+    },
+    {
+      "line": 18,
+      "value": "#Sample Feature Definition Template"
+    }
+  ],
+  "line": 20,
+  "name": "App login API test for different envs",
+  "description": "",
+  "id": "app-login-api-test-for-different-envs",
+  "keyword": "Feature",
+  "tags": [
+    {
+      "line": 19,
+      "name": "@AppApi"
+    }
+  ]
+});
+formatter.scenarioOutline({
+  "line": 23,
+  "name": "Test for app login api",
+  "description": "",
+  "id": "app-login-api-test-for-different-envs;test-for-app-login-api",
+  "type": "scenario_outline",
+  "keyword": "Scenario Outline",
+  "tags": [
+    {
+      "line": 22,
+      "name": "@AppApi"
+    }
+  ]
+});
+formatter.step({
+  "line": 24,
+  "name": "I call the \"login\" api of \u003cenv\u003e with \u003cpsw\u003e and \u003cusr\u003ein \u003capiParameters\u003e for \u003ctestCase\u003e",
+  "keyword": "Given "
+});
+formatter.step({
+  "line": 25,
+  "name": "Verify the calling is successful with \"登录成功\" for \u003ctestCase\u003e",
+  "keyword": "Then "
+});
+formatter.step({
+  "line": 26,
+  "name": "Verify the return message is expected as \u003cexpValueList\u003e in \u003creturnMsgFieldList\u003e for \u003ctestCase\u003e",
+  "keyword": "And "
+});
+formatter.examples({
+  "line": 28,
+  "name": "",
+  "description": "",
+  "id": "app-login-api-test-for-different-envs;test-for-app-login-api;",
+  "rows": [
+    {
+      "cells": [
+        "testCase",
+        "env",
+        "usr",
+        "psw",
+        "apiParameters",
+        "expValueList",
+        "returnMsgFieldList"
+      ],
+      "line": 29,
+      "id": "app-login-api-test-for-different-envs;test-for-app-login-api;;1"
+    },
+    {
+      "cells": [
+        "\"appapilogin_001\"",
+        "\"prodEnv\"",
+        "\"kentest40\"",
+        "\"12345678\"",
+        "\"device_id;password;username\"",
+        "\"115430;肆肆肆肆肆肆肆肆肆肆肆肆;kentest40;0\"",
+        "\"id;real_name;user_name;delete_at\""
+      ],
+      "line": 30,
+      "id": "app-login-api-test-for-different-envs;test-for-app-login-api;;2"
+    },
+    {
+      "cells": [
+        "\"appapilogin_002\"",
+        "\"longhuEnv\"",
+        "\"kentestchk1\"",
+        "\"12345678\"",
+        "\"device_id;password;username\"",
+        "\"2;坚龙湖检查人;kentestchk1;0\"",
+        "\"id;real_name;user_name;delete_at\""
+      ],
+      "line": 31,
+      "id": "app-login-api-test-for-different-envs;test-for-app-login-api;;3"
+    },
+    {
+      "cells": [
+        "\"appapilogin_003\"",
+        "\"zlEnv\"",
+        "\"kentest10\"",
+        "\"12345678\"",
+        "\"device_id;password;username\"",
+        "\"11448;kentest10;kentest10;0\"",
+        "\"id;real_name;user_name;delete_at\""
+      ],
+      "line": 32,
+      "id": "app-login-api-test-for-different-envs;test-for-app-login-api;;4"
+    },
+    {
+      "cells": [
+        "\"appapilogin_004\"",
+        "\"gzbEnv\"",
+        "\"kentest10\"",
+        "\"12345678\"",
+        "\"device_id;password;username\"",
+        "\"189;坚葛洲坝检查人;kentest10;0\"",
+        "\"id;real_name;user_name;delete_at\""
+      ],
+      "line": 33,
+      "id": "app-login-api-test-for-different-envs;test-for-app-login-api;;5"
+    }
+  ],
+  "keyword": "Examples"
+});
+formatter.before({
+  "duration": 51314,
+  "status": "passed"
+});
+formatter.scenario({
+  "line": 30,
+  "name": "Test for app login api",
+  "description": "",
+  "id": "app-login-api-test-for-different-envs;test-for-app-login-api;;2",
+  "type": "scenario",
+  "keyword": "Scenario Outline",
+  "tags": [
+    {
+      "line": 19,
+      "name": "@AppApi"
+    }
+  ]
+});
+formatter.step({
+  "line": 24,
+  "name": "I call the \"login\" api of \"prodEnv\" with \"12345678\" and \"kentest40\"in \"device_id;password;username\" for \"appapilogin_001\"",
+  "matchedColumns": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "keyword": "Given "
+});
+formatter.step({
+  "line": 25,
+  "name": "Verify the calling is successful with \"登录成功\" for \"appapilogin_001\"",
+  "matchedColumns": [
+    0
+  ],
+  "keyword": "Then "
+});
+formatter.step({
+  "line": 26,
+  "name": "Verify the return message is expected as \"115430;肆肆肆肆肆肆肆肆肆肆肆肆;kentest40;0\" in \"id;real_name;user_name;delete_at\" for \"appapilogin_001\"",
+  "matchedColumns": [
+    0,
+    5,
+    6
+  ],
+  "keyword": "And "
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "login",
+      "offset": 12
+    },
+    {
+      "val": "prodEnv",
+      "offset": 27
+    },
+    {
+      "val": "12345678",
+      "offset": 42
+    },
+    {
+      "val": "kentest40",
+      "offset": 57
+    },
+    {
+      "val": "device_id;password;username",
+      "offset": 71
+    },
+    {
+      "val": "appapilogin_001",
+      "offset": 105
+    }
+  ],
+  "location": "AppApiTest.i_call_the_api_of_with_and_in(String,String,String,String,String,String)"
+});
+formatter.result({
+  "duration": 1924692020,
+  "status": "passed"
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "登录成功",
+      "offset": 39
+    },
+    {
+      "val": "appapilogin_001",
+      "offset": 50
+    }
+  ],
+  "location": "AppApiTest.verify_the_calling_is_successful_with_for(String,String)"
+});
+formatter.result({
+  "duration": 104778533,
+  "status": "passed"
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "115430;肆肆肆肆肆肆肆肆肆肆肆肆;kentest40;0",
+      "offset": 42
+    },
+    {
+      "val": "id;real_name;user_name;delete_at",
+      "offset": 79
+    },
+    {
+      "val": "appapilogin_001",
+      "offset": 118
+    }
+  ],
+  "location": "AppApiTest.verify_the_return_message_is_expected_as_in_for(String,String,String)"
+});
+formatter.result({
+  "duration": 889178,
+  "status": "passed"
+});
+formatter.before({
+  "duration": 67325,
+  "status": "passed"
+});
+formatter.scenario({
+  "line": 31,
+  "name": "Test for app login api",
+  "description": "",
+  "id": "app-login-api-test-for-different-envs;test-for-app-login-api;;3",
+  "type": "scenario",
+  "keyword": "Scenario Outline",
+  "tags": [
+    {
+      "line": 19,
+      "name": "@AppApi"
+    }
+  ]
+});
+formatter.step({
+  "line": 24,
+  "name": "I call the \"login\" api of \"longhuEnv\" with \"12345678\" and \"kentestchk1\"in \"device_id;password;username\" for \"appapilogin_002\"",
+  "matchedColumns": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "keyword": "Given "
+});
+formatter.step({
+  "line": 25,
+  "name": "Verify the calling is successful with \"登录成功\" for \"appapilogin_002\"",
+  "matchedColumns": [
+    0
+  ],
+  "keyword": "Then "
+});
+formatter.step({
+  "line": 26,
+  "name": "Verify the return message is expected as \"2;坚龙湖检查人;kentestchk1;0\" in \"id;real_name;user_name;delete_at\" for \"appapilogin_002\"",
+  "matchedColumns": [
+    0,
+    5,
+    6
+  ],
+  "keyword": "And "
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "login",
+      "offset": 12
+    },
+    {
+      "val": "longhuEnv",
+      "offset": 27
+    },
+    {
+      "val": "12345678",
+      "offset": 44
+    },
+    {
+      "val": "kentestchk1",
+      "offset": 59
+    },
+    {
+      "val": "device_id;password;username",
+      "offset": 75
+    },
+    {
+      "val": "appapilogin_002",
+      "offset": 109
+    }
+  ],
+  "location": "AppApiTest.i_call_the_api_of_with_and_in(String,String,String,String,String,String)"
+});
+formatter.result({
+  "duration": 551870169,
+  "status": "passed"
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "登录成功",
+      "offset": 39
+    },
+    {
+      "val": "appapilogin_002",
+      "offset": 50
+    }
+  ],
+  "location": "AppApiTest.verify_the_calling_is_successful_with_for(String,String)"
+});
+formatter.result({
+  "duration": 3394559,
+  "status": "passed"
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "2;坚龙湖检查人;kentestchk1;0",
+      "offset": 42
+    },
+    {
+      "val": "id;real_name;user_name;delete_at",
+      "offset": 70
+    },
+    {
+      "val": "appapilogin_002",
+      "offset": 109
+    }
+  ],
+  "location": "AppApiTest.verify_the_return_message_is_expected_as_in_for(String,String,String)"
+});
+formatter.result({
+  "duration": 2608010,
+  "status": "passed"
+});
+formatter.before({
+  "duration": 151481,
+  "status": "passed"
+});
+formatter.scenario({
+  "line": 32,
+  "name": "Test for app login api",
+  "description": "",
+  "id": "app-login-api-test-for-different-envs;test-for-app-login-api;;4",
+  "type": "scenario",
+  "keyword": "Scenario Outline",
+  "tags": [
+    {
+      "line": 19,
+      "name": "@AppApi"
+    }
+  ]
+});
+formatter.step({
+  "line": 24,
+  "name": "I call the \"login\" api of \"zlEnv\" with \"12345678\" and \"kentest10\"in \"device_id;password;username\" for \"appapilogin_003\"",
+  "matchedColumns": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "keyword": "Given "
+});
+formatter.step({
+  "line": 25,
+  "name": "Verify the calling is successful with \"登录成功\" for \"appapilogin_003\"",
+  "matchedColumns": [
+    0
+  ],
+  "keyword": "Then "
+});
+formatter.step({
+  "line": 26,
+  "name": "Verify the return message is expected as \"11448;kentest10;kentest10;0\" in \"id;real_name;user_name;delete_at\" for \"appapilogin_003\"",
+  "matchedColumns": [
+    0,
+    5,
+    6
+  ],
+  "keyword": "And "
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "login",
+      "offset": 12
+    },
+    {
+      "val": "zlEnv",
+      "offset": 27
+    },
+    {
+      "val": "12345678",
+      "offset": 40
+    },
+    {
+      "val": "kentest10",
+      "offset": 55
+    },
+    {
+      "val": "device_id;password;username",
+      "offset": 69
+    },
+    {
+      "val": "appapilogin_003",
+      "offset": 103
+    }
+  ],
+  "location": "AppApiTest.i_call_the_api_of_with_and_in(String,String,String,String,String,String)"
+});
+formatter.result({
+  "duration": 481663264,
+  "status": "passed"
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "登录成功",
+      "offset": 39
+    },
+    {
+      "val": "appapilogin_003",
+      "offset": 50
+    }
+  ],
+  "location": "AppApiTest.verify_the_calling_is_successful_with_for(String,String)"
+});
+formatter.result({
+  "duration": 1375640,
+  "status": "passed"
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "11448;kentest10;kentest10;0",
+      "offset": 42
+    },
+    {
+      "val": "id;real_name;user_name;delete_at",
+      "offset": 75
+    },
+    {
+      "val": "appapilogin_003",
+      "offset": 114
+    }
+  ],
+  "location": "AppApiTest.verify_the_return_message_is_expected_as_in_for(String,String,String)"
+});
+formatter.result({
+  "duration": 581702,
+  "status": "passed"
+});
+formatter.before({
+  "duration": 57472,
+  "status": "passed"
+});
+formatter.scenario({
+  "line": 33,
+  "name": "Test for app login api",
+  "description": "",
+  "id": "app-login-api-test-for-different-envs;test-for-app-login-api;;5",
+  "type": "scenario",
+  "keyword": "Scenario Outline",
+  "tags": [
+    {
+      "line": 19,
+      "name": "@AppApi"
+    }
+  ]
+});
+formatter.step({
+  "line": 24,
+  "name": "I call the \"login\" api of \"gzbEnv\" with \"12345678\" and \"kentest10\"in \"device_id;password;username\" for \"appapilogin_004\"",
+  "matchedColumns": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "keyword": "Given "
+});
+formatter.step({
+  "line": 25,
+  "name": "Verify the calling is successful with \"登录成功\" for \"appapilogin_004\"",
+  "matchedColumns": [
+    0
+  ],
+  "keyword": "Then "
+});
+formatter.step({
+  "line": 26,
+  "name": "Verify the return message is expected as \"189;坚葛洲坝检查人;kentest10;0\" in \"id;real_name;user_name;delete_at\" for \"appapilogin_004\"",
+  "matchedColumns": [
+    0,
+    5,
+    6
+  ],
+  "keyword": "And "
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "login",
+      "offset": 12
+    },
+    {
+      "val": "gzbEnv",
+      "offset": 27
+    },
+    {
+      "val": "12345678",
+      "offset": 41
+    },
+    {
+      "val": "kentest10",
+      "offset": 56
+    },
+    {
+      "val": "device_id;password;username",
+      "offset": 70
+    },
+    {
+      "val": "appapilogin_004",
+      "offset": 104
+    }
+  ],
+  "location": "AppApiTest.i_call_the_api_of_with_and_in(String,String,String,String,String,String)"
+});
+formatter.result({
+  "duration": 371821424,
+  "status": "passed"
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "登录成功",
+      "offset": 39
+    },
+    {
+      "val": "appapilogin_004",
+      "offset": 50
+    }
+  ],
+  "location": "AppApiTest.verify_the_calling_is_successful_with_for(String,String)"
+});
+formatter.result({
+  "duration": 633837,
+  "status": "passed"
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "189;坚葛洲坝检查人;kentest10;0",
+      "offset": 42
+    },
+    {
+      "val": "id;real_name;user_name;delete_at",
+      "offset": 71
+    },
+    {
+      "val": "appapilogin_004",
+      "offset": 110
+    }
+  ],
+  "location": "AppApiTest.verify_the_return_message_is_expected_as_in_for(String,String,String)"
+});
+formatter.result({
+  "duration": 619059,
   "status": "passed"
 });
 });
