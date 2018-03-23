@@ -75,9 +75,9 @@ formatter.feature({
     }
   ],
   "line": 20,
-  "name": "Login test for different envs",
+  "name": "GUI Login test for different envs",
   "description": "",
-  "id": "login-test-for-different-envs",
+  "id": "gui-login-test-for-different-envs",
   "keyword": "Feature",
   "tags": [
     {
@@ -90,7 +90,7 @@ formatter.scenarioOutline({
   "line": 23,
   "name": "Test for login",
   "description": "",
-  "id": "login-test-for-different-envs;test-for-login",
+  "id": "gui-login-test-for-different-envs;test-for-login",
   "type": "scenario_outline",
   "keyword": "Scenario Outline",
   "tags": [
@@ -179,7 +179,7 @@ formatter.examples({
   "line": 40,
   "name": "",
   "description": "",
-  "id": "login-test-for-different-envs;test-for-login;",
+  "id": "gui-login-test-for-different-envs;test-for-login;",
   "rows": [
     {
       "cells": [
@@ -198,11 +198,11 @@ formatter.examples({
         "logoutXPath"
       ],
       "line": 41,
-      "id": "login-test-for-different-envs;test-for-login;;1"
+      "id": "gui-login-test-for-different-envs;test-for-login;;1"
     },
     {
       "cells": [
-        "\"001\"",
+        "\"guiLogin_001\"",
         "\"prod\"",
         "\"智检 - 工程现场管理协作平台\"",
         "\"kentestgrp10\"",
@@ -212,16 +212,16 @@ formatter.examples({
         "\"prodLoginBtn\"",
         "\"kentestgrp10\"",
         "\"prodCurUsrXPath\"",
-        "\"zhijian_login_001\"",
+        "\"guiLogin_001\"",
         "\"prodCurUsrDropDown\"",
         "\"prodLogout\""
       ],
       "line": 42,
-      "id": "login-test-for-different-envs;test-for-login;;2"
+      "id": "gui-login-test-for-different-envs;test-for-login;;2"
     },
     {
       "cells": [
-        "\"002\"",
+        "\"guiLogin_002\"",
         "\"longhu\"",
         "\"龙湖集团 - 龙建\"",
         "\"longhu\"",
@@ -231,16 +231,16 @@ formatter.examples({
         "\"lhLoginBtn\"",
         "\"龙湖集团管理员\"",
         "\"prodCurUsrXPath\"",
-        "\"zhijian_login_002\"",
+        "\"guiLogin_002\"",
         "\"prodCurUsrDropDown\"",
         "\"prodLogout\""
       ],
       "line": 43,
-      "id": "login-test-for-different-envs;test-for-login;;3"
+      "id": "gui-login-test-for-different-envs;test-for-login;;3"
     },
     {
       "cells": [
-        "\"003\"",
+        "\"guiLogin_003\"",
         "\"zl\"",
         "\"中梁控股集团\"",
         "\"zhongliang\"",
@@ -250,16 +250,16 @@ formatter.examples({
         "\"zlLoginBtn\"",
         "\"中梁\"",
         "\"zlCurUsrXPath\"",
-        "\"zhijian_login_003\"",
+        "\"guiLogin_003\"",
         "\"zlCurUsrDropDown\"",
         "\"prodLogout\""
       ],
       "line": 44,
-      "id": "login-test-for-different-envs;test-for-login;;4"
+      "id": "gui-login-test-for-different-envs;test-for-login;;4"
     },
     {
       "cells": [
-        "\"004\"",
+        "\"guiLogin_004\"",
         "\"gzb\"",
         "\"葛洲坝地产\"",
         "\"gzb\"",
@@ -269,25 +269,25 @@ formatter.examples({
         "\"gzbLoginBtn\"",
         "\"地产总部管理员\"",
         "\"prodCurUsrXPath\"",
-        "\"zhijian_login_004\"",
+        "\"guiLogin_004\"",
         "\"prodCurUsrDropDown\"",
         "\"prodLogout\""
       ],
       "line": 45,
-      "id": "login-test-for-different-envs;test-for-login;;5"
+      "id": "gui-login-test-for-different-envs;test-for-login;;5"
     }
   ],
   "keyword": "Examples"
 });
 formatter.before({
-  "duration": 254520,
+  "duration": 394088,
   "status": "passed"
 });
 formatter.scenario({
   "line": 42,
   "name": "Test for login",
   "description": "",
-  "id": "login-test-for-different-envs;test-for-login;;2",
+  "id": "gui-login-test-for-different-envs;test-for-login;;2",
   "type": "scenario",
   "keyword": "Scenario Outline",
   "tags": [
@@ -312,7 +312,7 @@ formatter.step({
 });
 formatter.step({
   "line": 26,
-  "name": "I Get the title of the website for test case \"001\"",
+  "name": "I Get the title of the website for test case \"guiLogin_001\"",
   "matchedColumns": [
     0
   ],
@@ -320,7 +320,7 @@ formatter.step({
 });
 formatter.step({
   "line": 27,
-  "name": "Verify the title value is correct as expected \"智检 - 工程现场管理协作平台\" for test case \"001\"",
+  "name": "Verify the title value is correct as expected \"智检 - 工程现场管理协作平台\" for test case \"guiLogin_001\"",
   "matchedColumns": [
     0,
     2
@@ -360,7 +360,7 @@ formatter.step({
 });
 formatter.step({
   "line": 32,
-  "name": "Capture the current page and save it as \"zhijian_login_001\"",
+  "name": "Capture the current page and save it as \"guiLogin_001\"",
   "matchedColumns": [
     10
   ],
@@ -416,7 +416,7 @@ formatter.match({
   "location": "PageOperations.i_open_URL(String)"
 });
 formatter.result({
-  "duration": 4974902676,
+  "duration": 4716471025,
   "status": "passed"
 });
 formatter.match({
@@ -429,20 +429,20 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 1002776322,
+  "duration": 1002457712,
   "status": "passed"
 });
 formatter.match({
   "arguments": [
     {
-      "val": "001",
+      "val": "guiLogin_001",
       "offset": 46
     }
   ],
   "location": "PageOperations.i_Get_the_title_of_the_website_for_test_case(String)"
 });
 formatter.result({
-  "duration": 39353322,
+  "duration": 25310703,
   "status": "passed"
 });
 formatter.match({
@@ -452,14 +452,14 @@ formatter.match({
       "offset": 47
     },
     {
-      "val": "001",
+      "val": "guiLogin_001",
       "offset": 79
     }
   ],
   "location": "PageOperations.verify_the_title_value_is_correct_as_expected_for_test_case(String,String)"
 });
 formatter.result({
-  "duration": 4552626,
+  "duration": 2391210,
   "status": "passed"
 });
 formatter.match({
@@ -476,7 +476,7 @@ formatter.match({
   "location": "PageOperations.i_input_into(String,String)"
 });
 formatter.result({
-  "duration": 242073649,
+  "duration": 247221578,
   "status": "passed"
 });
 formatter.match({
@@ -493,7 +493,7 @@ formatter.match({
   "location": "PageOperations.i_input_into(String,String)"
 });
 formatter.result({
-  "duration": 197651683,
+  "duration": 185906022,
   "status": "passed"
 });
 formatter.match({
@@ -506,7 +506,7 @@ formatter.match({
   "location": "PageOperations.i_click_button(String)"
 });
 formatter.result({
-  "duration": 126812584,
+  "duration": 141783370,
   "status": "passed"
 });
 formatter.match({
@@ -519,20 +519,20 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 2000812822,
+  "duration": 2000947452,
   "status": "passed"
 });
 formatter.match({
   "arguments": [
     {
-      "val": "zhijian_login_001",
+      "val": "guiLogin_001",
       "offset": 41
     }
   ],
   "location": "PageOperations.capture_the_current_page_and_save_it_as(String)"
 });
 formatter.result({
-  "duration": 372639173,
+  "duration": 394871111,
   "status": "passed"
 });
 formatter.match({
@@ -549,7 +549,7 @@ formatter.match({
   "location": "PageOperations.i_verify_can_be_found_in(String,String)"
 });
 formatter.result({
-  "duration": 81803578,
+  "duration": 83542932,
   "status": "passed"
 });
 formatter.match({
@@ -562,7 +562,7 @@ formatter.match({
   "location": "PageOperations.i_click_menu(String)"
 });
 formatter.result({
-  "duration": 102949272,
+  "duration": 103739935,
   "status": "passed"
 });
 formatter.match({
@@ -575,7 +575,7 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 1000682688,
+  "duration": 1000752872,
   "status": "passed"
 });
 formatter.match({
@@ -588,7 +588,7 @@ formatter.match({
   "location": "PageOperations.i_click_menu(String)"
 });
 formatter.result({
-  "duration": 106616414,
+  "duration": 133555555,
   "status": "passed"
 });
 formatter.match({
@@ -601,29 +601,29 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 2000825548,
+  "duration": 2001794742,
   "status": "passed"
 });
 formatter.match({
   "location": "PageOperations.quit_the_driver()"
 });
 formatter.result({
-  "duration": 95770985,
+  "duration": 51117301,
   "status": "passed"
 });
 formatter.after({
-  "duration": 150249,
+  "duration": 153530,
   "status": "passed"
 });
 formatter.before({
-  "duration": 79640,
+  "duration": 76765,
   "status": "passed"
 });
 formatter.scenario({
   "line": 43,
   "name": "Test for login",
   "description": "",
-  "id": "login-test-for-different-envs;test-for-login;;3",
+  "id": "gui-login-test-for-different-envs;test-for-login;;3",
   "type": "scenario",
   "keyword": "Scenario Outline",
   "tags": [
@@ -648,7 +648,7 @@ formatter.step({
 });
 formatter.step({
   "line": 26,
-  "name": "I Get the title of the website for test case \"002\"",
+  "name": "I Get the title of the website for test case \"guiLogin_002\"",
   "matchedColumns": [
     0
   ],
@@ -656,7 +656,7 @@ formatter.step({
 });
 formatter.step({
   "line": 27,
-  "name": "Verify the title value is correct as expected \"龙湖集团 - 龙建\" for test case \"002\"",
+  "name": "Verify the title value is correct as expected \"龙湖集团 - 龙建\" for test case \"guiLogin_002\"",
   "matchedColumns": [
     0,
     2
@@ -696,7 +696,7 @@ formatter.step({
 });
 formatter.step({
   "line": 32,
-  "name": "Capture the current page and save it as \"zhijian_login_002\"",
+  "name": "Capture the current page and save it as \"guiLogin_002\"",
   "matchedColumns": [
     10
   ],
@@ -752,7 +752,7 @@ formatter.match({
   "location": "PageOperations.i_open_URL(String)"
 });
 formatter.result({
-  "duration": 4060729726,
+  "duration": 4090222722,
   "status": "passed"
 });
 formatter.match({
@@ -765,20 +765,20 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 1000795581,
+  "duration": 1000975367,
   "status": "passed"
 });
 formatter.match({
   "arguments": [
     {
-      "val": "002",
+      "val": "guiLogin_002",
       "offset": 46
     }
   ],
   "location": "PageOperations.i_Get_the_title_of_the_website_for_test_case(String)"
 });
 formatter.result({
-  "duration": 21021718,
+  "duration": 8361641,
   "status": "passed"
 });
 formatter.match({
@@ -788,14 +788,14 @@ formatter.match({
       "offset": 47
     },
     {
-      "val": "002",
+      "val": "guiLogin_002",
       "offset": 73
     }
   ],
   "location": "PageOperations.verify_the_title_value_is_correct_as_expected_for_test_case(String,String)"
 });
 formatter.result({
-  "duration": 217984,
+  "duration": 87028,
   "status": "passed"
 });
 formatter.match({
@@ -812,7 +812,7 @@ formatter.match({
   "location": "PageOperations.i_input_into(String,String)"
 });
 formatter.result({
-  "duration": 178426384,
+  "duration": 178750044,
   "status": "passed"
 });
 formatter.match({
@@ -829,7 +829,7 @@ formatter.match({
   "location": "PageOperations.i_input_into(String,String)"
 });
 formatter.result({
-  "duration": 211629762,
+  "duration": 225235991,
   "status": "passed"
 });
 formatter.match({
@@ -842,7 +842,7 @@ formatter.match({
   "location": "PageOperations.i_click_button(String)"
 });
 formatter.result({
-  "duration": 120148673,
+  "duration": 146062918,
   "status": "passed"
 });
 formatter.match({
@@ -855,20 +855,20 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 2000682689,
+  "duration": 2000630540,
   "status": "passed"
 });
 formatter.match({
   "arguments": [
     {
-      "val": "zhijian_login_002",
+      "val": "guiLogin_002",
       "offset": 41
     }
   ],
   "location": "PageOperations.capture_the_current_page_and_save_it_as(String)"
 });
 formatter.result({
-  "duration": 365580755,
+  "duration": 366021006,
   "status": "passed"
 });
 formatter.match({
@@ -885,7 +885,7 @@ formatter.match({
   "location": "PageOperations.i_verify_can_be_found_in(String,String)"
 });
 formatter.result({
-  "duration": 123887655,
+  "duration": 158582187,
   "status": "passed"
 });
 formatter.match({
@@ -898,7 +898,7 @@ formatter.match({
   "location": "PageOperations.i_click_menu(String)"
 });
 formatter.result({
-  "duration": 111756078,
+  "duration": 119070363,
   "status": "passed"
 });
 formatter.match({
@@ -911,7 +911,7 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 1000801328,
+  "duration": 1000418719,
   "status": "passed"
 });
 formatter.match({
@@ -924,7 +924,7 @@ formatter.match({
   "location": "PageOperations.i_click_menu(String)"
 });
 formatter.result({
-  "duration": 121905272,
+  "duration": 139695526,
   "status": "passed"
 });
 formatter.match({
@@ -937,29 +937,29 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 2000979492,
+  "duration": 2000730294,
   "status": "passed"
 });
 formatter.match({
   "location": "PageOperations.quit_the_driver()"
 });
 formatter.result({
-  "duration": 47326369,
+  "duration": 72939916,
   "status": "passed"
 });
 formatter.after({
-  "duration": 55830,
+  "duration": 52956,
   "status": "passed"
 });
 formatter.before({
-  "duration": 77998,
+  "duration": 104680,
   "status": "passed"
 });
 formatter.scenario({
   "line": 44,
   "name": "Test for login",
   "description": "",
-  "id": "login-test-for-different-envs;test-for-login;;4",
+  "id": "gui-login-test-for-different-envs;test-for-login;;4",
   "type": "scenario",
   "keyword": "Scenario Outline",
   "tags": [
@@ -984,7 +984,7 @@ formatter.step({
 });
 formatter.step({
   "line": 26,
-  "name": "I Get the title of the website for test case \"003\"",
+  "name": "I Get the title of the website for test case \"guiLogin_003\"",
   "matchedColumns": [
     0
   ],
@@ -992,7 +992,7 @@ formatter.step({
 });
 formatter.step({
   "line": 27,
-  "name": "Verify the title value is correct as expected \"中梁控股集团\" for test case \"003\"",
+  "name": "Verify the title value is correct as expected \"中梁控股集团\" for test case \"guiLogin_003\"",
   "matchedColumns": [
     0,
     2
@@ -1032,7 +1032,7 @@ formatter.step({
 });
 formatter.step({
   "line": 32,
-  "name": "Capture the current page and save it as \"zhijian_login_003\"",
+  "name": "Capture the current page and save it as \"guiLogin_003\"",
   "matchedColumns": [
     10
   ],
@@ -1088,7 +1088,7 @@ formatter.match({
   "location": "PageOperations.i_open_URL(String)"
 });
 formatter.result({
-  "duration": 4537805470,
+  "duration": 4193306253,
   "status": "passed"
 });
 formatter.match({
@@ -1101,20 +1101,20 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 1001637549,
+  "duration": 1002288994,
   "status": "passed"
 });
 formatter.match({
   "arguments": [
     {
-      "val": "003",
+      "val": "guiLogin_003",
       "offset": 46
     }
   ],
   "location": "PageOperations.i_Get_the_title_of_the_website_for_test_case(String)"
 });
 formatter.result({
-  "duration": 24333352,
+  "duration": 19327957,
   "status": "passed"
 });
 formatter.match({
@@ -1124,14 +1124,14 @@ formatter.match({
       "offset": 47
     },
     {
-      "val": "003",
+      "val": "guiLogin_003",
       "offset": 70
     }
   ],
   "location": "PageOperations.verify_the_title_value_is_correct_as_expected_for_test_case(String,String)"
 });
 formatter.result({
-  "duration": 798044,
+  "duration": 159688,
   "status": "passed"
 });
 formatter.match({
@@ -1148,7 +1148,7 @@ formatter.match({
   "location": "PageOperations.i_input_into(String,String)"
 });
 formatter.result({
-  "duration": 259518949,
+  "duration": 222094372,
   "status": "passed"
 });
 formatter.match({
@@ -1165,7 +1165,7 @@ formatter.match({
   "location": "PageOperations.i_input_into(String,String)"
 });
 formatter.result({
-  "duration": 229816454,
+  "duration": 226077943,
   "status": "passed"
 });
 formatter.match({
@@ -1178,7 +1178,7 @@ formatter.match({
   "location": "PageOperations.i_click_button(String)"
 });
 formatter.result({
-  "duration": 121890494,
+  "duration": 128831427,
   "status": "passed"
 });
 formatter.match({
@@ -1191,20 +1191,20 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 2000823085,
+  "duration": 2000837026,
   "status": "passed"
 });
 formatter.match({
   "arguments": [
     {
-      "val": "zhijian_login_003",
+      "val": "guiLogin_003",
       "offset": 41
     }
   ],
   "location": "PageOperations.capture_the_current_page_and_save_it_as(String)"
 });
 formatter.result({
-  "duration": 380819530,
+  "duration": 366605569,
   "status": "passed"
 });
 formatter.match({
@@ -1221,7 +1221,7 @@ formatter.match({
   "location": "PageOperations.i_verify_can_be_found_in(String,String)"
 });
 formatter.result({
-  "duration": 77824445,
+  "duration": 81534315,
   "status": "passed"
 });
 formatter.match({
@@ -1234,7 +1234,7 @@ formatter.match({
   "location": "PageOperations.i_click_menu(String)"
 });
 formatter.result({
-  "duration": 98330964,
+  "duration": 99500617,
   "status": "passed"
 });
 formatter.match({
@@ -1247,7 +1247,7 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 1000307887,
+  "duration": 1000458538,
   "status": "passed"
 });
 formatter.match({
@@ -1260,7 +1260,7 @@ formatter.match({
   "location": "PageOperations.i_click_menu(String)"
 });
 formatter.result({
-  "duration": 148078969,
+  "duration": 103858162,
   "status": "passed"
 });
 formatter.match({
@@ -1273,29 +1273,29 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 2000693362,
+  "duration": 2000806239,
   "status": "passed"
 });
 formatter.match({
   "location": "PageOperations.quit_the_driver()"
 });
 formatter.result({
-  "duration": 92811162,
+  "duration": 78225209,
   "status": "passed"
 });
 formatter.after({
-  "duration": 42283,
+  "duration": 45156,
   "status": "passed"
 });
 formatter.before({
-  "duration": 48031,
+  "duration": 64860,
   "status": "passed"
 });
 formatter.scenario({
   "line": 45,
   "name": "Test for login",
   "description": "",
-  "id": "login-test-for-different-envs;test-for-login;;5",
+  "id": "gui-login-test-for-different-envs;test-for-login;;5",
   "type": "scenario",
   "keyword": "Scenario Outline",
   "tags": [
@@ -1320,7 +1320,7 @@ formatter.step({
 });
 formatter.step({
   "line": 26,
-  "name": "I Get the title of the website for test case \"004\"",
+  "name": "I Get the title of the website for test case \"guiLogin_004\"",
   "matchedColumns": [
     0
   ],
@@ -1328,7 +1328,7 @@ formatter.step({
 });
 formatter.step({
   "line": 27,
-  "name": "Verify the title value is correct as expected \"葛洲坝地产\" for test case \"004\"",
+  "name": "Verify the title value is correct as expected \"葛洲坝地产\" for test case \"guiLogin_004\"",
   "matchedColumns": [
     0,
     2
@@ -1368,7 +1368,7 @@ formatter.step({
 });
 formatter.step({
   "line": 32,
-  "name": "Capture the current page and save it as \"zhijian_login_004\"",
+  "name": "Capture the current page and save it as \"guiLogin_004\"",
   "matchedColumns": [
     10
   ],
@@ -1424,7 +1424,7 @@ formatter.match({
   "location": "PageOperations.i_open_URL(String)"
 });
 formatter.result({
-  "duration": 3890831816,
+  "duration": 3763196709,
   "status": "passed"
 });
 formatter.match({
@@ -1437,20 +1437,20 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 1000565692,
+  "duration": 1000945811,
   "status": "passed"
 });
 formatter.match({
   "arguments": [
     {
-      "val": "004",
+      "val": "guiLogin_004",
       "offset": 46
     }
   ],
   "location": "PageOperations.i_Get_the_title_of_the_website_for_test_case(String)"
 });
 formatter.result({
-  "duration": 18838592,
+  "duration": 21275408,
   "status": "passed"
 });
 formatter.match({
@@ -1460,14 +1460,14 @@ formatter.match({
       "offset": 47
     },
     {
-      "val": "004",
+      "val": "guiLogin_004",
       "offset": 69
     }
   ],
   "location": "PageOperations.verify_the_title_value_is_correct_as_expected_for_test_case(String,String)"
 });
 formatter.result({
-  "duration": 190890,
+  "duration": 169950,
   "status": "passed"
 });
 formatter.match({
@@ -1484,7 +1484,7 @@ formatter.match({
   "location": "PageOperations.i_input_into(String,String)"
 });
 formatter.result({
-  "duration": 160450697,
+  "duration": 170626908,
   "status": "passed"
 });
 formatter.match({
@@ -1501,7 +1501,7 @@ formatter.match({
   "location": "PageOperations.i_input_into(String,String)"
 });
 formatter.result({
-  "duration": 186541470,
+  "duration": 190533271,
   "status": "passed"
 });
 formatter.match({
@@ -1514,7 +1514,7 @@ formatter.match({
   "location": "PageOperations.i_click_button(String)"
 });
 formatter.result({
-  "duration": 123994389,
+  "duration": 136931574,
   "status": "passed"
 });
 formatter.match({
@@ -1527,20 +1527,20 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 2001625645,
+  "duration": 2001587435,
   "status": "passed"
 });
 formatter.match({
   "arguments": [
     {
-      "val": "zhijian_login_004",
+      "val": "guiLogin_004",
       "offset": 41
     }
   ],
   "location": "PageOperations.capture_the_current_page_and_save_it_as(String)"
 });
 formatter.result({
-  "duration": 394451544,
+  "duration": 359878982,
   "status": "passed"
 });
 formatter.match({
@@ -1557,7 +1557,7 @@ formatter.match({
   "location": "PageOperations.i_verify_can_be_found_in(String,String)"
 });
 formatter.result({
-  "duration": 79941476,
+  "duration": 85065507,
   "status": "passed"
 });
 formatter.match({
@@ -1570,7 +1570,7 @@ formatter.match({
   "location": "PageOperations.i_click_menu(String)"
 });
 formatter.result({
-  "duration": 104302745,
+  "duration": 101577377,
   "status": "passed"
 });
 formatter.match({
@@ -1583,7 +1583,7 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 1000276688,
+  "duration": 1000506157,
   "status": "passed"
 });
 formatter.match({
@@ -1596,7 +1596,7 @@ formatter.match({
   "location": "PageOperations.i_click_menu(String)"
 });
 formatter.result({
-  "duration": 133807780,
+  "duration": 131479615,
   "status": "passed"
 });
 formatter.match({
@@ -1609,18 +1609,18 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 2000502882,
+  "duration": 2000676518,
   "status": "passed"
 });
 formatter.match({
   "location": "PageOperations.quit_the_driver()"
 });
 formatter.result({
-  "duration": 79291219,
+  "duration": 58975248,
   "status": "passed"
 });
 formatter.after({
-  "duration": 79641,
+  "duration": 47619,
   "status": "passed"
 });
 formatter.uri("Interface/AppApi_ZJLogin.feature");
@@ -1815,7 +1815,7 @@ formatter.examples({
   "keyword": "Examples"
 });
 formatter.before({
-  "duration": 51314,
+  "duration": 41051,
   "status": "passed"
 });
 formatter.scenario({
@@ -1892,7 +1892,7 @@ formatter.match({
   "location": "AppApiTest.i_call_the_api_of_with_and_in(String,String,String,String,String,String)"
 });
 formatter.result({
-  "duration": 1924692020,
+  "duration": 1933022715,
   "status": "passed"
 });
 formatter.match({
@@ -1909,7 +1909,7 @@ formatter.match({
   "location": "AppApiTest.verify_the_calling_is_successful_with_for(String,String)"
 });
 formatter.result({
-  "duration": 104778533,
+  "duration": 80251887,
   "status": "passed"
 });
 formatter.match({
@@ -1930,11 +1930,11 @@ formatter.match({
   "location": "AppApiTest.verify_the_return_message_is_expected_as_in_for(String,String,String)"
 });
 formatter.result({
-  "duration": 889178,
+  "duration": 924875,
   "status": "passed"
 });
 formatter.before({
-  "duration": 67325,
+  "duration": 71838,
   "status": "passed"
 });
 formatter.scenario({
@@ -2011,7 +2011,7 @@ formatter.match({
   "location": "AppApiTest.i_call_the_api_of_with_and_in(String,String,String,String,String,String)"
 });
 formatter.result({
-  "duration": 551870169,
+  "duration": 342877375,
   "status": "passed"
 });
 formatter.match({
@@ -2028,7 +2028,7 @@ formatter.match({
   "location": "AppApiTest.verify_the_calling_is_successful_with_for(String,String)"
 });
 formatter.result({
-  "duration": 3394559,
+  "duration": 600574,
   "status": "passed"
 });
 formatter.match({
@@ -2049,11 +2049,11 @@ formatter.match({
   "location": "AppApiTest.verify_the_return_message_is_expected_as_in_for(String,String,String)"
 });
 formatter.result({
-  "duration": 2608010,
+  "duration": 545976,
   "status": "passed"
 });
 formatter.before({
-  "duration": 151481,
+  "duration": 52545,
   "status": "passed"
 });
 formatter.scenario({
@@ -2130,7 +2130,7 @@ formatter.match({
   "location": "AppApiTest.i_call_the_api_of_with_and_in(String,String,String,String,String,String)"
 });
 formatter.result({
-  "duration": 481663264,
+  "duration": 330240291,
   "status": "passed"
 });
 formatter.match({
@@ -2147,7 +2147,7 @@ formatter.match({
   "location": "AppApiTest.verify_the_calling_is_successful_with_for(String,String)"
 });
 formatter.result({
-  "duration": 1375640,
+  "duration": 3233162,
   "status": "passed"
 });
 formatter.match({
@@ -2168,11 +2168,11 @@ formatter.match({
   "location": "AppApiTest.verify_the_return_message_is_expected_as_in_for(String,String,String)"
 });
 formatter.result({
-  "duration": 581702,
+  "duration": 3566495,
   "status": "passed"
 });
 formatter.before({
-  "duration": 57472,
+  "duration": 112479,
   "status": "passed"
 });
 formatter.scenario({
@@ -2249,7 +2249,7 @@ formatter.match({
   "location": "AppApiTest.i_call_the_api_of_with_and_in(String,String,String,String,String,String)"
 });
 formatter.result({
-  "duration": 371821424,
+  "duration": 315656577,
   "status": "passed"
 });
 formatter.match({
@@ -2266,7 +2266,7 @@ formatter.match({
   "location": "AppApiTest.verify_the_calling_is_successful_with_for(String,String)"
 });
 formatter.result({
-  "duration": 633837,
+  "duration": 1442525,
   "status": "passed"
 });
 formatter.match({
@@ -2287,7 +2287,7 @@ formatter.match({
   "location": "AppApiTest.verify_the_return_message_is_expected_as_in_for(String,String,String)"
 });
 formatter.result({
-  "duration": 619059,
+  "duration": 2520110,
   "status": "passed"
 });
 });

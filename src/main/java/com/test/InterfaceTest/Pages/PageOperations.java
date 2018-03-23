@@ -17,6 +17,7 @@ import com.test.InterfaceTest.Util.GetConfigProperties;
 import com.test.InterfaceTest.Util.ScenarioContext;
 import com.test.InterfaceTest.WebDriver.WebUtil;
 
+import cucumber.api.PendingException;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -138,6 +139,103 @@ public class PageOperations {
 		String menuXPath = GetConfigProperties.getValue(this.configPath, menuName);
 		this.webUtil.clickTarget(menuXPath);
 	}
+	
+	@Given("^I login \"([^\"]*)\" by \"([^\"]*)\" and \"([^\"]*)\"$")
+	public void i_login_by_and(String env, String usr, String psw) throws Throwable {
+		String url = GetConfigProperties.getValue(this.configPath, env);
+		this.webUtil.openUrl(url);
+		if (env.equals("prod")) {
+			String usrNameXPath = GetConfigProperties.getValue(this.configPath, "prodUsrNameXPath");
+			String pswXPath = GetConfigProperties.getValue(this.configPath, "prodUsrPswXPath");
+			this.webUtil.inputText(usr, usrNameXPath);
+			this.webUtil.inputText(psw, pswXPath);		
+			String buttonXPath = GetConfigProperties.getValue(this.configPath, "prodLoginBtn");
+			this.webUtil.clickButton(buttonXPath);
+		} else if (env.equals("longhu")) {
+			String usrNameXPath = GetConfigProperties.getValue(this.configPath, "lhUsrNameXPath");
+			String pswXPath = GetConfigProperties.getValue(this.configPath, "lhUsrPswXPath");
+			this.webUtil.inputText(usr, usrNameXPath);
+			this.webUtil.inputText(psw, pswXPath);		
+			String buttonXPath = GetConfigProperties.getValue(this.configPath, "lhLoginBtn");
+			this.webUtil.clickButton(buttonXPath);			
+		} else if (env.equals("zl")) {
+			String usrNameXPath = GetConfigProperties.getValue(this.configPath, "zlUsrNameXPath");
+			String pswXPath = GetConfigProperties.getValue(this.configPath, "zlUsrPswXPath");
+			this.webUtil.inputText(usr, usrNameXPath);
+			this.webUtil.inputText(psw, pswXPath);		
+			String buttonXPath = GetConfigProperties.getValue(this.configPath, "zlLoginBtn");
+			this.webUtil.clickButton(buttonXPath);
+		} else if (env.equals("gzb")) {
+			String usrNameXPath = GetConfigProperties.getValue(this.configPath, "gzbUsrNameXPath");
+			String pswXPath = GetConfigProperties.getValue(this.configPath, "gzbUsrPswXPath");
+			this.webUtil.inputText(usr, usrNameXPath);
+			this.webUtil.inputText(psw, pswXPath);		
+			String buttonXPath = GetConfigProperties.getValue(this.configPath, "gzbLoginBtn");
+			this.webUtil.clickButton(buttonXPath);
+		}
+	    
+	}
+
+	@Given("^I navigate to \"([^\"]*)\" of \"([^\"]*)\"$")
+	public void i_navigate_to_of(String arg1, String arg2) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Given("^I search \"([^\"]*)\" in the issue list$")
+	public void i_search_in_the_issue_list(String arg1) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Given("^I open the details of issue <>$")
+	public void i_open_the_details_of_issue() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@When("^I click the floor plan for the issue$")
+	public void i_click_the_floor_plan_for_the_issue() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Then("^I verify the picture can be shown$")
+	public void i_verify_the_picture_can_be_shown() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Then("^I close the pop up windown$")
+	public void i_close_the_pop_up_windown() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@When("^I click the picture for the issue$")
+	public void i_click_the_picture_for_the_issue() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Then("^I vefity the picture can be shown$")
+	public void i_vefity_the_picture_can_be_shown() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Then("^I close the pop up window$")
+	public void i_close_the_pop_up_window() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Then("^I logout the system$")
+	public void i_logout_the_system() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
 
 
 }

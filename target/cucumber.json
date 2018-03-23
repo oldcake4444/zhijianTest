@@ -80,7 +80,7 @@
         "before": [
           {
             "result": {
-              "duration": 254520,
+              "duration": 394088,
               "status": "passed"
             },
             "match": {
@@ -91,11 +91,11 @@
         "line": 42,
         "name": "Test for login",
         "description": "",
-        "id": "login-test-for-different-envs;test-for-login;;2",
+        "id": "gui-login-test-for-different-envs;test-for-login;;2",
         "after": [
           {
             "result": {
-              "duration": 150249,
+              "duration": 153530,
               "status": "passed"
             },
             "match": {
@@ -108,7 +108,7 @@
         "steps": [
           {
             "result": {
-              "duration": 4974902676,
+              "duration": 4716471025,
               "status": "passed"
             },
             "line": 24,
@@ -129,7 +129,7 @@
           },
           {
             "result": {
-              "duration": 1002776322,
+              "duration": 1002457712,
               "status": "passed"
             },
             "line": 25,
@@ -147,15 +147,15 @@
           },
           {
             "result": {
-              "duration": 39353322,
+              "duration": 25310703,
               "status": "passed"
             },
             "line": 26,
-            "name": "I Get the title of the website for test case \"001\"",
+            "name": "I Get the title of the website for test case \"guiLogin_001\"",
             "match": {
               "arguments": [
                 {
-                  "val": "001",
+                  "val": "guiLogin_001",
                   "offset": 46
                 }
               ],
@@ -168,11 +168,11 @@
           },
           {
             "result": {
-              "duration": 4552626,
+              "duration": 2391210,
               "status": "passed"
             },
             "line": 27,
-            "name": "Verify the title value is correct as expected \"智检 - 工程现场管理协作平台\" for test case \"001\"",
+            "name": "Verify the title value is correct as expected \"智检 - 工程现场管理协作平台\" for test case \"guiLogin_001\"",
             "match": {
               "arguments": [
                 {
@@ -180,7 +180,7 @@
                   "offset": 47
                 },
                 {
-                  "val": "001",
+                  "val": "guiLogin_001",
                   "offset": 79
                 }
               ],
@@ -194,7 +194,7 @@
           },
           {
             "result": {
-              "duration": 242073649,
+              "duration": 247221578,
               "status": "passed"
             },
             "line": 28,
@@ -220,7 +220,7 @@
           },
           {
             "result": {
-              "duration": 197651683,
+              "duration": 185906022,
               "status": "passed"
             },
             "line": 29,
@@ -246,7 +246,7 @@
           },
           {
             "result": {
-              "duration": 126812584,
+              "duration": 141783370,
               "status": "passed"
             },
             "line": 30,
@@ -267,7 +267,7 @@
           },
           {
             "result": {
-              "duration": 2000812822,
+              "duration": 2000947452,
               "status": "passed"
             },
             "line": 31,
@@ -285,15 +285,15 @@
           },
           {
             "result": {
-              "duration": 372639173,
+              "duration": 394871111,
               "status": "passed"
             },
             "line": 32,
-            "name": "Capture the current page and save it as \"zhijian_login_001\"",
+            "name": "Capture the current page and save it as \"guiLogin_001\"",
             "match": {
               "arguments": [
                 {
-                  "val": "zhijian_login_001",
+                  "val": "guiLogin_001",
                   "offset": 41
                 }
               ],
@@ -306,7 +306,7 @@
           },
           {
             "result": {
-              "duration": 81803578,
+              "duration": 83542932,
               "status": "passed"
             },
             "line": 33,
@@ -332,7 +332,7 @@
           },
           {
             "result": {
-              "duration": 102949272,
+              "duration": 103739935,
               "status": "passed"
             },
             "line": 34,
@@ -353,7 +353,7 @@
           },
           {
             "result": {
-              "duration": 1000682688,
+              "duration": 1000752872,
               "status": "passed"
             },
             "line": 35,
@@ -371,7 +371,7 @@
           },
           {
             "result": {
-              "duration": 106616414,
+              "duration": 133555555,
               "status": "passed"
             },
             "line": 36,
@@ -392,7 +392,7 @@
           },
           {
             "result": {
-              "duration": 2000825548,
+              "duration": 2001794742,
               "status": "passed"
             },
             "line": 37,
@@ -410,7 +410,7 @@
           },
           {
             "result": {
-              "duration": 95770985,
+              "duration": 51117301,
               "status": "passed"
             },
             "line": 38,
@@ -432,7 +432,7 @@
         "before": [
           {
             "result": {
-              "duration": 79640,
+              "duration": 76765,
               "status": "passed"
             },
             "match": {
@@ -443,11 +443,11 @@
         "line": 43,
         "name": "Test for login",
         "description": "",
-        "id": "login-test-for-different-envs;test-for-login;;3",
+        "id": "gui-login-test-for-different-envs;test-for-login;;3",
         "after": [
           {
             "result": {
-              "duration": 55830,
+              "duration": 52956,
               "status": "passed"
             },
             "match": {
@@ -460,7 +460,7 @@
         "steps": [
           {
             "result": {
-              "duration": 4060729726,
+              "duration": 4090222722,
               "status": "passed"
             },
             "line": 24,
@@ -481,7 +481,7 @@
           },
           {
             "result": {
-              "duration": 1000795581,
+              "duration": 1000975367,
               "status": "passed"
             },
             "line": 25,
@@ -499,15 +499,15 @@
           },
           {
             "result": {
-              "duration": 21021718,
+              "duration": 8361641,
               "status": "passed"
             },
             "line": 26,
-            "name": "I Get the title of the website for test case \"002\"",
+            "name": "I Get the title of the website for test case \"guiLogin_002\"",
             "match": {
               "arguments": [
                 {
-                  "val": "002",
+                  "val": "guiLogin_002",
                   "offset": 46
                 }
               ],
@@ -520,11 +520,11 @@
           },
           {
             "result": {
-              "duration": 217984,
+              "duration": 87028,
               "status": "passed"
             },
             "line": 27,
-            "name": "Verify the title value is correct as expected \"龙湖集团 - 龙建\" for test case \"002\"",
+            "name": "Verify the title value is correct as expected \"龙湖集团 - 龙建\" for test case \"guiLogin_002\"",
             "match": {
               "arguments": [
                 {
@@ -532,7 +532,7 @@
                   "offset": 47
                 },
                 {
-                  "val": "002",
+                  "val": "guiLogin_002",
                   "offset": 73
                 }
               ],
@@ -546,7 +546,7 @@
           },
           {
             "result": {
-              "duration": 178426384,
+              "duration": 178750044,
               "status": "passed"
             },
             "line": 28,
@@ -572,7 +572,7 @@
           },
           {
             "result": {
-              "duration": 211629762,
+              "duration": 225235991,
               "status": "passed"
             },
             "line": 29,
@@ -598,7 +598,7 @@
           },
           {
             "result": {
-              "duration": 120148673,
+              "duration": 146062918,
               "status": "passed"
             },
             "line": 30,
@@ -619,7 +619,7 @@
           },
           {
             "result": {
-              "duration": 2000682689,
+              "duration": 2000630540,
               "status": "passed"
             },
             "line": 31,
@@ -637,15 +637,15 @@
           },
           {
             "result": {
-              "duration": 365580755,
+              "duration": 366021006,
               "status": "passed"
             },
             "line": 32,
-            "name": "Capture the current page and save it as \"zhijian_login_002\"",
+            "name": "Capture the current page and save it as \"guiLogin_002\"",
             "match": {
               "arguments": [
                 {
-                  "val": "zhijian_login_002",
+                  "val": "guiLogin_002",
                   "offset": 41
                 }
               ],
@@ -658,7 +658,7 @@
           },
           {
             "result": {
-              "duration": 123887655,
+              "duration": 158582187,
               "status": "passed"
             },
             "line": 33,
@@ -684,7 +684,7 @@
           },
           {
             "result": {
-              "duration": 111756078,
+              "duration": 119070363,
               "status": "passed"
             },
             "line": 34,
@@ -705,7 +705,7 @@
           },
           {
             "result": {
-              "duration": 1000801328,
+              "duration": 1000418719,
               "status": "passed"
             },
             "line": 35,
@@ -723,7 +723,7 @@
           },
           {
             "result": {
-              "duration": 121905272,
+              "duration": 139695526,
               "status": "passed"
             },
             "line": 36,
@@ -744,7 +744,7 @@
           },
           {
             "result": {
-              "duration": 2000979492,
+              "duration": 2000730294,
               "status": "passed"
             },
             "line": 37,
@@ -762,7 +762,7 @@
           },
           {
             "result": {
-              "duration": 47326369,
+              "duration": 72939916,
               "status": "passed"
             },
             "line": 38,
@@ -784,7 +784,7 @@
         "before": [
           {
             "result": {
-              "duration": 77998,
+              "duration": 104680,
               "status": "passed"
             },
             "match": {
@@ -795,11 +795,11 @@
         "line": 44,
         "name": "Test for login",
         "description": "",
-        "id": "login-test-for-different-envs;test-for-login;;4",
+        "id": "gui-login-test-for-different-envs;test-for-login;;4",
         "after": [
           {
             "result": {
-              "duration": 42283,
+              "duration": 45156,
               "status": "passed"
             },
             "match": {
@@ -812,7 +812,7 @@
         "steps": [
           {
             "result": {
-              "duration": 4537805470,
+              "duration": 4193306253,
               "status": "passed"
             },
             "line": 24,
@@ -833,7 +833,7 @@
           },
           {
             "result": {
-              "duration": 1001637549,
+              "duration": 1002288994,
               "status": "passed"
             },
             "line": 25,
@@ -851,15 +851,15 @@
           },
           {
             "result": {
-              "duration": 24333352,
+              "duration": 19327957,
               "status": "passed"
             },
             "line": 26,
-            "name": "I Get the title of the website for test case \"003\"",
+            "name": "I Get the title of the website for test case \"guiLogin_003\"",
             "match": {
               "arguments": [
                 {
-                  "val": "003",
+                  "val": "guiLogin_003",
                   "offset": 46
                 }
               ],
@@ -872,11 +872,11 @@
           },
           {
             "result": {
-              "duration": 798044,
+              "duration": 159688,
               "status": "passed"
             },
             "line": 27,
-            "name": "Verify the title value is correct as expected \"中梁控股集团\" for test case \"003\"",
+            "name": "Verify the title value is correct as expected \"中梁控股集团\" for test case \"guiLogin_003\"",
             "match": {
               "arguments": [
                 {
@@ -884,7 +884,7 @@
                   "offset": 47
                 },
                 {
-                  "val": "003",
+                  "val": "guiLogin_003",
                   "offset": 70
                 }
               ],
@@ -898,7 +898,7 @@
           },
           {
             "result": {
-              "duration": 259518949,
+              "duration": 222094372,
               "status": "passed"
             },
             "line": 28,
@@ -924,7 +924,7 @@
           },
           {
             "result": {
-              "duration": 229816454,
+              "duration": 226077943,
               "status": "passed"
             },
             "line": 29,
@@ -950,7 +950,7 @@
           },
           {
             "result": {
-              "duration": 121890494,
+              "duration": 128831427,
               "status": "passed"
             },
             "line": 30,
@@ -971,7 +971,7 @@
           },
           {
             "result": {
-              "duration": 2000823085,
+              "duration": 2000837026,
               "status": "passed"
             },
             "line": 31,
@@ -989,15 +989,15 @@
           },
           {
             "result": {
-              "duration": 380819530,
+              "duration": 366605569,
               "status": "passed"
             },
             "line": 32,
-            "name": "Capture the current page and save it as \"zhijian_login_003\"",
+            "name": "Capture the current page and save it as \"guiLogin_003\"",
             "match": {
               "arguments": [
                 {
-                  "val": "zhijian_login_003",
+                  "val": "guiLogin_003",
                   "offset": 41
                 }
               ],
@@ -1010,7 +1010,7 @@
           },
           {
             "result": {
-              "duration": 77824445,
+              "duration": 81534315,
               "status": "passed"
             },
             "line": 33,
@@ -1036,7 +1036,7 @@
           },
           {
             "result": {
-              "duration": 98330964,
+              "duration": 99500617,
               "status": "passed"
             },
             "line": 34,
@@ -1057,7 +1057,7 @@
           },
           {
             "result": {
-              "duration": 1000307887,
+              "duration": 1000458538,
               "status": "passed"
             },
             "line": 35,
@@ -1075,7 +1075,7 @@
           },
           {
             "result": {
-              "duration": 148078969,
+              "duration": 103858162,
               "status": "passed"
             },
             "line": 36,
@@ -1096,7 +1096,7 @@
           },
           {
             "result": {
-              "duration": 2000693362,
+              "duration": 2000806239,
               "status": "passed"
             },
             "line": 37,
@@ -1114,7 +1114,7 @@
           },
           {
             "result": {
-              "duration": 92811162,
+              "duration": 78225209,
               "status": "passed"
             },
             "line": 38,
@@ -1136,7 +1136,7 @@
         "before": [
           {
             "result": {
-              "duration": 48031,
+              "duration": 64860,
               "status": "passed"
             },
             "match": {
@@ -1147,11 +1147,11 @@
         "line": 45,
         "name": "Test for login",
         "description": "",
-        "id": "login-test-for-different-envs;test-for-login;;5",
+        "id": "gui-login-test-for-different-envs;test-for-login;;5",
         "after": [
           {
             "result": {
-              "duration": 79641,
+              "duration": 47619,
               "status": "passed"
             },
             "match": {
@@ -1164,7 +1164,7 @@
         "steps": [
           {
             "result": {
-              "duration": 3890831816,
+              "duration": 3763196709,
               "status": "passed"
             },
             "line": 24,
@@ -1185,7 +1185,7 @@
           },
           {
             "result": {
-              "duration": 1000565692,
+              "duration": 1000945811,
               "status": "passed"
             },
             "line": 25,
@@ -1203,15 +1203,15 @@
           },
           {
             "result": {
-              "duration": 18838592,
+              "duration": 21275408,
               "status": "passed"
             },
             "line": 26,
-            "name": "I Get the title of the website for test case \"004\"",
+            "name": "I Get the title of the website for test case \"guiLogin_004\"",
             "match": {
               "arguments": [
                 {
-                  "val": "004",
+                  "val": "guiLogin_004",
                   "offset": 46
                 }
               ],
@@ -1224,11 +1224,11 @@
           },
           {
             "result": {
-              "duration": 190890,
+              "duration": 169950,
               "status": "passed"
             },
             "line": 27,
-            "name": "Verify the title value is correct as expected \"葛洲坝地产\" for test case \"004\"",
+            "name": "Verify the title value is correct as expected \"葛洲坝地产\" for test case \"guiLogin_004\"",
             "match": {
               "arguments": [
                 {
@@ -1236,7 +1236,7 @@
                   "offset": 47
                 },
                 {
-                  "val": "004",
+                  "val": "guiLogin_004",
                   "offset": 69
                 }
               ],
@@ -1250,7 +1250,7 @@
           },
           {
             "result": {
-              "duration": 160450697,
+              "duration": 170626908,
               "status": "passed"
             },
             "line": 28,
@@ -1276,7 +1276,7 @@
           },
           {
             "result": {
-              "duration": 186541470,
+              "duration": 190533271,
               "status": "passed"
             },
             "line": 29,
@@ -1302,7 +1302,7 @@
           },
           {
             "result": {
-              "duration": 123994389,
+              "duration": 136931574,
               "status": "passed"
             },
             "line": 30,
@@ -1323,7 +1323,7 @@
           },
           {
             "result": {
-              "duration": 2001625645,
+              "duration": 2001587435,
               "status": "passed"
             },
             "line": 31,
@@ -1341,15 +1341,15 @@
           },
           {
             "result": {
-              "duration": 394451544,
+              "duration": 359878982,
               "status": "passed"
             },
             "line": 32,
-            "name": "Capture the current page and save it as \"zhijian_login_004\"",
+            "name": "Capture the current page and save it as \"guiLogin_004\"",
             "match": {
               "arguments": [
                 {
-                  "val": "zhijian_login_004",
+                  "val": "guiLogin_004",
                   "offset": 41
                 }
               ],
@@ -1362,7 +1362,7 @@
           },
           {
             "result": {
-              "duration": 79941476,
+              "duration": 85065507,
               "status": "passed"
             },
             "line": 33,
@@ -1388,7 +1388,7 @@
           },
           {
             "result": {
-              "duration": 104302745,
+              "duration": 101577377,
               "status": "passed"
             },
             "line": 34,
@@ -1409,7 +1409,7 @@
           },
           {
             "result": {
-              "duration": 1000276688,
+              "duration": 1000506157,
               "status": "passed"
             },
             "line": 35,
@@ -1427,7 +1427,7 @@
           },
           {
             "result": {
-              "duration": 133807780,
+              "duration": 131479615,
               "status": "passed"
             },
             "line": 36,
@@ -1448,7 +1448,7 @@
           },
           {
             "result": {
-              "duration": 2000502882,
+              "duration": 2000676518,
               "status": "passed"
             },
             "line": 37,
@@ -1466,7 +1466,7 @@
           },
           {
             "result": {
-              "duration": 79291219,
+              "duration": 58975248,
               "status": "passed"
             },
             "line": 38,
@@ -1485,9 +1485,9 @@
         ]
       }
     ],
-    "name": "Login test for different envs",
+    "name": "GUI Login test for different envs",
     "description": "",
-    "id": "login-test-for-different-envs",
+    "id": "gui-login-test-for-different-envs",
     "keyword": "Feature",
     "uri": "Gui/GUI_ZJLogin.feature",
     "tags": [
@@ -1578,7 +1578,7 @@
         "before": [
           {
             "result": {
-              "duration": 51314,
+              "duration": 41051,
               "status": "passed"
             },
             "match": {
@@ -1595,7 +1595,7 @@
         "steps": [
           {
             "result": {
-              "duration": 1924692020,
+              "duration": 1933022715,
               "status": "passed"
             },
             "line": 24,
@@ -1640,7 +1640,7 @@
           },
           {
             "result": {
-              "duration": 104778533,
+              "duration": 80251887,
               "status": "passed"
             },
             "line": 25,
@@ -1665,7 +1665,7 @@
           },
           {
             "result": {
-              "duration": 889178,
+              "duration": 924875,
               "status": "passed"
             },
             "line": 26,
@@ -1706,7 +1706,7 @@
         "before": [
           {
             "result": {
-              "duration": 67325,
+              "duration": 71838,
               "status": "passed"
             },
             "match": {
@@ -1723,7 +1723,7 @@
         "steps": [
           {
             "result": {
-              "duration": 551870169,
+              "duration": 342877375,
               "status": "passed"
             },
             "line": 24,
@@ -1768,7 +1768,7 @@
           },
           {
             "result": {
-              "duration": 3394559,
+              "duration": 600574,
               "status": "passed"
             },
             "line": 25,
@@ -1793,7 +1793,7 @@
           },
           {
             "result": {
-              "duration": 2608010,
+              "duration": 545976,
               "status": "passed"
             },
             "line": 26,
@@ -1834,7 +1834,7 @@
         "before": [
           {
             "result": {
-              "duration": 151481,
+              "duration": 52545,
               "status": "passed"
             },
             "match": {
@@ -1851,7 +1851,7 @@
         "steps": [
           {
             "result": {
-              "duration": 481663264,
+              "duration": 330240291,
               "status": "passed"
             },
             "line": 24,
@@ -1896,7 +1896,7 @@
           },
           {
             "result": {
-              "duration": 1375640,
+              "duration": 3233162,
               "status": "passed"
             },
             "line": 25,
@@ -1921,7 +1921,7 @@
           },
           {
             "result": {
-              "duration": 581702,
+              "duration": 3566495,
               "status": "passed"
             },
             "line": 26,
@@ -1962,7 +1962,7 @@
         "before": [
           {
             "result": {
-              "duration": 57472,
+              "duration": 112479,
               "status": "passed"
             },
             "match": {
@@ -1979,7 +1979,7 @@
         "steps": [
           {
             "result": {
-              "duration": 371821424,
+              "duration": 315656577,
               "status": "passed"
             },
             "line": 24,
@@ -2024,7 +2024,7 @@
           },
           {
             "result": {
-              "duration": 633837,
+              "duration": 1442525,
               "status": "passed"
             },
             "line": 25,
@@ -2049,7 +2049,7 @@
           },
           {
             "result": {
-              "duration": 619059,
+              "duration": 2520110,
               "status": "passed"
             },
             "line": 26,

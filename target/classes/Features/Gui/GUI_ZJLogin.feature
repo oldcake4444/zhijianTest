@@ -38,8 +38,8 @@ Feature: GUI Login test for different envs
     And Quit the driver
 
     Examples: 
-      | testCase | url      | expTitle          | userName       | password          | userNameXPath      | passwordXPath     | loginButtonXPath | userRealName   | curUserXPath      | fileName            | menuXPath            | logoutXPath  |
-      | "001"    | "prod"   | "智检 - 工程现场管理协作平台" | "kentestgrp10" | "12345678"        | "prodUsrNameXPath" | "prodUsrPswXPath" | "prodLoginBtn"   | "kentestgrp10" | "prodCurUsrXPath" | "zhijian_login_001" | "prodCurUsrDropDown" | "prodLogout" |
-      | "002"    | "longhu" | "龙湖集团 - 龙建"       | "longhu"       | "longhu2018"      | "lhUsrNameXPath"   | "lhUsrPswXPath"   | "lhLoginBtn"     | "龙湖集团管理员"      | "prodCurUsrXPath" | "zhijian_login_002" | "prodCurUsrDropDown" | "prodLogout" |
-      | "003"    | "zl"     | "中梁控股集团"          | "zhongliang"   | "zhongliang@2018" | "zlUsrNameXPath"   | "zlUsrPswXPath"   | "zlLoginBtn"     | "中梁"           | "zlCurUsrXPath"   | "zhijian_login_003" | "zlCurUsrDropDown"   | "prodLogout" |
-      | "004"    | "gzb"    | "葛洲坝地产"           | "gzb"          | "gzb@2018"        | "gzbUsrNameXPath"  | "gzbUsrPswXPath"  | "gzbLoginBtn"    | "地产总部管理员"      | "prodCurUsrXPath" | "zhijian_login_004" | "prodCurUsrDropDown" | "prodLogout" |
+      | testCase       | url      | expTitle          | userName       | password          | userNameXPath      | passwordXPath     | loginButtonXPath | userRealName   | curUserXPath      | fileName       | menuXPath            | logoutXPath  |
+      | "guiLogin_001" | "prod"   | "智检 - 工程现场管理协作平台" | "kentestgrp10" | "12345678"        | "prodUsrNameXPath" | "prodUsrPswXPath" | "prodLoginBtn"   | "kentestgrp10" | "prodCurUsrXPath" | "guiLogin_001" | "prodCurUsrDropDown" | "prodLogout" |
+      | "guiLogin_002" | "longhu" | "龙湖集团 - 龙建"       | "longhu"       | "longhu2018"      | "lhUsrNameXPath"   | "lhUsrPswXPath"   | "lhLoginBtn"     | "龙湖集团管理员"      | "prodCurUsrXPath" | "guiLogin_002" | "prodCurUsrDropDown" | "prodLogout" |
+      | "guiLogin_003" | "zl"     | "中梁控股集团"          | "zhongliang"   | "zhongliang@2018" | "zlUsrNameXPath"   | "zlUsrPswXPath"   | "zlLoginBtn"     | "中梁"           | "zlCurUsrXPath"   | "guiLogin_003" | "zlCurUsrDropDown"   | "prodLogout" |
+      | "guiLogin_004" | "gzb"    | "葛洲坝地产"           | "gzb"          | "gzb@2018"        | "gzbUsrNameXPath"  | "gzbUsrPswXPath"  | "gzbLoginBtn"    | "地产总部管理员"      | "prodCurUsrXPath" | "guiLogin_004" | "prodCurUsrDropDown" | "prodLogout" |
