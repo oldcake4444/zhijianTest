@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import org.junit.Test;
@@ -14,6 +16,8 @@ import org.junit.Test;
 public class FileUtil {
 	
 	static Logger log = Logger.getLogger("FileUtil.class");
+	
+	private static String configPath = "/Configuration/GUI_zhijian.properties";
 	
     public static void copyFile(File fromFile,File toFile) throws IOException{
     	//toFile.deleteOnExit();
@@ -46,6 +50,14 @@ public class FileUtil {
             e.printStackTrace();
         }
         return result.toString();    	
+    }
+    
+    public static void saveScreenShotToNewName(File screenShot, String rawFileName) throws IOException {
+    	Date day = new Date();
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss"); 
+		String curTime = df.format(day);
+		String fileName =rawFileName + "_" + curTime + ".jpg";
+		FileUtil.copyFile(screenShot, new File(GetConfigProperties.getValue(configPath, "screenshot.path") + fileName));
     }
     
     

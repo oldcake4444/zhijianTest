@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.test.InterfaceTest.CucumberRunEntryPoint
 -------------------------------------------------------------------------------
-Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 50.582 sec - in com.test.InterfaceTest.CucumberRunEntryPoint
+Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 390.498 sec - in com.test.InterfaceTest.CucumberRunEntryPoint

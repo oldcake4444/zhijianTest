@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -24,6 +25,8 @@ public class WebUtil {
 	//protected WebDriver driver = SelectBrowser.selectChrome();
 	//protected ScreenCaptureHtmlUnitDriver driver = SelectBrowser.selectGhost();
 	protected WebDriver driver = SelectBrowser.selectChromeHeadless();
+	
+	Actions action = new Actions(driver);
 	
 	public Boolean isElementPresent(String xPath) throws InterruptedException {
 		By path = By.xpath(xPath); 
@@ -67,6 +70,7 @@ public class WebUtil {
 		return attribute;
 	}
 	
+	
 	public File captureExplorerScreenShot() {
 		File img = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		return img;
@@ -108,6 +112,31 @@ public class WebUtil {
 		By path = By.xpath(targetXPath);
 		if (this.isElementPresent(targetXPath)) {
 			driver.findElement(path).click();
+		}
+	}
+	
+	public void sendKeyToField(String targetXPath, Keys keyName) throws InterruptedException {
+		By path = By.xpath(targetXPath);
+		if (this.isElementPresent(targetXPath)) {
+			action.sendKeys(driver.findElement(path), keyName).build().perform();;
+		}
+	}
+	
+	public void sendKey(Keys keyName) throws InterruptedException {
+		action.sendKeys(keyName).build().perform();
+	}
+	
+	public void rightClick(String targetXPath) throws InterruptedException {	
+		By path = By.xpath(targetXPath);
+		if (this.isElementPresent(targetXPath)) {
+			action.contextClick(driver.findElement(path)).build().perform();
+		}
+	}
+	
+	public void actionToClick(String targetXPath) throws InterruptedException {	
+		By path = By.xpath(targetXPath);
+		if (this.isElementPresent(targetXPath)) {
+			action.moveToElement(driver.findElement(path)).click().perform();
 		}
 	}
 	
