@@ -27,7 +27,7 @@ Feature: App login API test for different envs
 
     Examples: 
       | testCase          | env         | usr           | psw        | apiParameters                 | expValueList                      | returnMsgFieldList                 |
-      | "appapilogin_001" | "prodEnv"   | "kentest40"   | "12345678" | "device_id;password;username" | "115430;肆肆肆肆肆肆肆肆肆肆肆肆;kentest40;0" | "id;real_name;user_name;delete_at" |
+      | "appapilogin_001" | "prodEnv"   | "kentest40"   | "12345678" | "device_id;password;username" | "115430;肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆;kentest40;0" | "id;real_name;user_name;delete_at" |
       | "appapilogin_002" | "longhuEnv" | "kentestchk1" | "12345678" | "device_id;password;username" | "2;坚龙湖检查人;kentestchk1;0"          | "id;real_name;user_name;delete_at" |
       | "appapilogin_003" | "zlEnv"     | "kentest10"   | "12345678" | "device_id;password;username" | "11448;kentest10;kentest10;0"     | "id;real_name;user_name;delete_at" |
       | "appapilogin_004" | "gzbEnv"    | "kentest10"   | "12345678" | "device_id;password;username" | "189;坚葛洲坝检查人;kentest10;0"         | "id;real_name;user_name;delete_at" |

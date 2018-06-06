@@ -2,6 +2,7 @@ package com.test.InterfaceTest.Pages;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -13,9 +14,11 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import com.test.InterfaceTest.Util.DateUtil;
 import com.test.InterfaceTest.Util.FileUtil;
 import com.test.InterfaceTest.Util.GetConfigProperties;
 import com.test.InterfaceTest.Util.ScenarioContext;
+import com.test.InterfaceTest.Util.TextHandle;
 import com.test.InterfaceTest.WebDriver.WebUtil;
 
 import cucumber.api.PendingException;
@@ -36,6 +39,8 @@ public class PageOperations {
 	@FindBy(how = How.ID, id = "su")
 	WebElement frontPageSearchButton;
 	private String configPath = "/Configuration/GUI_zhijian.properties";
+	private String acntConfigPath = "/Configuration/accountName.properties";
+	private String acntConfigFullPath = "src/main/resources/Configuration/accountName.properties";
 	
 //	protected WebDriver driver;
 //	
@@ -172,6 +177,13 @@ public class PageOperations {
 			this.webUtil.inputText(usr, usrNameXPath);
 			this.webUtil.inputText(psw, pswXPath);		
 			String buttonXPath = GetConfigProperties.getValue(this.configPath, "gzbLoginBtn");
+			this.webUtil.clickButton(buttonXPath);
+		} else if (env.equals("test")) {
+			String usrNameXPath = GetConfigProperties.getValue(this.configPath, "prodUsrNameXPath");
+			String pswXPath = GetConfigProperties.getValue(this.configPath, "prodUsrPswXPath");
+			this.webUtil.inputText(usr, usrNameXPath);
+			this.webUtil.inputText(psw, pswXPath);		
+			String buttonXPath = GetConfigProperties.getValue(this.configPath, "prodLoginBtn");
 			this.webUtil.clickButton(buttonXPath);
 		}
 	    
@@ -341,5 +353,226 @@ public class PageOperations {
 	    }
 		
 	}
+	
+	@Given("^I navigate to group statistics page of \"([^\"]*)\" of \"([^\"]*)\" env from front page$")
+	public void i_navigate_to_group_statistics_page_of_of_env_from_front_page(String product, String env) throws Throwable {
+		if(env.equals("lh") && product.equals("gcjc")) {
+			this.webUtil.clickTarget(GetConfigProperties.getValue(this.configPath, "龙湖首页集团入口"));
+			Thread.sleep(1000);
+			this.webUtil.clickTarget(GetConfigProperties.getValue(this.configPath, "龙湖集团统计汇总入口"));
+			Thread.sleep(1000);
+			this.webUtil.clickTarget(GetConfigProperties.getValue(this.configPath, "龙湖集团工程检查统计入口"));
+			Thread.sleep(1000);
+			this.webUtil.clickTarget(GetConfigProperties.getValue(this.configPath, "龙湖集团工程检查统计分析入口"));
+			Thread.sleep(1000);
+		}
+
+	}
+	
+	@Given("^I navigate to group statistics page of \"([^\"]*)\" of \"([^\"]*)\" env from group statistics page$")
+	public void i_navigate_to_group_statistics_page_of_of_env_from_group_statistics_page(String product, String env) throws Throwable {
+		if(env.equals("lh") && product.equals("gxgl")) {
+			this.webUtil.clickTarget(GetConfigProperties.getValue(this.configPath, "龙湖集团工序管理统计入口"));
+			Thread.sleep(1000);
+			this.webUtil.clickTarget(GetConfigProperties.getValue(this.configPath, "龙湖集团工序管理统计分析入口"));
+			Thread.sleep(1000);
+		} else if (env.equals("lh") && product.equals("scsl")) {
+			this.webUtil.clickTarget(GetConfigProperties.getValue(this.configPath, "龙湖集团实测实量统计入口"));
+			Thread.sleep(1000);
+			this.webUtil.clickTarget(GetConfigProperties.getValue(this.configPath, "龙湖集团实测实量统计分析入口"));
+			Thread.sleep(1000);
+		}
+	}
+	
+	@Then("^I verify non null \"([^\"]*)\" can be found in the page and the value is larger than zero$")
+	public void i_verify_non_null_can_be_found_in_the_page_and_the_value_is_larger_than_zero(String stgStaElement) throws Throwable {
+	    if (stgStaElement.equals("工程百平米总问题数")) {
+	    	String tgtVal = this.webUtil.getText(GetConfigProperties.getValue(this.configPath, "集团总览工程检查百平米总问题数"));
+	    	float tgtNum = Float.parseFloat(tgtVal);
+	    	Assert.assertTrue(tgtNum > 0);
+	    } else if (stgStaElement.equals("及时整改完结率")) {
+	    	String tgtVal = this.webUtil.getText(GetConfigProperties.getValue(this.configPath, "集团总览及时整改完结率"));
+	    	float tgtNum = new Float(tgtVal.substring(0, tgtVal.indexOf("%"))) / 100;
+	    	Assert.assertTrue(tgtNum > 0);
+	    } else if (stgStaElement.equals("整改完结率")) {
+	    	String tgtVal = this.webUtil.getText(GetConfigProperties.getValue(this.configPath, "集团总览整改完结率"));
+	    	float tgtNum = new Float(tgtVal.substring(0, tgtVal.indexOf("%"))) / 100;
+	    	Assert.assertTrue(tgtNum > 0);
+	    } else if (stgStaElement.equals("工序一次验收合格率")) {
+	    	String tgtVal = this.webUtil.getText(GetConfigProperties.getValue(this.configPath, "集团总览工序管理一次验收合格率"));
+	    	float tgtNum = new Float(tgtVal.substring(0, tgtVal.indexOf("%"))) / 100;
+	    	Assert.assertTrue(tgtNum > 0);
+	    } else if (stgStaElement.equals("实测合格率")) {
+	    	String tgtVal = this.webUtil.getText(GetConfigProperties.getValue(this.configPath, "集团总览实测合格率"));
+	    	float tgtNum = new Float(tgtVal.substring(0, tgtVal.indexOf("%"))) / 100;
+	    	Assert.assertTrue(tgtNum > 0);
+	    }
+	}
+	
+	@Then("^I verify the group overall statistics data for \"([^\"]*)\" days can be found for gcjc$")
+	public void i_verify_the_group_overall_statistics_data_for_days_can_be_found_for_gcjc(String dayStr) throws Throwable {
+		ArrayList<String> dayList = DateUtil.getPreDay(3);
+		for(int i = 0; i < dayList.size(); i++) {
+	    	String tgtVal1 = this.webUtil.getText(GetConfigProperties.getValue(this.configPath, "集团总览工程检查日期百平米总问题").replace("MMdd", dayList.get(i)));
+	    	float tgtNum1 = Float.parseFloat(tgtVal1); 
+	    	Assert.assertTrue(tgtNum1 > 0);
+	    	
+	    	String tgtVal2 = this.webUtil.getText(GetConfigProperties.getValue(this.configPath, "集团总览工程检查日期及时整改完结率").replace("MMdd", dayList.get(i)));
+	    	float tgtNum2 = new Float(tgtVal2.substring(0, tgtVal2.indexOf("%"))) / 100;
+	    	Assert.assertTrue(tgtNum2 > 0);
+	    	
+	    	String tgtVal3 = this.webUtil.getText(GetConfigProperties.getValue(this.configPath, "集团总览工程检查日期整改完结率").replace("MMdd", dayList.get(i)));
+	    	float tgtNum3 = new Float(tgtVal3.substring(0, tgtVal3.indexOf("%"))) / 100;
+	    	Assert.assertTrue(tgtNum3 > 0);
+		}
+	}
+	
+	@Then("^I verify the group overall statistics data for \"([^\"]*)\" days can be found for gxgl$")
+	public void i_verify_the_group_overall_statistics_data_for_days_can_be_found_for_gxgl(String dayStr) throws Throwable {
+		ArrayList<String> dayList = DateUtil.getPreDay(3);
+		for(int i = 0; i < dayList.size(); i++) {
+	    	String tgtVal1 = this.webUtil.getText(GetConfigProperties.getValue(this.configPath, "集团总览工序管理日期一次验收合格率").replace("MMdd", dayList.get(i)));
+	    	float tgtNum1 = new Float(tgtVal1.substring(0, tgtVal1.indexOf("%"))) / 100;
+	    	Assert.assertTrue(tgtNum1 > 0);
+	    	
+	    	String tgtVal2 = this.webUtil.getText(GetConfigProperties.getValue(this.configPath, "集团总览工序管理日期及时整改完结率").replace("MMdd", dayList.get(i)));
+	    	float tgtNum2 = new Float(tgtVal2.substring(0, tgtVal2.indexOf("%"))) / 100;
+	    	Assert.assertTrue(tgtNum2 > 0);
+	    	
+	    	String tgtVal3 = this.webUtil.getText(GetConfigProperties.getValue(this.configPath, "集团总览工序管理日期整改完结率").replace("MMdd", dayList.get(i)));
+	    	float tgtNum3 = new Float(tgtVal3.substring(0, tgtVal3.indexOf("%"))) / 100;
+	    	Assert.assertTrue(tgtNum3 > 0);
+	    	
+		}
+	}
+		
+	@Then("^I verify the group overall statistics data for \"([^\"]*)\" days can be found for scsl$")
+	public void i_verify_the_group_overall_statistics_data_for_days_can_be_found_for_scsl(String dayStr) throws Throwable {
+		ArrayList<String> dayList = DateUtil.getPreDay(3);
+		for(int i = 0; i < dayList.size(); i++) {
+	    	String tgtVal1 = this.webUtil.getText(GetConfigProperties.getValue(this.configPath, "集团总览实测实量日期实测合格率").replace("MMdd", dayList.get(i)));
+	    	float tgtNum1 = new Float(tgtVal1.substring(0, tgtVal1.indexOf("%"))) / 100;
+	    	Assert.assertTrue(tgtNum1 > 0);
+	    	
+	    	String tgtVal2 = this.webUtil.getText(GetConfigProperties.getValue(this.configPath, "集团总览实测实量日期及时整改完结率").replace("MMdd", dayList.get(i)));
+	    	float tgtNum2 = new Float(tgtVal2.substring(0, tgtVal2.indexOf("%"))) / 100;
+	    	Assert.assertTrue(tgtNum2 > 0);
+	    	
+	    	String tgtVal3 = this.webUtil.getText(GetConfigProperties.getValue(this.configPath, "集团总览实测实量日期整改完结率").replace("MMdd", dayList.get(i)));
+	    	float tgtNum3 = new Float(tgtVal3.substring(0, tgtVal3.indexOf("%"))) / 100;
+	    	Assert.assertTrue(tgtNum3 > 0);
+	    	
+	    	log.info(tgtVal1);
+	    	log.info(tgtVal2);
+	    	log.info(tgtVal3);
+	    	
+		}
+	}
+	
+	@Given("^I click usr management link for \"([^\"]*)\"$")
+	public void i_click_usr_management_link_for(String lvlName) throws Throwable {
+	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境人员管理集团页面通用层级").replace("<lvlName>", lvlName));
+	}
+	
+	@When("^I expand the project list of \"([^\"]*)\" in usr management page$")
+	public void i_expand_the_project_list_of_in_usr_management_page(String comName) throws Throwable {
+		this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境人员管理集团页面公司下拉").replace("<comName>", comName));;
+	}
+	
+	@Given("^I click the link for \"([^\"]*)\"$")
+	public void i_click_the_link_for(String btnName) throws Throwable {
+		if (btnName.equals("新增人员")) {
+			this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境人员管理新增人员"));
+		}
+		
+	}
+	
+	@When("^I input \"([^\"]*)\" to create \"([^\"]*)\" new accounts$")
+	public void i_input_to_create_new_accounts(String usrInfo, String nostr) throws Throwable {
+		String finalAcntName = null;
+		String finalAcntNameFromConfig = GetConfigProperties.getValue(this.acntConfigPath, "latestAcntName");
+		String finalAcntNameFromMem = null;
+		finalAcntNameFromMem = (String) ScenarioContext.get("latestAcntName");
+		if (finalAcntNameFromMem == null || finalAcntNameFromMem.isEmpty()) {
+			finalAcntNameFromMem = GetConfigProperties.getValue(this.acntConfigPath, "latestAcntName").substring(0, Integer.valueOf(GetConfigProperties.getValue(this.acntConfigPath, "nameLen"))) + "0";
+		}
+	
+		log.info(finalAcntNameFromMem);
+		int finalAcntNameSeqFromConfig = Integer.valueOf(finalAcntNameFromConfig.substring(Integer.valueOf(GetConfigProperties.getValue(this.acntConfigPath, "nameLen")), finalAcntNameFromConfig.length()));
+		int finalAcntNameSeqFromMem =  Integer.valueOf(finalAcntNameFromMem.substring(Integer.valueOf(GetConfigProperties.getValue(this.acntConfigPath, "nameLen")), finalAcntNameFromMem.length()));
+		
+		if(finalAcntNameSeqFromConfig <= finalAcntNameSeqFromMem) {
+			for (int i = 1; i <= Integer.valueOf(nostr); i++) {
+			    String usrInfoList[] = usrInfo.split(",");
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境人员管理新增人员"));
+			    Thread.sleep(1000);
+			    
+			    String acntNamePart1 = finalAcntNameFromMem.substring(0, Integer.valueOf(GetConfigProperties.getValue(this.acntConfigPath, "nameLen")));
+			    String acntNamePart2 = String.valueOf(Integer.valueOf(finalAcntNameFromMem.substring(Integer.valueOf(GetConfigProperties.getValue(this.acntConfigPath, "nameLen")), finalAcntNameFromMem.length())) + i);
+			    String acntName = acntNamePart1+ acntNamePart2;
+			    String rawRealNameWithoutSeq = GetConfigProperties.getValue(this.acntConfigPath, "realName");
+			    String realName = rawRealNameWithoutSeq + acntNamePart2;
+			    
+			    this.webUtil.inputText(acntName, GetConfigProperties.getValue(this.configPath, "生产环境新增人员用户名"));
+			    this.webUtil.inputText(usrInfoList[1], GetConfigProperties.getValue(this.configPath, "生产环境新增人员密码"));
+			    this.webUtil.inputText(realName, GetConfigProperties.getValue(this.configPath, "生产环境新增人员真实姓名"));
+			    this.webUtil.inputText(usrInfoList[3], GetConfigProperties.getValue(this.configPath, "生产环境新增人员手机号码"));
+			    this.webUtil.inputText(usrInfoList[4], GetConfigProperties.getValue(this.configPath, "生产环境新增人员邮箱地址"));
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员人员角色下拉"));
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员角色选择").replace("<角色名>", usrInfoList[5]));
+			    Thread.sleep(1000);
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员手机"));
+			    Thread.sleep(1000);
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员确定"));	
+			    Thread.sleep(2000);
+			    finalAcntName = acntName;
+			}
+			
+		} else {
+			for (int i = 1; i <= Integer.valueOf(nostr); i++) {
+			    String usrInfoList[] = usrInfo.split(",");
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境人员管理新增人员"));
+			    Thread.sleep(1000);
+			    this.webUtil.inputText(TextHandle.getNewAcntName(this.acntConfigPath, this.acntConfigFullPath, i)[0], GetConfigProperties.getValue(this.configPath, "生产环境新增人员用户名"));
+			    this.webUtil.inputText(usrInfoList[1], GetConfigProperties.getValue(this.configPath, "生产环境新增人员密码"));
+			    this.webUtil.inputText(TextHandle.getNewAcntName(this.acntConfigPath, this.acntConfigFullPath, i)[1], GetConfigProperties.getValue(this.configPath, "生产环境新增人员真实姓名"));
+			    this.webUtil.inputText(usrInfoList[3], GetConfigProperties.getValue(this.configPath, "生产环境新增人员手机号码"));
+			    this.webUtil.inputText(usrInfoList[4], GetConfigProperties.getValue(this.configPath, "生产环境新增人员邮箱地址"));
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员人员角色下拉"));
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员角色选择").replace("<角色名>", usrInfoList[5]));
+			    Thread.sleep(1000);
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员手机"));
+			    Thread.sleep(1000);
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员确定"));	
+			    Thread.sleep(2000);
+			    finalAcntName = TextHandle.getNewAcntName(this.acntConfigPath, this.acntConfigFullPath, i)[0];
+			}
+		}
+		
+		
+		log.info(finalAcntName);
+		TextHandle.updatePropAcntName(this.acntConfigPath, this.acntConfigFullPath, finalAcntName);
+		ScenarioContext.put("latestAcntName", finalAcntName);
+		Thread.sleep(3000);
+	}
+	
+	@Given("^I search \"([^\"]*)\" and add accounts to project as \"([^\"]*)\"$")
+	public void i_search_and_add_accounts_to_project_as(String keyWord, String roleName) throws Throwable {
+	    this.webUtil.inputText(keyWord, GetConfigProperties.getValue(this.configPath, "生产环境新增人员搜索输入"));
+	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员搜索确定"));
+	    Thread.sleep(3000);
+	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员搜索全选"));
+	    Thread.sleep(1000);
+	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员搜索添加"));
+	    Thread.sleep(1000);
+	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员搜索角色下拉"));
+	    Thread.sleep(1000);
+	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员搜索角色选择").replace("<角色名>", roleName));
+	    Thread.sleep(1000);
+	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员搜索添加确定"));
+	}
+
+
+
 
 }
