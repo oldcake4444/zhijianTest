@@ -5,6 +5,10 @@ import java.util.logging.Logger;
 import org.junit.Test;
 
 import com.jayway.restassured.response.Response;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import com.jayway.restassured.RestAssured;
 import static com.jayway.restassured.RestAssured.*;
 
@@ -66,10 +70,32 @@ public class RestassureApiCalling {
 		return reponseJson;
 	}
 	
-	@Test
-	public void testApiGetMethod() {
-		String response = getMethod("http://www.weather.com.cn", "/data/cityinfo/101010100.html");
+//	@Test
+//	public void testApiGetMethod() {
+//		String response = getMethod("https://zj.buildingqm.com", "/v3/api/mine/teams_and_projects/?device_id=862460033965107&token=CDY3NDOGHF4GZIGNH3BKOACSNLXTYQH2SYT4RBADET3NCX25GNXQ");
+//		log.info(response);
+//    	JSONObject responseJson = ApiShareSteps.strToJson(response);
+//    	JSONObject responseData = (JSONObject) responseJson.get("data");
+//	    JSONObject teamData = (JSONObject) responseData.get("teams");		    
+//	    JSONObject projectData = (JSONObject) responseData.get("projects");
+//	}
+	
+	public static void main(String[] args) {
+		String response = getMethod("https://zj.buildingqm.com", "/v3/api/mine/teams_and_projects/?device_id=862460033965107&token=CDY3NDOGHF4GZIGNH3BKOACSNLXTYQH2SYT4RBADET3NCX25GNXQ");
 		log.info(response);
+    	JSONObject responseJson = ApiShareSteps.strToJson(response);
+    	JSONObject responseData = (JSONObject) responseJson.get("data");
+    	JSONArray teamData = (JSONArray) responseData.get("teams");
+    	JSONArray projectData = (JSONArray) responseData.get("projects");
+    	for(int i = 0; i < teamData.size(); i++) {
+    		JSONObject team = teamData.getJSONObject(i);
+    		log.info(team.getString("team_name"));
+    	}
+    	for(int j = 0; j < projectData.size(); j++) {
+    		JSONObject project = projectData.getJSONObject(j);
+    		log.info(project.getString("name"));
+    	}
+
 	}
 
 

@@ -40,9 +40,10 @@ Feature: Create new account
     And I search <keyWord> and add accounts to project as <role> in <env> env
     And I wait for "2" seconds
     And Quit the driver
+    And I call the teams and projects api in <env> to verify the <usrCount> new users are in <grpName> and <comName> and <projName> for <testCase>
 
     Examples: 
       | testCase          | env    | usr            | psw        | tgtPage        | grpName | comName | projName | usrInfo1                                                                  | usrInfo2                                                                   | keyWord       | role  |apiParameters|usrCount|
-      | "usrCreation_001" | "prod" | "kentestgrp11" | "12345678" | "人员管理集团页面" | "坚11集团" | "坚1公司"  | "坚1项目"   | "acntName,psw,realName,13800138000,automation@zhijiancloud.com,集团员工" | "acntName,12345678,realName,13800138000,automation@zhijiancloud.com,公司管理员" | "kentestauto" | "检查人" |"device_id;password;username"|"2"|
+      | "usrCreation_001" | "prod" | "kentestgrp11" | "12345678" | "人员管理集团页面" | "坚11集团" | "坚1公司"  | "坚1项目"   | "acntName,psw,realName,13800138000,automation@zhijiancloud.com,集团员工" | "acntName,12345678,realName,13800138000,automation@zhijiancloud.com,公司管理员" | "autotest" | "检查人" |"device_id;password;username"|"2"|
       #| "usrCreation_001" | "test" | "kentestgrp11" | "12345678" | "人员管理集团页面" | "KEN坚集团拾壹" | "坚1公司"  | "坚1项目"   | "acntName,psw,realName,13800138000,automation@zhijiancloud.com,集团员工" | "acntName,12345678,realName,13800138000,automation@zhijiancloud.com,公司管理员" | "kentest" | "检查人" |"device_id;password;username"|"2"|
       

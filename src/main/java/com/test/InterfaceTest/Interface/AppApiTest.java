@@ -15,6 +15,7 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class AppApiTest {
@@ -105,7 +106,9 @@ public class AppApiTest {
 		    Assert.assertEquals(msg, callMsg);
 
 		    JSONObject responseData = (JSONObject) responseJson.get("data");
-		    JSONObject usrData = (JSONObject) responseData.get("user");
+		    JSONObject usrData = (JSONObject) responseData.get("user");		    
+		    String tokenId = (String) responseData.get("token");
+		    ScenarioContext.put(testCase + env + String.valueOf(i) + "tokenId", tokenId);
 		    
 		    String expEmail = expUsrInfo.split(",")[4];
 		    String expMobile = expUsrInfo.split(",")[3];
@@ -116,8 +119,43 @@ public class AppApiTest {
 		    Assert.assertEquals(expRealName, usrData.get("real_name"));
 		    Assert.assertEquals(expUsrName, usrData.get("user_name"));
 		    
+		    
+		    
 		}
 
+	}
+	
+	@Given("^I call the teams and projects api in \"([^\"]*)\" to verify the \"([^\"]*)\" new users are in \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" for \"([^\"]*)\"$")
+	public void i_call_the_teams_and_projects_api_in_to_verify_the_new_users_are_in_and_and_for(String env, String usrCount, String expGrpName, String expComName, String expProjName, String testCase) throws Throwable {
+		String hostName = GetConfigProperties.getValue(configPath, env);
+		String apiPath = GetConfigProperties.getValue(configPath, "teamsAndProjects");
+		String device_id = ApiShareSteps.deviceIdGenerator();
+	    for(int i = 1; i <= Integer.valueOf(usrCount); i++) {
+	    	String tokenId = (String)ScenarioContext.get(testCase + env + String.valueOf(i) + "tokenId");
+	    	String fullApiPath = apiPath + "device_id=" + device_id + "&" + "token=" + tokenId;
+	    	log.info(hostName+fullApiPath);
+	    	String response = RestassureApiCalling.getMethod(hostName, fullApiPath);
+	    	
+	    	JSONObject responseJson = ApiShareSteps.strToJson(response);
+	    	JSONObject responseData = (JSONObject) responseJson.get("data");
+	    	JSONArray teamData = (JSONArray) responseData.get("teams");
+	    	JSONArray projectData = (JSONArray) responseData.get("projects");
+
+	    	for(int j = 0; j < teamData.size(); j++) {
+	    		JSONObject team = teamData.getJSONObject(j);
+	    		String teamName = team.getString("team_name");
+   				log.info(team.getString("team_name"));
+	    		Assert.assertTrue(teamName.equals(expGrpName) || teamName.equals(expComName));
+	    		
+	    	}
+	    	for(int k = 0; k < projectData.size(); k++) {
+	    		JSONObject project = projectData.getJSONObject(k);
+	    		String projName = project.getString("name");
+	    		log.info(project.getString("name"));
+	    		Assert.assertEquals(expProjName, projName);
+	    	}
+	    	
+	    }
 	}
 	
 
