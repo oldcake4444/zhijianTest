@@ -16,12 +16,12 @@ public class TextHandle {
 	private String configPath = "/Configuration/accountName.properties";
 	private String configFullPath = "src/main/resources/Configuration/accountName.properties";
 	
-	public static String[] getNewAcntName(String acntConfigPath, String acntConfigFullPath, int seqNo) throws IOException {
-		String curAcntName = GetConfigProperties.getValue(acntConfigPath, "latestAcntName");
+	public static String[] getNewAcntName(String acntConfigPath, String acntConfigFullPath, int seqNo, String env) throws IOException {
+		String curAcntName = GetConfigProperties.getValue(acntConfigPath, env + "AcntName");
 		String acntseqNoStr = curAcntName.substring(Integer.valueOf(GetConfigProperties.getValue(acntConfigPath, "nameLen")), curAcntName.length());
 		String newSeqNoStr = String.valueOf(Integer.valueOf(acntseqNoStr) + seqNo);
 		String newAcntName = curAcntName.substring(0, Integer.valueOf(GetConfigProperties.getValue(acntConfigPath, "nameLen"))) + newSeqNoStr;
-		GetConfigProperties.setValue(acntConfigPath, acntConfigFullPath, "latestAcntName", newAcntName);
+		GetConfigProperties.setValue(acntConfigPath, acntConfigFullPath, env + "AcntName", newAcntName);
 		
 		String curRealName = GetConfigProperties.getValue(acntConfigPath, "realName");
 		String newRealName = curRealName + newSeqNoStr;
@@ -31,14 +31,14 @@ public class TextHandle {
 		return acntInfo;
 	}
 	
-	public static void updatePropAcntName(String acntConfigPath, String acntConfigFullPath, String newAcntName) throws IOException {
-		GetConfigProperties.setValue(acntConfigPath, acntConfigFullPath, "latestAcntName", newAcntName);
+	public static void updatePropAcntName(String acntConfigPath, String acntConfigFullPath, String newAcntName, String env) throws IOException {
+		GetConfigProperties.setValue(acntConfigPath, acntConfigFullPath, env + "AcntName", newAcntName);
 	}
 	
 	
 	@Test
 	public void testGetNewAcntName() throws IOException {
-		String acntInfo[] = getNewAcntName(this.configPath, this.configFullPath, 1);
+		String acntInfo[] = getNewAcntName(this.configPath, this.configFullPath, 1, "test");
 		for (int i = 0; i < acntInfo.length; i++) {
 			log.info(acntInfo[i]);
 		}

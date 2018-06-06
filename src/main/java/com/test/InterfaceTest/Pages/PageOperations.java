@@ -469,42 +469,41 @@ public class PageOperations {
 		}
 	}
 	
-	@Given("^I click usr management link for \"([^\"]*)\"$")
-	public void i_click_usr_management_link_for(String lvlName) throws Throwable {
-	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境人员管理集团页面通用层级").replace("<lvlName>", lvlName));
+	@Given("^I click usr management link for \"([^\"]*)\" in \"([^\"]*)\" env$")
+	public void i_click_usr_management_link_for(String lvlName, String env) throws Throwable {
+	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "人员管理集团页面通用层级").replace("<lvlName>", lvlName));
 	}
 	
-	@When("^I expand the project list of \"([^\"]*)\" in usr management page$")
-	public void i_expand_the_project_list_of_in_usr_management_page(String comName) throws Throwable {
-		this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境人员管理集团页面公司下拉").replace("<comName>", comName));;
+	@When("^I expand the project list of \"([^\"]*)\" in usr management page in \"([^\"]*)\" env$")
+	public void i_expand_the_project_list_of_in_usr_management_page(String comName, String env) throws Throwable {
+		this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "人员管理集团页面公司下拉").replace("<comName>", comName));;
 	}
 	
-	@Given("^I click the link for \"([^\"]*)\"$")
-	public void i_click_the_link_for(String btnName) throws Throwable {
+	@When("^I click the link for \"([^\"]*)\" in \"([^\"]*)\" env$")
+	public void i_click_the_link_for_in_env(String btnName, String env) throws Throwable {
 		if (btnName.equals("新增人员")) {
-			this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境人员管理新增人员"));
+			this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "人员管理新增人员"));
 		}
 		
 	}
 	
-	@When("^I input \"([^\"]*)\" to create \"([^\"]*)\" new accounts$")
-	public void i_input_to_create_new_accounts(String usrInfo, String nostr) throws Throwable {
+	@When("^I input \"([^\"]*)\" to create \"([^\"]*)\" new accounts in \"([^\"]*)\" env$")
+	public void i_input_to_create_new_accounts_in_env(String usrInfo, String nostr, String env) throws Throwable {
 		String finalAcntName = null;
-		String finalAcntNameFromConfig = GetConfigProperties.getValue(this.acntConfigPath, "latestAcntName");
+		String finalAcntNameFromConfig = GetConfigProperties.getValue(this.acntConfigPath, env + "AcntName");
 		String finalAcntNameFromMem = null;
-		finalAcntNameFromMem = (String) ScenarioContext.get("latestAcntName");
+		finalAcntNameFromMem = (String) ScenarioContext.get(env + "LatestAcntName");
 		if (finalAcntNameFromMem == null || finalAcntNameFromMem.isEmpty()) {
-			finalAcntNameFromMem = GetConfigProperties.getValue(this.acntConfigPath, "latestAcntName").substring(0, Integer.valueOf(GetConfigProperties.getValue(this.acntConfigPath, "nameLen"))) + "0";
+			finalAcntNameFromMem = finalAcntNameFromConfig.substring(0, Integer.valueOf(GetConfigProperties.getValue(this.acntConfigPath, "nameLen"))) + "0";
 		}
 	
-		log.info(finalAcntNameFromMem);
 		int finalAcntNameSeqFromConfig = Integer.valueOf(finalAcntNameFromConfig.substring(Integer.valueOf(GetConfigProperties.getValue(this.acntConfigPath, "nameLen")), finalAcntNameFromConfig.length()));
 		int finalAcntNameSeqFromMem =  Integer.valueOf(finalAcntNameFromMem.substring(Integer.valueOf(GetConfigProperties.getValue(this.acntConfigPath, "nameLen")), finalAcntNameFromMem.length()));
 		
 		if(finalAcntNameSeqFromConfig <= finalAcntNameSeqFromMem) {
 			for (int i = 1; i <= Integer.valueOf(nostr); i++) {
 			    String usrInfoList[] = usrInfo.split(",");
-			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境人员管理新增人员"));
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "人员管理新增人员"));
 			    Thread.sleep(1000);
 			    
 			    String acntNamePart1 = finalAcntNameFromMem.substring(0, Integer.valueOf(GetConfigProperties.getValue(this.acntConfigPath, "nameLen")));
@@ -513,63 +512,74 @@ public class PageOperations {
 			    String rawRealNameWithoutSeq = GetConfigProperties.getValue(this.acntConfigPath, "realName");
 			    String realName = rawRealNameWithoutSeq + acntNamePart2;
 			    
-			    this.webUtil.inputText(acntName, GetConfigProperties.getValue(this.configPath, "生产环境新增人员用户名"));
-			    this.webUtil.inputText(usrInfoList[1], GetConfigProperties.getValue(this.configPath, "生产环境新增人员密码"));
-			    this.webUtil.inputText(realName, GetConfigProperties.getValue(this.configPath, "生产环境新增人员真实姓名"));
-			    this.webUtil.inputText(usrInfoList[3], GetConfigProperties.getValue(this.configPath, "生产环境新增人员手机号码"));
-			    this.webUtil.inputText(usrInfoList[4], GetConfigProperties.getValue(this.configPath, "生产环境新增人员邮箱地址"));
-			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员人员角色下拉"));
-			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员角色选择").replace("<角色名>", usrInfoList[5]));
+			    this.webUtil.inputText(acntName, GetConfigProperties.getValue(this.configPath, env + "新增人员用户名"));
+			    this.webUtil.inputText(GetConfigProperties.getValue(this.acntConfigPath, "password"), GetConfigProperties.getValue(this.configPath, env + "新增人员密码"));
+			    this.webUtil.inputText(realName, GetConfigProperties.getValue(this.configPath, env + "新增人员真实姓名"));
+			    this.webUtil.inputText(usrInfoList[3], GetConfigProperties.getValue(this.configPath, env + "新增人员手机号码"));
+			    this.webUtil.inputText(usrInfoList[4], GetConfigProperties.getValue(this.configPath, env + "新增人员邮箱地址"));
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "新增人员人员角色下拉"));
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "新增人员角色选择").replace("<角色名>", usrInfoList[5]));
 			    Thread.sleep(1000);
-			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员手机"));
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "新增人员手机"));
 			    Thread.sleep(1000);
-			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员确定"));	
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "新增人员确定"));	
 			    Thread.sleep(2000);
 			    finalAcntName = acntName;
+			    log.info(finalAcntName);
+			    ScenarioContext.put(env + i, finalAcntName);
+			    ScenarioContext.put(env + i + "realName", realName);
 			}
 			
 		} else {
 			for (int i = 1; i <= Integer.valueOf(nostr); i++) {
 			    String usrInfoList[] = usrInfo.split(",");
-			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境人员管理新增人员"));
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "人员管理新增人员"));
 			    Thread.sleep(1000);
-			    this.webUtil.inputText(TextHandle.getNewAcntName(this.acntConfigPath, this.acntConfigFullPath, i)[0], GetConfigProperties.getValue(this.configPath, "生产环境新增人员用户名"));
-			    this.webUtil.inputText(usrInfoList[1], GetConfigProperties.getValue(this.configPath, "生产环境新增人员密码"));
-			    this.webUtil.inputText(TextHandle.getNewAcntName(this.acntConfigPath, this.acntConfigFullPath, i)[1], GetConfigProperties.getValue(this.configPath, "生产环境新增人员真实姓名"));
-			    this.webUtil.inputText(usrInfoList[3], GetConfigProperties.getValue(this.configPath, "生产环境新增人员手机号码"));
-			    this.webUtil.inputText(usrInfoList[4], GetConfigProperties.getValue(this.configPath, "生产环境新增人员邮箱地址"));
-			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员人员角色下拉"));
-			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员角色选择").replace("<角色名>", usrInfoList[5]));
+			    this.webUtil.inputText(TextHandle.getNewAcntName(this.acntConfigPath, this.acntConfigFullPath, i, env)[0], GetConfigProperties.getValue(this.configPath, env + "新增人员用户名"));
+			    this.webUtil.inputText(GetConfigProperties.getValue(this.acntConfigPath, "password"), GetConfigProperties.getValue(this.configPath, env + "新增人员密码"));
+			    this.webUtil.inputText(TextHandle.getNewAcntName(this.acntConfigPath, this.acntConfigFullPath, i, env)[1], GetConfigProperties.getValue(this.configPath, env + "新增人员真实姓名"));
+			    this.webUtil.inputText(usrInfoList[3], GetConfigProperties.getValue(this.configPath, env + "新增人员手机号码"));
+			    this.webUtil.inputText(usrInfoList[4], GetConfigProperties.getValue(this.configPath, env + "新增人员邮箱地址"));
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "新增人员人员角色下拉"));
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "新增人员角色选择").replace("<角色名>", usrInfoList[5]));
 			    Thread.sleep(1000);
-			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员手机"));
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "新增人员手机"));
 			    Thread.sleep(1000);
-			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员确定"));	
+			    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "新增人员确定"));	
 			    Thread.sleep(2000);
-			    finalAcntName = TextHandle.getNewAcntName(this.acntConfigPath, this.acntConfigFullPath, i)[0];
+			    finalAcntName = TextHandle.getNewAcntName(this.acntConfigPath, this.acntConfigFullPath, i, env)[0];
+			    ScenarioContext.put(env + i, finalAcntName);
+			    ScenarioContext.put(env + i + "realName", TextHandle.getNewAcntName(this.acntConfigPath, this.acntConfigFullPath, i, env)[1]);
 			}
 		}
 		
 		
-		log.info(finalAcntName);
-		TextHandle.updatePropAcntName(this.acntConfigPath, this.acntConfigFullPath, finalAcntName);
-		ScenarioContext.put("latestAcntName", finalAcntName);
+		//log.info(finalAcntName);
+		TextHandle.updatePropAcntName(this.acntConfigPath, this.acntConfigFullPath, finalAcntName, env);
+		ScenarioContext.put(env + "LatestAcntName", finalAcntName);
 		Thread.sleep(3000);
 	}
 	
-	@Given("^I search \"([^\"]*)\" and add accounts to project as \"([^\"]*)\"$")
-	public void i_search_and_add_accounts_to_project_as(String keyWord, String roleName) throws Throwable {
-	    this.webUtil.inputText(keyWord, GetConfigProperties.getValue(this.configPath, "生产环境新增人员搜索输入"));
-	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员搜索确定"));
+	@When("^I search \"([^\"]*)\" and add accounts to project as \"([^\"]*)\" in \"([^\"]*)\" env$")
+	public void i_search_and_add_accounts_to_project_as_in_env(String keyWord, String roleName, String env) throws Throwable {
+	    this.webUtil.inputText(keyWord, GetConfigProperties.getValue(this.configPath, env + "新增人员搜索输入"));
+	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "新增人员搜索确定"));
 	    Thread.sleep(3000);
-	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员搜索全选"));
+	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "新增人员搜索全选"));
 	    Thread.sleep(1000);
-	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员搜索添加"));
+	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "新增人员搜索添加"));
 	    Thread.sleep(1000);
-	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员搜索角色下拉"));
+	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "新增人员搜索角色下拉"));
 	    Thread.sleep(1000);
-	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员搜索角色选择").replace("<角色名>", roleName));
+	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "新增人员搜索角色选择").replace("<角色名>", roleName));
 	    Thread.sleep(1000);
-	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, "生产环境新增人员搜索添加确定"));
+	    this.webUtil.actionToClick(GetConfigProperties.getValue(this.configPath, env + "新增人员搜索添加确定"));
+	}
+	
+	@Given("^I go to \"([^\"]*)\" in \"([^\"]*)\" env$")
+	public void i_go_to_in_env(String tgtPage, String env) throws Throwable {
+		String tgtUrl = GetConfigProperties.getValue(this.configPath, env + tgtPage);
+		this.webUtil.openUrl(tgtUrl);
 	}
 
 
