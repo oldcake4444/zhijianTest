@@ -80,23 +80,7 @@ public class RestassureApiCalling {
 //	    JSONObject projectData = (JSONObject) responseData.get("projects");
 //	}
 	
-	public static void main(String[] args) {
-		String response = getMethod("https://zj.buildingqm.com", "/v3/api/mine/teams_and_projects/?device_id=862460033965107&token=CDY3NDOGHF4GZIGNH3BKOACSNLXTYQH2SYT4RBADET3NCX25GNXQ");
-		log.info(response);
-    	JSONObject responseJson = ApiShareSteps.strToJson(response);
-    	JSONObject responseData = (JSONObject) responseJson.get("data");
-    	JSONArray teamData = (JSONArray) responseData.get("teams");
-    	JSONArray projectData = (JSONArray) responseData.get("projects");
-    	for(int i = 0; i < teamData.size(); i++) {
-    		JSONObject team = teamData.getJSONObject(i);
-    		log.info(team.getString("team_name"));
-    	}
-    	for(int j = 0; j < projectData.size(); j++) {
-    		JSONObject project = projectData.getJSONObject(j);
-    		log.info(project.getString("name"));
-    	}
 
-	}
 
 
 

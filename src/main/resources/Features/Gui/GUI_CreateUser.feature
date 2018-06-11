@@ -1,21 +1,3 @@
-#Author: your.email@your.domain.com
-#Keywords Summary :
-#Feature: List of scenarios.
-#Scenario: Business rule through list of steps with arguments.
-#Given: Some precondition step
-#When: Some key actions
-#Then: To observe outcomes or validation
-#And,But: To enumerate more Given,When,Then steps
-#Scenario Outline: List of steps for data-driven as an Examples and <placeholder>
-#Examples: Container for s table
-#Background: List of steps run before each of the scenarios
-#""" (Doc Strings)
-#| (Data Tables)
-#@ (Tags/Labels):To group Scenarios
-#<> (placeholder)
-#""
-## (Comments)
-#Sample Feature Definition Template
 @GUI
 Feature: Create new account
 
@@ -44,6 +26,6 @@ Feature: Create new account
 
     Examples: 
       | testCase          | env    | usr            | psw        | tgtPage        | grpName | comName | projName | usrInfo1                                                                  | usrInfo2                                                                   | keyWord       | role  |apiParameters|usrCount|
-      | "usrCreation_001" | "prod" | "kentestgrp11" | "12345678" | "人员管理集团页面" | "坚11集团" | "坚1公司"  | "坚1项目"   | "acntName,psw,realName,13800138000,automation@zhijiancloud.com,集团员工" | "acntName,12345678,realName,13800138000,automation@zhijiancloud.com,公司管理员" | "autotest" | "检查人" |"device_id;password;username"|"2"|
-      #| "usrCreation_001" | "test" | "kentestgrp11" | "12345678" | "人员管理集团页面" | "KEN坚集团拾壹" | "坚1公司"  | "坚1项目"   | "acntName,psw,realName,13800138000,automation@zhijiancloud.com,集团员工" | "acntName,12345678,realName,13800138000,automation@zhijiancloud.com,公司管理员" | "kentest" | "检查人" |"device_id;password;username"|"2"|
+      #| "usrCreation_001" | "prod" | "kentestgrp11" | "12345678" | "人员管理集团页面" | "坚11集团" | "坚1公司"  | "坚1项目"   | "acntName,psw,realName,13800138000,automation@zhijiancloud.com,集团员工" | "acntName,12345678,realName,13800138000,automation@zhijiancloud.com,公司管理员" | "autotest" | "检查人" |"device_id;password;username"|"2"|
+      | "usrCreation_001" | "test" | "kentestgrp11" | "12345678" | "人员管理集团页面" | "KEN坚集团拾壹" | "坚1公司"  | "坚1项目"   | "acntName,psw,realName,13800138000,automation@zhijiancloud.com,集团员工" | "acntName,12345678,realName,13800138000,automation@zhijiancloud.com,公司管理员" | "testauto" | "检查人" |"device_id;password;username"|"2"|
       

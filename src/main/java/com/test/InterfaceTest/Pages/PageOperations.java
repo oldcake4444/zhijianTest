@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import org.junit.Assert;
@@ -14,6 +15,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import com.test.InterfaceTest.Util.CsvHandler;
 import com.test.InterfaceTest.Util.DateUtil;
 import com.test.InterfaceTest.Util.FileUtil;
 import com.test.InterfaceTest.Util.GetConfigProperties;
@@ -41,6 +43,7 @@ public class PageOperations {
 	private String configPath = "/Configuration/GUI_zhijian.properties";
 	private String acntConfigPath = "/Configuration/accountName.properties";
 	private String acntConfigFullPath = "src/main/resources/Configuration/accountName.properties";
+	private String acntRealNameInfo = "src/main/resources/AcntInfo/acntRealNameInfo.csv";
 	
 //	protected WebDriver driver;
 //	
@@ -500,6 +503,8 @@ public class PageOperations {
 		int finalAcntNameSeqFromConfig = Integer.valueOf(finalAcntNameFromConfig.substring(Integer.valueOf(GetConfigProperties.getValue(this.acntConfigPath, "nameLen")), finalAcntNameFromConfig.length()));
 		int finalAcntNameSeqFromMem =  Integer.valueOf(finalAcntNameFromMem.substring(Integer.valueOf(GetConfigProperties.getValue(this.acntConfigPath, "nameLen")), finalAcntNameFromMem.length()));
 		
+		HashMap<String, String> acntNameInfo = new HashMap<String, String>();
+		
 		if(finalAcntNameSeqFromConfig <= finalAcntNameSeqFromMem) {
 			for (int i = 1; i <= Integer.valueOf(nostr); i++) {
 			    String usrInfoList[] = usrInfo.split(",");
@@ -528,6 +533,8 @@ public class PageOperations {
 			    log.info(finalAcntName);
 			    ScenarioContext.put(env + i, finalAcntName);
 			    ScenarioContext.put(env + i + "realName", realName);
+			    
+			    acntNameInfo.put(acntName, realName);
 			}
 			
 		} else {
@@ -549,10 +556,14 @@ public class PageOperations {
 			    Thread.sleep(2000);
 			    finalAcntName = TextHandle.getNewAcntName(this.acntConfigPath, this.acntConfigFullPath, i, env)[0];
 			    ScenarioContext.put(env + i, finalAcntName);
-			    ScenarioContext.put(env + i + "realName", TextHandle.getNewAcntName(this.acntConfigPath, this.acntConfigFullPath, i, env)[1]);
+			    String realName = TextHandle.getNewAcntName(this.acntConfigPath, this.acntConfigFullPath, i, env)[1];
+			    ScenarioContext.put(env + i + "realName", realName);
+			    
+			    acntNameInfo.put(finalAcntName, realName);
 			}
 		}
 		
+		CsvHandler.writeCsv(this.acntRealNameInfo, acntNameInfo, ";");
 		
 		//log.info(finalAcntName);
 		TextHandle.updatePropAcntName(this.acntConfigPath, this.acntConfigFullPath, finalAcntName, env);
