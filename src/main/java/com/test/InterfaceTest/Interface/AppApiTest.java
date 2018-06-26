@@ -1,10 +1,12 @@
 package com.test.InterfaceTest.Interface;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import org.junit.Assert;
 
 import com.test.InterfaceTest.Util.ApiShareSteps;
+import com.test.InterfaceTest.Util.CsvHandler;
 import com.test.InterfaceTest.Util.GetConfigProperties;
 import com.test.InterfaceTest.Util.HttpUtil;
 import com.test.InterfaceTest.Util.RestassureApiCalling;
@@ -42,6 +44,8 @@ public class AppApiTest {
 	    String response = RestassureApiCalling.getMethod(hostName, fullApiPath);
 	    
 	    ScenarioContext.put(testCase, response);
+	    ScenarioContext.put("loginInfo", response);
+	    ScenarioContext.put("deviceId", device_id);
 	}
 	
 	@Then("^Verify the calling is successful with \"([^\"]*)\" for \"([^\"]*)\"$")
@@ -158,5 +162,105 @@ public class AppApiTest {
 	    }
 	}
 	
+	
+	@When("^I call the GetSquadMembers api of \"([^\"]*)\" of \"([^\"]*)\" for \"([^\"]*)\"$")
+	public void i_call_the_GetSquadMembers_api_of_of_for(String env, String taskId, String testCase) throws Throwable {
+		String hostName = GetConfigProperties.getValue(configPath, env);
+		
+		String device_id = (String) ScenarioContext.get("deviceId");
+		
+		String loginResponse = (String) ScenarioContext.get("loginInfo");
+		JSONObject responseJson = ApiShareSteps.strToJson(loginResponse);
+	    JSONObject responseData = (JSONObject) responseJson.get("data");	    
+	    String tokenId = (String) responseData.get("token");
+	    
+	    String apiPath = GetConfigProperties.getValue(configPath, "getSquadMembers");
+	    String fullApiPath = apiPath + "device_id=" + device_id + "&task_ids=" + taskId + "&token=" + tokenId;
+	    log.info(hostName+fullApiPath);
+	    
+	    String response = RestassureApiCalling.getMethod(hostName, fullApiPath);
+	    
+	    ScenarioContext.put(testCase, response);
+	}
+
+	@Then("^I verify the squad members of \"([^\"]*)\" are correct as \"([^\"]*)\" for \"([^\"]*)\" of \"([^\"]*)\"$")
+	public void i_verify_the_squad_members_of_are_correct_as_for_of(String taskId, String squadInfoPath, String testCase, String env) throws Throwable {
+		String SquadInfoResponse = (String) ScenarioContext.get(testCase);
+		JSONObject responseJson = ApiShareSteps.strToJson(SquadInfoResponse);
+		JSONObject responseData = (JSONObject) responseJson.get("data");	    
+		JSONArray squadList = (JSONArray) responseData.get("squad_list");
+		JSONArray memList = (JSONArray) responseData.get("member_list");
+		
+		ArrayList<String> expSquadRawList = CsvHandler.readFromCsv(squadInfoPath, ";");	
+		
+		int expSquadMemCount = 0;
+		int actSquadSize = 0;
+		int actMemCount = 0;
+		for(int i = 0; i < expSquadRawList.size(); i++) {
+			String expSquadRawInfo[] = expSquadRawList.get(i).split("-");
+			String expSquadId = expSquadRawInfo[0];
+			String expSquadName = expSquadRawInfo[1];
+			String expSquadType = expSquadRawInfo[2];
+			String[] expSquadMemList = expSquadRawInfo[3].split(",");
+			String expCantAprlMemRaw = expSquadRawInfo[4];
+			String expCantAprlMem = null;
+			if(expCantAprlMemRaw.equals("null")) {
+				expCantAprlMem = null;
+			} else {
+				expCantAprlMem = expCantAprlMemRaw;
+			}
+			
+			for(int j = 0; j < squadList.size(); j++) {				
+				JSONObject squadInfo = (JSONObject) squadList.get(j);
+				String actSquadId = squadInfo.get("id").toString();
+				String actSquadName = squadInfo.get("name").toString();
+				String actSquadTaskId = squadInfo.get("task_id").toString();
+				String actSquadType = squadInfo.get("squad_type").toString();
+				
+				if (squadInfo.get("delete_at").toString().equals("0") && actSquadTaskId.equals(taskId) && actSquadId.equals(expSquadId)) {
+					actSquadSize++;
+					Assert.assertEquals(expSquadName, actSquadName);
+					Assert.assertEquals(expSquadType, actSquadType);
+					
+					for(int k = 0; k < memList.size(); k++) {
+						JSONObject squadMemInfo = (JSONObject) memList.get(k);
+						String memSquadId = squadMemInfo.get("squad_id").toString();
+						String usrId = squadMemInfo.get("user_id").toString();
+						String memCanApvl = squadMemInfo.get("can_approve").toString();
+						String squadTaskId = squadMemInfo.get("task_id").toString();
+						String memRoleType = squadMemInfo.get("role_type").toString();
+						
+						for(int l = 0; l < expSquadMemList.length; l++) {
+							if(squadInfo.get("delete_at").toString().equals("0") && memSquadId.equals(expSquadId) && squadTaskId.equals(taskId) && usrId.equals(expSquadMemList[l])) {
+								actMemCount++;
+								
+								Assert.assertEquals(expSquadType, memRoleType);
+								
+								if (actSquadType.equals("10")) {
+									if(usrId.equals(expCantAprlMem)) {
+										Assert.assertEquals("20", memCanApvl);
+									} else {
+										Assert.assertEquals("10", memCanApvl);
+									}
+									
+								} else {
+									Assert.assertEquals("20", memCanApvl);
+								}
+
+							}
+						}
+
+					}
+				}
+				
+
+			}
+			expSquadMemCount = expSquadMemCount + expSquadMemList.length;
+		}
+		
+		Assert.assertEquals(expSquadRawList.size(), actSquadSize);
+		Assert.assertEquals(expSquadMemCount, actMemCount);
+		
+	}
 
 }

@@ -2,21 +2,29 @@ package com.test.InterfaceTest.Util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import org.junit.Test;
 
 public class CsvHandler {
 	
+	static Logger log = Logger.getLogger("CsvHandler.class");
+	
 	public static ArrayList<String> readFromCsv(String filePath, String splitter) throws IOException {
-		@SuppressWarnings("resource")
-		BufferedReader reader = new BufferedReader(new FileReader(filePath));
+		@SuppressWarnings("resource")		
+        DataInputStream in = new DataInputStream(new FileInputStream(new File(filePath)));
+        BufferedReader reader= new BufferedReader(new InputStreamReader(in,"utf-8"));//这里如果csv文件编码格式是utf-8,改成utf-8即可
+		
         reader.readLine(); //第一行信息，为标题信息，不用,如果需要，注释掉            
         String line = null;
         
@@ -29,6 +37,30 @@ public class CsvHandler {
         		strList.add(last);
         	}
         }
+        
+		return strList;	
+	}
+	
+	public static ArrayList<String> readFromCsvByColAndRow(String filePath, String splitter, int row, int col) throws IOException {	
+        DataInputStream in = new DataInputStream(new FileInputStream(new File(filePath)));
+        BufferedReader reader= new BufferedReader(new InputStreamReader(in,"utf-8"));//这里如果csv文件编码格式是utf-8,改成utf-8即可
+		
+        reader.readLine(); //第一行信息，为标题信息，不用,如果需要，注释掉            
+        String line = null;
+        
+        ArrayList<String> strList = new ArrayList<String>();
+        
+        int index=0;
+        while((line=reader.readLine())!=null){
+            String item[] = line.split(splitter);//CSV格式文件为逗号分隔符文件，这里根据逗号切分
+         if(index == row-1){
+             if(item.length >= col-1){
+                 String last = item[col-1];//这就是你要的数据了 
+                 strList.add(last);
+             }
+         }
+         index++;
+         }      
         
 		return strList;	
 	}
@@ -56,8 +88,7 @@ public class CsvHandler {
 	      bw.newLine();
 	      bw.close();    
 	  } 
-	
-	@Test
+
 	public void testWriteCsv() throws IOException {
 		ArrayList<String> strList = new ArrayList<String>();
 		strList.add("I");
@@ -65,6 +96,24 @@ public class CsvHandler {
 		strList.add("the");
 		strList.add("KING");
 		writeCsv("C:\\Users\\Administrator\\Desktop\\writeTest.csv", strList, ";");
+		
+	}
+	
+	public void testReadCsv() throws IOException {
+		ArrayList<String> abc = readFromCsv("src/main/resources/SquadInfo/squadInfo.csv", ";");
+		for(int i = 0; i < abc.size(); i++) {
+			System.out.println(abc.get(i));
+		}
+		System.out.println(abc.get(1));
+		
+	}
+	
+	@Test
+	public void testReadCsvByColAndRow() throws IOException {
+		ArrayList<String> abc = readFromCsvByColAndRow("src/main/resources/SquadInfo/squadInfo.csv", ";", 1, 4);
+		for(int i = 0; i < abc.size(); i++) {
+			System.out.println(abc.get(i));
+		}
 		
 	}
 	

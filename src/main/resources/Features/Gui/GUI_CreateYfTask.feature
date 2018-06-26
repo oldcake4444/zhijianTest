@@ -2,7 +2,7 @@
 Feature: Create yanfang task
 
   @GUI @TaskCreation
-  Scenario Outline: Create a new yangfang task
+  Scenario Outline: Create a new yanfang task
     Given I login <env> by <usr> and <psw>
     And I go to <tgtPage> in <env> env
 
