@@ -3,8 +3,8 @@ package com.test.InterfaceTest.TextHandling;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
-import com.test.InterfaceTest.Util.FileUtil;
-import com.test.InterfaceTest.Util.ScenarioContext;
+import com.test.Util.FileUtil;
+import com.test.Util.ScenarioContext;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;

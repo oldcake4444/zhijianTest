@@ -4,29 +4,30 @@ package com.test.InterfaceTest;
 import org.json.JSONObject;
 import org.junit.Assert;
 
-import com.test.InterfaceTest.Util.RestassureApiCalling;
+import com.test.Util.FileUtil;
+import com.test.Util.RestassureApiCalling;
 
 public class JsonTest {
 	
 	public static void main(String[] args) {
 		
-		String response = RestassureApiCalling.getMethod("https://devtest8.buildingqm.com", "/uc/app/login/?device_id=862460033965107&password=12345678&username=kentest40");
-		//System.out.print(ApiShareSteps.strToJson(response).toString());
-		
-		
-		JSONObject data_obj = new JSONObject(response);
-		System.out.print(data_obj + "\n");
-		
-		JSONObject loginInfo = (JSONObject) data_obj.get("data");
-		System.out.print(loginInfo + "\n");
-		
-		JSONObject usrInfo = (JSONObject) loginInfo.get("user");
-		System.out.print(usrInfo + "\n");
-		
-		String realName = usrInfo.getString("real_name");
-		System.out.print(realName);
-		
-		Assert.assertEquals("kentest40", realName);
+//		String response = RestassureApiCalling.getMethod("https://devtest8.buildingqm.com", "/uc/app/login/?device_id=862460033965107&password=12345678&username=kentest40");
+//		//System.out.print(ApiShareSteps.strToJson(response).toString());
+//		
+//		
+//		JSONObject data_obj = new JSONObject(response);
+//		System.out.print(data_obj + "\n");
+//		
+//		JSONObject loginInfo = (JSONObject) data_obj.get("data");
+//		System.out.print(loginInfo + "\n");
+//		
+//		JSONObject usrInfo = (JSONObject) loginInfo.get("user");
+//		System.out.print(usrInfo + "\n");
+//		
+//		String realName = usrInfo.getString("real_name");
+//		System.out.print(realName);
+//		
+//		Assert.assertEquals("kentest40", realName);
 		
 
 //		JSONArray apps_array = new JSONArray(apps_str);
@@ -36,6 +37,11 @@ public class JsonTest {
 //		    String name = app_obj.get("name").toString();
 //		    result[i] = name;
 //		}
+		
+		String rawJson = FileUtil.readFile("C:\\Users\\Administrator\\Downloads\\问题清单导出_20181128104738.json");
+		System.out.print(rawJson);
+		JSONObject jsonObj = new JSONObject(rawJson);
+//		System.out.print(jsonObj.);
 		
 
 		

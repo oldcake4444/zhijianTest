@@ -5,13 +5,13 @@ import java.util.logging.Logger;
 
 import org.junit.Assert;
 
-import com.test.InterfaceTest.Util.ApiShareSteps;
-import com.test.InterfaceTest.Util.CsvHandler;
-import com.test.InterfaceTest.Util.GetConfigProperties;
-import com.test.InterfaceTest.Util.HttpUtil;
-import com.test.InterfaceTest.Util.RestassureApiCalling;
-import com.test.InterfaceTest.Util.ScenarioContext;
-import com.test.InterfaceTest.Util.TextFormat;
+import com.test.Util.ApiShareSteps;
+import com.test.Util.CsvHandler;
+import com.test.Util.GetConfigProperties;
+import com.test.Util.HttpUtil;
+import com.test.Util.RestassureApiCalling;
+import com.test.Util.ScenarioContext;
+import com.test.Util.TextFormat;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
@@ -85,16 +85,74 @@ public class AppApiTest {
 	    String apiParmName1 = apiParmList[0];
 	    String apiParmName2 = apiParmList[1];
 	    String apiParmName3 = apiParmList[2];
+	    String apiParmName4 = apiParmList[3]; 
 	    
 	    for(int i = 1; i <= Integer.valueOf(usrCount); i++) {
 	    	String usrName = (String)ScenarioContext.get(env + i);
-	    	String fullApiPath = apiPath + apiParmName1 + "=" + device_id + "&" + apiParmName2 + "=" + GetConfigProperties.getValue(this.acntConfigPath, "password") + "&" + apiParmName3 + "=" + usrName ;
+	    	String fullApiPath = apiPath + apiParmName1 + "=" + device_id + "&" + apiParmName4 + "=" + GetConfigProperties.getValue(this.acntConfigPath, "enterpriseId")  + "&" + apiParmName2 + "=" + GetConfigProperties.getValue(this.acntConfigPath, "password") + "&" + apiParmName3 + "=" + usrName ;
 	    	log.info(hostName+fullApiPath);
 	    	String response = RestassureApiCalling.getMethod(hostName, fullApiPath);
 	    	ScenarioContext.put(testCase + env + String.valueOf(i), response);
 	    	Thread.sleep(2000);
 	    }
 	    
+	}
+	
+	@When("^I call the login api for the \"([^\"]*)\" with \"([^\"]*)\" for \"([^\"]*)\"$")
+	public void i_call_the_login_api_for_the_with_for(String usrInfoPath, String apiParms, String testCase) throws Throwable {
+		String env = (String)ScenarioContext.get(testCase);
+		String hostName = GetConfigProperties.getValue(configPath, env);
+		String apiPath = GetConfigProperties.getValue(configPath, "login");
+		String device_id = ApiShareSteps.deviceIdGenerator();
+	    String[]apiParmList = apiParms.split(";");
+	    String apiParmName1 = apiParmList[0];
+	    String apiParmName2 = apiParmList[1];
+	    String apiParmName3 = apiParmList[2];
+	    String apiParmName4 = apiParmList[3]; 
+	    
+		int acntCnt = CsvHandler.getCsvRow(usrInfoPath, ",");
+		for(int i = 1; i <= acntCnt; i++) {
+			String[] acntInfo = CsvHandler.readFromCsvByRow(usrInfoPath, ",", i);
+			String acntName = acntInfo[1];
+			String passWord = acntInfo[2];
+			String grpCode = acntInfo[7];
+	    	String fullApiPath = apiPath + apiParmName1 + "=" + device_id + "&" + apiParmName4 + "=" + grpCode  + "&" + apiParmName2 + "=" + passWord + "&" + apiParmName3 + "=" + acntName;
+	    	log.info(hostName+fullApiPath);
+	    	String response = RestassureApiCalling.getMethod(hostName, fullApiPath);
+	    	ScenarioContext.put(testCase + acntName, response);
+	    	Thread.sleep(2000);
+		}
+			
+	}
+	
+	@Then("^Verify the response of the login api is the same as \"([^\"]*)\" for \"([^\"]*)\"$")
+	public void verify_the_response_of_the_login_api_is_the_same_as_for(String usrInfoPath, String testCase) throws Throwable {
+		int acntCnt = CsvHandler.getCsvRow(usrInfoPath, ",");
+		for(int i = 1; i <= acntCnt; i++) {
+			String[] acntInfo = CsvHandler.readFromCsvByRow(usrInfoPath, ",", i);
+			String acntName = acntInfo[1];
+			String realName = acntInfo[3];
+			String phone = acntInfo[4];
+			String email = acntInfo[5];
+			String grpCode = acntInfo[7];
+			
+			String response = (String) ScenarioContext.get(testCase + acntName);
+			JSONObject responseJson = ApiShareSteps.strToJson(response);
+			String callResult = responseJson.getString("result").toString();
+			
+			Assert.assertEquals("0", callResult);
+		    String callMsg = responseJson.getString("message").toString();
+		    Assert.assertEquals("登录成功", callMsg);
+		    
+		    JSONObject responseData = (JSONObject) responseJson.get("data");
+		    JSONObject usrData = (JSONObject) responseData.get("user");		    
+		    String tokenId = (String) responseData.get("token");
+		    ScenarioContext.put(testCase + acntName + "tokenId", tokenId);
+		    
+		    Assert.assertEquals(email, usrData.get("email"));
+		    Assert.assertEquals(phone, usrData.get("mobile"));
+		    Assert.assertEquals(realName, usrData.get("real_name"));
+		}
 	}
 	
 	@Then("^Verify the \"([^\"]*)\" callings in \"([^\"]*)\" are successful with \"([^\"]*)\" and equal to \"([^\"]*)\" for \"([^\"]*)\"$")
@@ -262,5 +320,107 @@ public class AppApiTest {
 		Assert.assertEquals(expSquadMemCount, actMemCount);
 		
 	}
+	
+	@When("^I call the GetUsrOrg api of \"([^\"]*)\" for \"([^\"]*)\"$")
+	public void i_call_the_GetUsrOrg_api_of_for(String env, String testCase) throws Throwable {
+		String hostName = GetConfigProperties.getValue(configPath, env);
+		
+		String device_id = (String) ScenarioContext.get("deviceId");
+		
+		String loginResponse = (String) ScenarioContext.get("loginInfo");
+		JSONObject responseJson = ApiShareSteps.strToJson(loginResponse);
+	    JSONObject responseData = (JSONObject) responseJson.get("data");	    
+	    String tokenId = (String) responseData.get("token");
+	    
+	    String apiPath = GetConfigProperties.getValue(configPath, "GetUsrOrg");
+	    String fullApiPath = apiPath + "device_id=" + device_id + "&timestamp=0" + "&token=" + tokenId;
+	    log.info(hostName+fullApiPath);
+	    
+	    String response = RestassureApiCalling.getMethod(hostName, fullApiPath);
+	    
+	    ScenarioContext.put(testCase, response);
+	}
+
+	@Then("^Verify the related product list is expected as \"([^\"]*)\" for \"([^\"]*)\"$")
+	public void verify_the_related_product_list_is_expected_as_for(String expProductInfoPath, String testCase) throws Throwable {
+	    ArrayList<String> expAppInfoRawList = CsvHandler.readFromCsv(expProductInfoPath, ";");	
+	    log.info(String.valueOf(expAppInfoRawList.size()));
+	    
+		String relatedProductInfoResponse = (String) ScenarioContext.get(testCase);
+		JSONObject responseJson = ApiShareSteps.strToJson(relatedProductInfoResponse);
+	    JSONObject responseData = (JSONObject) responseJson.get("data");
+	    JSONArray appsArray = (JSONArray) responseData.get("apps");
+	    int appsNum = appsArray.size();
+	    
+	    Assert.assertEquals(expAppInfoRawList.size(), appsNum);
+	    for(int i = 0; i < appsNum; i++) {
+	    	JSONObject responseApp = (JSONObject)appsArray.getJSONObject(i);
+	    	String actAppId = responseApp.getString("app_id");
+	    	String actAppName = responseApp.getString("app_name");
+	    	String actAppRealName = responseApp.getString("name");
+	    	String actAppLogo = responseApp.getString("logo");
+	    	String actAppType = responseApp.getString("app_type");
+	    	String actAppGrpUrl = responseApp.getString("app_org_url");
+	    	String actAppComUrl = responseApp.getString("app_company_url");
+	    	String actAppProjUrl = responseApp.getString("app_project_url");
+	    	String actAppFoloUrl = responseApp.getString("follow_url");
+	    	
+
+			String expAppRawInfo[] = expAppInfoRawList.get(i).split(",");
+			Assert.assertEquals(expAppRawInfo[0], actAppId);
+			Assert.assertEquals(expAppRawInfo[1], actAppName);
+			Assert.assertEquals(expAppRawInfo[2], actAppRealName);
+			Assert.assertEquals(expAppRawInfo[3], actAppLogo);
+			Assert.assertEquals(expAppRawInfo[4], actAppType);
+			Assert.assertEquals(expAppRawInfo[5], actAppGrpUrl);
+			Assert.assertEquals(expAppRawInfo[6], actAppComUrl);
+			Assert.assertEquals(expAppRawInfo[7], actAppProjUrl);
+			Assert.assertEquals(expAppRawInfo[8], actAppFoloUrl);
+
+			log.info("循环了第" + String.valueOf(i) + "次");
+				
+
+	    }
+	    
+
+		
+
+//			String expSquadRawInfo[] = expSquadRawList.get(i).split("-");
+//			String expSquadId = expSquadRawInfo[0];
+//			String expSquadName = expSquadRawInfo[1];
+//			String expSquadType = expSquadRawInfo[2];
+//			String[] expSquadMemList = expSquadRawInfo[3].split(",");
+//			String expCantAprlMemRaw = expSquadRawInfo[4];
+//			String expCantAprlMem = null;
+	    
+	    
+
+	}
+
+	@Then("^Verify the related group info is expected as \"([^\"]*)\" for \"([^\"]*)\"$")
+	public void verify_the_related_group_info_is_expected_as_for(String arg1, String arg2) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Then("^Verify the related company info is expected as \"([^\"]*)\" for \"([^\"]*)\"$")
+	public void verify_the_related_company_info_is_expected_as_for(String arg1, String arg2) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Then("^Verify the related project info is expected as \"([^\"]*)\" for \"([^\"]*)\"$")
+	public void verify_the_related_project_info_is_expected_as_for(String arg1, String arg2) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Then("^Verify the follow app info is expected as \"([^\"]*)\" for \"([^\"]*)\"$")
+	public void verify_the_follow_app_info_is_expected_as_for(String arg1, String arg2) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+
 
 }

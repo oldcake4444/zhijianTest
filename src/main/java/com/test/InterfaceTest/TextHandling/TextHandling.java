@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import org.junit.Test;
 
-import com.test.InterfaceTest.Util.FileUtil;
+import com.test.Util.FileUtil;
 
 public class TextHandling {
 	

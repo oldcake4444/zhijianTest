@@ -4,10 +4,10 @@ import java.util.logging.Logger;
 
 import org.junit.Assert;
 
-import com.test.InterfaceTest.Util.GetConfigProperties;
-import com.test.InterfaceTest.Util.HttpUtil;
-import com.test.InterfaceTest.Util.ScenarioContext;
-import com.test.InterfaceTest.Util.TextFormat;
+import com.test.Util.GetConfigProperties;
+import com.test.Util.HttpUtil;
+import com.test.Util.ScenarioContext;
+import com.test.Util.TextFormat;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;

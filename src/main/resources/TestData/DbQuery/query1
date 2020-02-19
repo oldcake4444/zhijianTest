@@ -1,0 +1,8 @@
+select distinct b.user_id, b.real_name from house_qm_check_task_issue a,
+test_zhijian2_apisvr.user b
+where a.project_id = 100496
+and a.category_cls = 28
+and a.house_area_id = 2757147
+and a.delete_at is null and b.delete_at is null 
+and a.typ = 1
+and a.destroy_user = b.user_id
