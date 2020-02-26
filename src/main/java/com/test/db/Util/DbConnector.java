@@ -23,7 +23,7 @@ import com.test.Util.GetConfigProperties;
 public class DbConnector {
 	
 	static Logger log = Logger.getLogger("DbConnector.class");
-	private String dbConfigPath = "/Configuration/db.properties";
+	private static String dbConfigPath = "/Configuration/db.properties";
 	
 	public static int connectToForwardHost(String host, int port, String usrName, String keyPath, String dbHost, int dbPort) throws JSchException {
 		JSch jsch = new JSch();
@@ -34,12 +34,11 @@ public class DbConnector {
 		config.put("StrictHostKeyChecking", "no");
 		session.setConfig(config);
 		
-		session.connect();
+		session.connect();		
 		log.info(session.getServerVersion());
 		
 		Channel channel = session.openChannel("session");
 		channel.connect();
-		
 		int assinged_port = session.setPortForwardingL(33609, dbHost, dbPort);
 		
 		return assinged_port;
@@ -51,9 +50,40 @@ public class DbConnector {
 		Class.forName(driverName).newInstance();
 		Connection conn = null;
 		String url = "jdbc:mysql://localhost:" + dbLPort + "/" + dataBase + "?characterEncoding=utf-8";
-		log.info(url);
 		conn = DriverManager.getConnection(url, usr, psw);
 	    return conn;
+	}
+	
+	public static Connection connectToTestDB() throws JSchException, NumberFormatException, IOException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		int lPort = connectToForwardHost(GetConfigProperties.getValue(dbConfigPath, "forwardHost"),
+				Integer.valueOf(GetConfigProperties.getValue(dbConfigPath, "forwardHostPort")),
+				GetConfigProperties.getValue(dbConfigPath, "forwardHostUsr"),
+				GetConfigProperties.getValue(dbConfigPath, "privateKeyPath"),
+				GetConfigProperties.getValue(dbConfigPath, "testDbHost"),
+				Integer.valueOf(GetConfigProperties.getValue(dbConfigPath, "testDbPort"))
+				);
+		
+		Connection conn = dbConn(lPort, GetConfigProperties.getValue(dbConfigPath, "testZhijian2"), 
+				GetConfigProperties.getValue(dbConfigPath, "testUsr"),
+				GetConfigProperties.getValue(dbConfigPath, "testPsw")
+				);	
+		return conn;	
+	}
+	
+	public static Connection connectToProdDB() throws JSchException, NumberFormatException, IOException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		int lPort = connectToForwardHost(GetConfigProperties.getValue(dbConfigPath, "forwardHost"),
+				Integer.valueOf(GetConfigProperties.getValue(dbConfigPath, "forwardHostPort")),
+				GetConfigProperties.getValue(dbConfigPath, "forwardHostUsr"),
+				GetConfigProperties.getValue(dbConfigPath, "privateKeyPath"),
+				GetConfigProperties.getValue(dbConfigPath, "prodDbHost"),
+				Integer.valueOf(GetConfigProperties.getValue(dbConfigPath, "prodDbPort"))
+				);
+		
+		Connection conn = dbConn(lPort, GetConfigProperties.getValue(dbConfigPath, "prodZhijian2"), 
+				GetConfigProperties.getValue(dbConfigPath, "prodUsr"),
+				GetConfigProperties.getValue(dbConfigPath, "prodPsw")
+				);	
+		return conn;	
 	}
 	
 	@SuppressWarnings("null")
@@ -63,21 +93,21 @@ public class DbConnector {
 				Integer.valueOf(GetConfigProperties.getValue(this.dbConfigPath, "forwardHostPort")),
 				GetConfigProperties.getValue(this.dbConfigPath, "forwardHostUsr"),
 				GetConfigProperties.getValue(this.dbConfigPath, "privateKeyPath"),
-				GetConfigProperties.getValue(this.dbConfigPath, "testDbHost"),
-				Integer.valueOf(GetConfigProperties.getValue(this.dbConfigPath, "testDbPort"))
+				GetConfigProperties.getValue(this.dbConfigPath, "prodDbHost"),
+				Integer.valueOf(GetConfigProperties.getValue(this.dbConfigPath, "prodDbPort"))
 				);
 		
 
 
-		Connection conn = dbConn(lPort, GetConfigProperties.getValue(this.dbConfigPath, "testZhijian2"), 
-				GetConfigProperties.getValue(this.dbConfigPath, "testUsr"),
-				GetConfigProperties.getValue(this.dbConfigPath, "testPsw")
+		Connection conn = dbConn(lPort, GetConfigProperties.getValue(this.dbConfigPath, "prodZhijian2"), 
+				GetConfigProperties.getValue(this.dbConfigPath, "prodUsr"),
+				GetConfigProperties.getValue(this.dbConfigPath, "prodPsw")
 				);
 		
 		
 //		if (conn != null && !conn.isClosed()) {
 //            Statement stmt = (Statement) conn.createStatement();
-//            String query = DbQuery.dbQuery("query1Path");
+//            String query = DbQuery.dbQuery("src/main/resources/TestData/DbQuery/query1");
 //            ResultSet rs = stmt.executeQuery(query);
 //            while (rs.next()) {
 //                String a = rs.getString(1);
@@ -91,7 +121,7 @@ public class DbConnector {
 		
 		if (conn != null && !conn.isClosed()) {
             Statement stmt = (Statement) conn.createStatement();
-            String query = DbQuery.dbQuery("query1Path");
+            String query = DbQuery.dbQuery("src/main/resources/TestData/DbQuery/yfFrontPage001/query3");
             ResultSet rs = stmt.executeQuery(query);
             ResultSetMetaData rsmd = rs.getMetaData();
             System.out.println(rsmd.getColumnCount());

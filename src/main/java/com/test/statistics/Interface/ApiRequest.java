@@ -1,5 +1,7 @@
 package com.test.statistics.Interface;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -7,13 +9,16 @@ import java.util.logging.Logger;
 import org.junit.Assert;
 
 import com.jayway.restassured.response.Response;
+import com.mysql.jdbc.Statement;
 import com.test.Util.ApiShareSteps;
 import com.test.Util.GetConfigProperties;
 import com.test.Util.RestassureApiCalling;
 import com.test.Util.ScenarioContext;
+import com.test.db.Util.DbConnector;
+import com.test.db.Util.DbQuery;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import net.sf.json.JSONObject;
 
 public class ApiRequest {
@@ -34,11 +39,8 @@ public class ApiRequest {
 		Response response = RestassureApiCalling.postMethodWithoutCookies(hostName, apiPath, setParams);
 		Map<String, String> curCookeis = response.cookies();
 		int responseStatus = response.statusCode();
-		String responseBody = response.getBody().asString().replace("<html>", "").replace("<body>", "").replace("\n","").replace("  ","").replace("</body></html>", "");
-		
-		log.info(responseBody);
-		log.info(String.valueOf(responseStatus));
-		
+		String responseBody = response.print();
+				
 		JSONObject responseJson = ApiShareSteps.strToJson(responseBody);
 		String loginMsg = responseJson.get("message").toString();
 		Assert.assertEquals("登录成功", loginMsg);
@@ -61,7 +63,84 @@ public class ApiRequest {
 	    String response = RestassureApiCalling.getMethodWithCookies(hostName, fullApiPath, cookies);
 	    log.info(response);
 	    
+	    JSONObject responseJson = ApiShareSteps.strToJson(response);
+	    JSONObject responseData = (JSONObject) responseJson.get("data");
+	    JSONObject responseDetails = (JSONObject) responseData.get("detail");
 	    
+	    ScenarioContext.put(testCase, responseDetails);
     }
+    
+    @Then("^I verify the return of module issue percentage stat api is the same as the \"([^\"]*)\" in \"([^\"]*)\" for \"([^\"]*)\"$")
+    public void i_verify_the_return_of_module_issue_percentage_stat_api_is_the_same_as_the_in_for(String queryPath, String env, String testCase) throws Throwable {
+    	JSONObject responseDetails = (JSONObject)ScenarioContext.get(testCase);
+	    String houseAvrgeIssueStr = responseDetails.getString("house_average_issue");
+	    Float houseAvrgeIssue = Float.parseFloat(houseAvrgeIssueStr);
+	    String issueRformAvrgeDurationStr = responseDetails.getString("issue_reform_average_duration");
+	    Float issueRformAvrgeDuration = Float.parseFloat(issueRformAvrgeDurationStr);
+	    String issueAsignOverDue = responseDetails.getString("issue_assign_overdue");
+	    String issueChkRatioStr = responseDetails.getString("issue_check_ratio").replace("%", "");
+	    Float issueChkRatio = Float.parseFloat(issueChkRatioStr) / 100;    
+	    String[]querySet = queryPath.split(";");
+	    Connection conn = null;
+	    
+	    try {
+			if (env.equals("prod")) {
+				conn = DbConnector.connectToProdDB();
+				if (conn != null && !conn.isClosed()) {
+					Statement stmt = (Statement) conn.createStatement();
 
-}
+					String query1 = DbQuery.dbQuery(querySet[0]);
+					ResultSet rs1 = stmt.executeQuery(query1);
+					while (rs1.next()) {
+						String queryResult1 = rs1.getString(1);
+						Assert.assertTrue(houseAvrgeIssue-0.1<=Float.parseFloat(queryResult1));
+						Assert.assertTrue(houseAvrgeIssue+0.1>=Float.parseFloat(queryResult1));
+						}
+					
+					String query2 = DbQuery.dbQuery(querySet[1]);
+					ResultSet rs2 = stmt.executeQuery(query2);
+					while (rs2.next()) {
+						String queryResult2 = rs2.getString(1);
+						Assert.assertTrue(issueRformAvrgeDuration-0.1<=Float.parseFloat(queryResult2));
+						Assert.assertTrue(issueRformAvrgeDuration+0.1>=Float.parseFloat(queryResult2));
+						}	
+						
+					String query3 = DbQuery.dbQuery(querySet[2]);
+					ResultSet rs3 = stmt.executeQuery(query3);
+					while (rs3.next()) {
+						String queryResult3 = rs3.getString(1);
+						Assert.assertEquals(queryResult3, issueAsignOverDue);
+						}
+					
+					String query4 = DbQuery.dbQuery(querySet[3]);
+					ResultSet rs4 = stmt.executeQuery(query4);
+					while (rs4.next()) {
+						String queryResult4 = rs4.getString(1);
+						Assert.assertEquals(queryResult4, String.valueOf(issueChkRatio));
+						}	
+					
+					conn.close();
+					log.info("Closing Database Connection");
+				}
+			} else if (env.equals("test")) {
+				conn = DbConnector.connectToTestDB();
+				if (conn != null && !conn.isClosed()) {
+					Statement stmt = (Statement) conn.createStatement();
+					String query = DbQuery.dbQuery("query1Path");
+					ResultSet rs = stmt.executeQuery(query);
+					while (rs.next()) {
+						String a = rs.getString(1);
+						String b = rs.getString(2);
+						System.out.println(a + ',' + b);
+					}
+					conn.close();
+					log.info("Closing Database Connection");
+					
+				}
+			} 
+		} finally {
+			conn.close();
+			log.info("Closing Database Connection");
+		}
+	    }
+    }

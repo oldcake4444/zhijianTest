@@ -1,4 +1,4 @@
-@AppApi
+@ProcecssEngine @StopPointCheck
 Feature: Verify the process form for yc stop checkpoint
 
   @AppApi
@@ -35,3 +35,4 @@ Feature: Verify the process form for yc stop checkpoint
       | "stoppoint023" | "t3" | "yctest26"   | "12345678" | "device_id;password;username" | "stop_checkpoint_yc,processform,team_list_mobile" | "group"   | "104966,," | "Detail,Export"              |
       | "stoppoint024" | "t3" | "yctest27"   | "12345678" | "device_id;password;username" | "stop_checkpoint_yc,processform,team_list_mobile" | "group"   | "104966,," | "Detail,Export"              |
       | "stoppoint025" | "t3" | "yctest30"   | "12345678" | "device_id;password;username" | "stop_checkpoint_yc,processform,team_list_mobile" | "group"   | "104966,," | "Detail,Export"              |
+ 

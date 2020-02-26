@@ -10,18 +10,18 @@ import com.test.Util.GetConfigProperties;
 import com.test.Util.RestassureApiCalling;
 import com.test.Util.ScenarioContext;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-public class FormViewVerification {
+public class StopPointChecking {
 	
-	static Logger log = Logger.getLogger("FormViewVerification.class");
+	static Logger log = Logger.getLogger("StopPointChecking.class");
 	
 	private String configPath = "/Configuration/processEngineerInterface.properties";
-	
+	private String apiConfigPath = "/Configuration/AppApi_zhijian.properties";
+
 	@When("^I call the stop_checkpoint_yc_processform api of \"([^\"]*)\" for \"([^\"]*)\" with \"([^\"]*)\" of \"([^\"]*)\" level for \"([^\"]*)\"$")
 	public void i_call_the_stop_checkpoint_yc_processform_api_of_for_with_of_level_for(String env, String testCase, String apiParameters, String lvl, String orgId) throws Throwable {
 		String loginResponse = (String) ScenarioContext.get("loginInfo");
@@ -83,12 +83,4 @@ public class FormViewVerification {
 	    Assert.assertEquals(expUsrPriArray, actUsrPriArray);
 	    
 	}
-
-	
-
-
-
-	
-	
-
 }

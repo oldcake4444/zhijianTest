@@ -1,5 +1,10 @@
 package com.test.Util;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -37,7 +42,7 @@ public class RestassureApiCalling {
         .when().log().all().post(path.trim());          
 //		log.info(String.valueOf(response.statusCode()));
 //		log.info("response:");
-		String responseStr = response.getBody().prettyPrint();
+		String responeseStr = response.print();
 //		log.info(responseStr);
 		return response;
 	}
@@ -55,8 +60,21 @@ public class RestassureApiCalling {
         .when().log().all().post(path.trim());          
 //		log.info(String.valueOf(response.statusCode()));
 //		log.info("response:");
-		String responseStr = response.getBody().prettyPrint();
+		String responseStr = response.print();
 //		log.info(responseStr);
+		return response;
+	}
+	
+	public static Response postMethodWithoutCookies(String hostName, String apiPath, String body) {
+		//      开始发起post 请求 
+		String path = hostName + apiPath;
+		log.info(path);
+		Response response = given().accept("application/json, text/plain, */*").contentType("application/json;charset=utf-8")
+        .body(body)
+        .post(path);          
+//		log.info(String.valueOf(response.statusCode()));
+//		log.info("response:");
+		String responseStr = response.print();
 		return response;
 	}
 	
@@ -69,15 +87,13 @@ public class RestassureApiCalling {
 		//      开始发起GET 请求
 		String path = hostName + apiPath;
 		Response response = given().
-           contentType("application/json;charset=UTF-8").
+		   accept("application/json, text/plain, */*").contentType("application/x-www-form-urlencoded").
            headers("headers1", "value1").
            cookie("cookie1", "value1").
            when().log().all().get(path.trim());
 //		log.info(String.valueOf(response.statusCode()));
 //		log.info("reponse:");
-		response.getBody().prettyPrint();
-		String responeseStr = response.getBody().asString();
-		log.info(responeseStr);
+		String responeseStr = response.print();
 		return responeseStr;
 	}
 	
@@ -91,9 +107,7 @@ public class RestassureApiCalling {
            when().log().all().get(path.trim());
 //		log.info(String.valueOf(response.statusCode()));
 //		log.info("reponse:");
-		response.getBody().prettyPrint();
-		String responeseStr = response.getBody().asString();
-		log.info(responeseStr);
+		String responeseStr = response.print();
 		return responeseStr;
 	}
 	
@@ -122,23 +136,55 @@ public class RestassureApiCalling {
 	
 	@Test
 	public void testApiGetMethod() {
-//		Response response = getMethodResponse("https://zj.buildingqm.com", "/uc/user/login/?user_name=kentestgrp10&password=12345678&group_code=&remember_me=0&verify_code=");
-//		response.cookies();
-		Map<String,String> setParams = new HashMap<>();
-		setParams.put("user_name", "kentestgrp10");
-		setParams.put("password", "12345678");
-		setParams.put("group_code", "");
-		setParams.put("remember_me", "0");
-		setParams.put("verify_code", "");
-		
-		String jsonStr = "{\"user_name\":\"kentestgrp10\",\"password\":\"12345678\",\"remember_me\":\"0\"}";
-		
-		Response response = given().accept("application/json").
-				contentType("application/x-www-form-urlencoded")
+		Response response = getMethodResponse("https://zj.buildingqm.com", "/uc/user/login/?user_name=kentestgrp10&password=12345678&group_code=&remember_me=0&verify_code=");
+		Map<String, String> curCookies = response.cookies();
+//		Map<String,String> setParams = new HashMap<>();
+//		setParams.put("user_name", "kentestgrp10");
+//		setParams.put("password", "12345678");
+//		setParams.put("group_code", "");
+//		setParams.put("remember_me", "0");
+//		setParams.put("verify_code", "");
+//		
+//		String jsonStr = "{\"user_name\":\"kentestgrp10\",\"password\":\"12345678\",\"remember_me\":\"0\"}";
+//		
+//		Response response = given().accept("application/json").
+//				contentType("application/x-www-form-urlencoded")
+//
+//		         .formParams(setParams).post("https://zj.buildingqm.com/uc/user/login/");    
+//		
+//		log.info(response.prettyPrint());
+		String host = "https://zj.buildingqm.com/";
+		String url = "app_flow/v1/papi/processform/project_drawings_create_yc/detail/get/?operation_def_id=detail&form_id=5e54b9e4ca681d34804b0903&form_def_id=project_drawings_create_yc&group_id=100546&team_id=100547&project_id=100987&page_level=project";
+		String res = getMethodWithCookies(host, url, curCookies);
+		JSONObject responseJson = ApiShareSteps.strToJson(res);
+		JSONObject responseRawDataJson1 = (JSONObject) responseJson.get("data");	
+		JSONObject responseRawDataJson2 = (JSONObject) responseRawDataJson1.get("data");
+		JSONObject filedDataJson = (JSONObject) responseRawDataJson2.get("f_fields");
+		JSONObject auditDataJson = (JSONObject) filedDataJson.get("spe_supervision_audit");
 
-		         .formParams(setParams).post("https://zj.buildingqm.com/uc/user/login/");    
 		
-		log.info(response.getBody().prettyPrint());
+		long dateLong = auditDataJson.getLong("audit_at");
+		long dateAct = dateLong - 23;
+		String dateStr = String.valueOf(dateAct) + ".000";
+		log.info(dateStr);
+		System.out.println(auditDataJson.get("audit_at"));
+		
+//		System.out.println(auditDataJson.get("audit_at")); 
+//		System.out.println(auditDataJson.get("audit_at").toString());
+//		String longStr = auditDataJson.get("audit_at").toString();
+//		Double abc = (Double) auditDataJson.get("audit_at");
+//		System.out.println(BigDecimal.valueOf(abc));
+//		System.out.println(String.valueOf(abc));
+//		System.out.println(longStr);
+
+
+
+// 1582610917.995
+	//	1582610940
+//		1582610940
+//		1582610917.995
+
+		
 
 	}
 	
