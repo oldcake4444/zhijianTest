@@ -1,0 +1,463 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 199714,
+              "status": "passed"
+            },
+            "match": {
+              "location": "ScenarioContext.init()"
+            }
+          }
+        ],
+        "line": 11,
+        "name": "Test for the interface from whether report",
+        "description": "",
+        "id": "sample-test-for-interface-test;test-for-the-interface-from-whether-report;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 702966367,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I call the interface \"DailyWeather\" for city \"101010100\" for \"Interface001\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "DailyWeather",
+                  "offset": 22
+                },
+                {
+                  "val": "101010100",
+                  "offset": 46
+                },
+                {
+                  "val": "Interface001",
+                  "offset": 62
+                }
+              ],
+              "location": "InterfaceTest.i_call_the_interface_for_city_for(String,String,String)"
+            },
+            "matchedColumns": [
+              0,
+              1,
+              2
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 71202404,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Verify city \"北京\" \"101010100\" can be found in the return message for \"Interface001\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "北京",
+                  "offset": 13
+                },
+                {
+                  "val": "101010100",
+                  "offset": 18
+                },
+                {
+                  "val": "Interface001",
+                  "offset": 69
+                }
+              ],
+              "location": "InterfaceTest.verify_city_can_be_found_in_the_return_message_for(String,String,String)"
+            },
+            "matchedColumns": [
+              0,
+              2,
+              3
+            ],
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "line": 1,
+            "name": "@interface"
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 74411,
+              "status": "passed"
+            },
+            "match": {
+              "location": "ScenarioContext.init()"
+            }
+          }
+        ],
+        "line": 12,
+        "name": "Test for the interface from whether report",
+        "description": "",
+        "id": "sample-test-for-interface-test;test-for-the-interface-from-whether-report;;3",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 68280256,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I call the interface \"DailyWeather\" for city \"101280101\" for \"Interface002\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "DailyWeather",
+                  "offset": 22
+                },
+                {
+                  "val": "101280101",
+                  "offset": 46
+                },
+                {
+                  "val": "Interface002",
+                  "offset": 62
+                }
+              ],
+              "location": "InterfaceTest.i_call_the_interface_for_city_for(String,String,String)"
+            },
+            "matchedColumns": [
+              0,
+              1,
+              2
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 565356,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Verify city \"广州\" \"101280101\" can be found in the return message for \"Interface002\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "广州",
+                  "offset": 13
+                },
+                {
+                  "val": "101280101",
+                  "offset": 18
+                },
+                {
+                  "val": "Interface002",
+                  "offset": 69
+                }
+              ],
+              "location": "InterfaceTest.verify_city_can_be_found_in_the_return_message_for(String,String,String)"
+            },
+            "matchedColumns": [
+              0,
+              2,
+              3
+            ],
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "line": 1,
+            "name": "@interface"
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 147113,
+              "status": "passed"
+            },
+            "match": {
+              "location": "ScenarioContext.init()"
+            }
+          }
+        ],
+        "line": 13,
+        "name": "Test for the interface from whether report",
+        "description": "",
+        "id": "sample-test-for-interface-test;test-for-the-interface-from-whether-report;;4",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 82571969,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I call the interface \"DailyWeather\" for city \"101281701\" for \"Interface003\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "DailyWeather",
+                  "offset": 22
+                },
+                {
+                  "val": "101281701",
+                  "offset": 46
+                },
+                {
+                  "val": "Interface003",
+                  "offset": 62
+                }
+              ],
+              "location": "InterfaceTest.i_call_the_interface_for_city_for(String,String,String)"
+            },
+            "matchedColumns": [
+              0,
+              1,
+              2
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 697073,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Verify city \"中山\" \"101281701\" can be found in the return message for \"Interface003\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "中山",
+                  "offset": 13
+                },
+                {
+                  "val": "101281701",
+                  "offset": 18
+                },
+                {
+                  "val": "Interface003",
+                  "offset": 69
+                }
+              ],
+              "location": "InterfaceTest.verify_city_can_be_found_in_the_return_message_for(String,String,String)"
+            },
+            "matchedColumns": [
+              0,
+              2,
+              3
+            ],
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "line": 1,
+            "name": "@interface"
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 182180,
+              "status": "passed"
+            },
+            "match": {
+              "location": "ScenarioContext.init()"
+            }
+          }
+        ],
+        "line": 14,
+        "name": "Test for the interface from whether report",
+        "description": "",
+        "id": "sample-test-for-interface-test;test-for-the-interface-from-whether-report;;5",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 143587267,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I call the interface \"DailyWeather\" for city \"101250700\" for \"Interface004\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "DailyWeather",
+                  "offset": 22
+                },
+                {
+                  "val": "101250700",
+                  "offset": 46
+                },
+                {
+                  "val": "Interface004",
+                  "offset": 62
+                }
+              ],
+              "location": "InterfaceTest.i_call_the_interface_for_city_for(String,String,String)"
+            },
+            "matchedColumns": [
+              0,
+              1,
+              2
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1016957,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Verify city \"益阳\" \"101250700\" can be found in the return message for \"Interface004\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "益阳",
+                  "offset": 13
+                },
+                {
+                  "val": "101250700",
+                  "offset": 18
+                },
+                {
+                  "val": "Interface004",
+                  "offset": 69
+                }
+              ],
+              "location": "InterfaceTest.verify_city_can_be_found_in_the_return_message_for(String,String,String)"
+            },
+            "matchedColumns": [
+              0,
+              2,
+              3
+            ],
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "line": 1,
+            "name": "@interface"
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 289948,
+              "status": "passed"
+            },
+            "match": {
+              "location": "ScenarioContext.init()"
+            }
+          }
+        ],
+        "line": 15,
+        "name": "Test for the interface from whether report",
+        "description": "",
+        "id": "sample-test-for-interface-test;test-for-the-interface-from-whether-report;;6",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 48166483,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I call the interface \"DailyWeather\" for city \"101040100\" for \"Interface005\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "DailyWeather",
+                  "offset": 22
+                },
+                {
+                  "val": "101040100",
+                  "offset": 46
+                },
+                {
+                  "val": "Interface005",
+                  "offset": 62
+                }
+              ],
+              "location": "InterfaceTest.i_call_the_interface_for_city_for(String,String,String)"
+            },
+            "matchedColumns": [
+              0,
+              1,
+              2
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 530717,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Verify city \"重庆\" \"101040100\" can be found in the return message for \"Interface005\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "重庆",
+                  "offset": 13
+                },
+                {
+                  "val": "101040100",
+                  "offset": 18
+                },
+                {
+                  "val": "Interface005",
+                  "offset": 69
+                }
+              ],
+              "location": "InterfaceTest.verify_city_can_be_found_in_the_return_message_for(String,String,String)"
+            },
+            "matchedColumns": [
+              0,
+              2,
+              3
+            ],
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "line": 1,
+            "name": "@interface"
+          }
+        ]
+      }
+    ],
+    "name": "Sample test for interface test",
+    "description": "",
+    "id": "sample-test-for-interface-test",
+    "keyword": "Feature",
+    "uri": "Interface/WeatherReportInterface.feature",
+    "tags": [
+      {
+        "line": 1,
+        "name": "@interface"
+      }
+    ]
+  }
+]

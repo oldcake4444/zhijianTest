@@ -1,0 +1,5 @@
+select count(id) from house_qm_check_task_issue where category_cls in (26)
+and delete_at is null and typ = 1 and project_id = 100756
+and status in (20,30) and plan_end_on > '1980-01-01 00:00:00'
+and plan_end_on < NOW()
+group by category_cls

@@ -1,0 +1,10 @@
+select t1.fixCount/t2.totalCount from
+(
+select count(id) as fixCount from house_qm_check_task_issue where category_cls in (26)
+and delete_at is null and typ = 1 and project_id = 100756
+and status in (60)
+) t1,
+(
+select count(id) as totalCount from house_qm_check_task_issue where category_cls in (26)
+and delete_at is null and typ = 1 and project_id = 100756
+) t2
