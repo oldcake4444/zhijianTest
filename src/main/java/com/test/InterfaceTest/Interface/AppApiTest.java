@@ -420,6 +420,32 @@ public class AppApiTest {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new PendingException();
 	}
+	
+	@Given("^I call app login api of \"([^\"]*)\" with \"([^\"]*)\" and \"([^\"]*)\" for \"([^\"]*)\" for \"([^\"]*)\"$")
+	public void i_call_app_login_api_of_with_and_for_for(String env, String usr, String psw, String grpCode, String testCase) throws Throwable {
+		String usrName = null;
+		if(usr.contains("-")) {
+			usrName = usr.split("-")[1];
+		} else {
+			usrName = usr;
+		}		
+        String appHostName = GetConfigProperties.getValue(configPath, env);
+		String device_id = ApiShareSteps.deviceIdGenerator();	    
+	    String appApiPath = GetConfigProperties.getValue(configPath, "appLogin");
+	    String fullApiPath = appApiPath + "device_id=" + device_id + "&group_code=" + grpCode + "&password=" + psw + "&source=" + "&username=" + usrName + "&verify_code=";
+	    
+	    String appResponse = RestassureApiCalling.getMethod(appHostName, fullApiPath);
+		JSONObject appResponseJson = ApiShareSteps.strToJson(appResponse);
+		String appCallResult = appResponseJson.getString("result").toString();
+		Assert.assertEquals("0", appCallResult);
+	    String appCallMsg = appResponseJson.getString("message").toString();
+	    Assert.assertEquals("登录成功", appCallMsg);
+	    
+	    JSONObject appResponseData = (JSONObject) appResponseJson.get("data");	    
+	    String tokenId = (String) appResponseData.get("token");
+	    ScenarioContext.put(testCase + "token", tokenId);   
+	    ScenarioContext.put(testCase + "deviceId", device_id);
+	}
 
 
 

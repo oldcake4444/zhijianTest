@@ -1,11 +1,15 @@
 package com.test.GuiTest.WebDriver;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -154,6 +158,22 @@ public class WebUtil {
 		if (this.isElementPresent(targetXPath)) {
 			action.moveToElement(driver.findElement(path)).click().perform();
 		}
+	}
+	
+	public void toggleDeviceToolBar() throws InterruptedException, AWTException {
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_F12);
+		robot.keyRelease(KeyEvent.VK_F12);
+		Thread.sleep(1000);
+		robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_SHIFT);
+        Thread.sleep(1000);
+        robot.keyPress(KeyEvent.VK_M);
+        Thread.sleep(1000);;
+        robot.keyRelease(KeyEvent.VK_M);
+        robot.keyRelease(KeyEvent.VK_SHIFT);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        
 	}
 	
 	

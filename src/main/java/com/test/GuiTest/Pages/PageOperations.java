@@ -1,10 +1,13 @@
 package com.test.GuiTest.Pages;
 
+import static org.hamcrest.CoreMatchers.containsString;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import org.junit.Assert;
@@ -690,7 +693,29 @@ public class PageOperations {
 		
 	}
 
-
+	@When("^I open the house pofessional report page of \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" for \"([^\"]*)\"$")
+	public void i_open_the_house_pofessional_report_page_of_and_and_and_and_for(String groupId, String teamId, String projectId, String taskId, String houseId, String testCase) throws Throwable {
+		String token = (String) ScenarioContext.get(testCase + "token");
+		String url = "https://zj.buildingqm.com/public/app3/houseqm3/inspection_report.html?token="
+				+ token + "&group_id=" + groupId + "&team_id=" + teamId + "&project_id=" + projectId
+				+ "&task_id=" + taskId + "&house_id=" + houseId + "#/";
+		this.webUtil.openUrl(url);
+		Thread.sleep(2000);
+		// this.webUtil.toggleDeviceToolBar();		
+		
+	}
+	
+	@Then("^I verify \"([^\"]*)\" can be found on the page and the summary contains \"([^\"]*)\"$")
+	public void i_verify_can_be_found_on_the_page_and_the_summary_contains(String h5ElementPath, String summaryInfo) throws Throwable {
+	    this.webUtil.isElementPresent(GetConfigProperties.getValue(this.configPath, h5ElementPath));
+	    String summary = this.webUtil.getText(GetConfigProperties.getValue(this.configPath, h5ElementPath));
+	    Assert.assertTrue(summary.contains(summaryInfo));
+	}
+	
+	@Then("^I verify button \"([^\"]*)\" can be found on the page$")
+	public void i_verify_button_can_be_found_on_the_page(String buttonElementPath) throws Throwable {
+		this.webUtil.isElementPresent(GetConfigProperties.getValue(this.configPath, buttonElementPath));
+	}
 
 
 

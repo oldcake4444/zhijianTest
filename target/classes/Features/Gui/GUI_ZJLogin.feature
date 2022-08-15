@@ -30,16 +30,16 @@ Feature: GUI Login test for different envs
     When I click button <loginButtonXPath>
     And I wait for "2" seconds
     Then Capture the current page and save it as <fileName>
-    Then I verify <userRealName> can be found in <curUserXPath>
-    And I click menu <menuXPath>
-    And I wait for "1" seconds
-    Then I click menu <logoutXPath>
+    #Then I verify <userRealName> can be found in <curUserXPath>
+    #And I click menu <menuXPath>
+    #And I wait for "1" seconds
+    #Then I click menu <logoutXPath>
     And I wait for "2" seconds
     And Quit the driver
 
     Examples: 
       | testCase       | url      | expTitle          | userName       | password          | userNameXPath      | passwordXPath     | loginButtonXPath | userRealName   | curUserXPath      | fileName       | menuXPath            | logoutXPath  |
       | "guiLogin_001" | "prod"   | "\| 中国首个工程管理协作平台" | "kentestgrp10" | "12345678"        | "prodUsrNameXPath" | "prodUsrPswXPath" | "prodLoginBtn"   | "kentestgrp10" | "prodCurUsrXPath" | "guiLogin_001" | "prodCurUsrDropDown" | "prodLogout" |
-      | "guiLogin_002" | "longhu" | "龙湖集团 - 龙建"       | "longhu"       | "longhu2018"      | "lhUsrNameXPath"   | "lhUsrPswXPath"   | "lhLoginBtn"     | "龙湖集团管理员"      | "prodCurUsrXPath" | "guiLogin_002" | "prodCurUsrDropDown" | "prodLogout" |
-      | "guiLogin_003" | "zl"     | "中梁控股集团"          | "zhongliang"   | "zhongliang***" | "zlUsrNameXPath"   | "zlUsrPswXPath"   | "zlLoginBtn"     | "中梁"           | "zlCurUsrXPath"   | "guiLogin_003" | "zlCurUsrDropDown"   | "prodLogout" |
-      | "guiLogin_004" | "gzb"    | "葛洲坝地产"           | "gzb"          | "gzb@2018"        | "gzbUsrNameXPath"  | "gzbUsrPswXPath"  | "gzbLoginBtn"    | "地产总部管理员"      | "prodCurUsrXPath" | "guiLogin_004" | "prodCurUsrDropDown" | "prodLogout" |
+      #| "guiLogin_002" | "longhu" | "龙湖集团 - 龙建"       | "longhu"       | "longhu2018"      | "lhUsrNameXPath"   | "lhUsrPswXPath"   | "lhLoginBtn"     | "龙湖集团管理员"      | "prodCurUsrXPath" | "guiLogin_002" | "prodCurUsrDropDown" | "prodLogout" |
+      #| "guiLogin_003" | "zl"     | "中梁控股集团"          | "zhongliang"   | "zhongliang***" | "zlUsrNameXPath"   | "zlUsrPswXPath"   | "zlLoginBtn"     | "中梁"           | "zlCurUsrXPath"   | "guiLogin_003" | "zlCurUsrDropDown"   | "prodLogout" |
+      #| "guiLogin_004" | "gzb"    | "葛洲坝地产"           | "gzb"          | "gzb@2018"        | "gzbUsrNameXPath"  | "gzbUsrPswXPath"  | "gzbLoginBtn"    | "地产总部管理员"      | "prodCurUsrXPath" | "guiLogin_004" | "prodCurUsrDropDown" | "prodLogout" |
