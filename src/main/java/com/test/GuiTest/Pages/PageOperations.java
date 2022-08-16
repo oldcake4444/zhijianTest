@@ -43,8 +43,8 @@ public class PageOperations {
 	
 	@FindBy(how = How.ID, id = "su")
 	WebElement frontPageSearchButton;
-	private String configPath = "zhijianTest/src/main/resources/Configuration/GUI_zhijian.properties";
-	private String acntConfigPath = "zhijianTest/src//main/resources/Configuration/accountName.properties";
+	private String configPath = "/main/resources/Configuration/GUI_zhijian.properties";
+	private String acntConfigPath = "/main/resources/Configuration/accountName.properties";
 	private String acntConfigFullPath = "src/main/resources/Configuration/accountName.properties";
 	private String acntRealNameInfo = "src/main/resources/TestData/AcntInfo/acntRealNameInfo.csv";
 	
