@@ -1,7 +1,7 @@
 @gui @houseProRpt
 Feature: Check export button can be found on the page
 
-  @gui
+  @gui @houseProRpt
   Scenario Outline: Test for house professional report page
     Given I call app login api of <env> with <usr> and <psw> for <groupCode> for <testCase>
     When I open the house pofessional report page of <groupId> and <teamId> and <projectId> and <taskId> and <houseId> for <testCase>
