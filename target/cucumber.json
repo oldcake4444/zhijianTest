@@ -1,0 +1,270 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 198100,
+              "status": "passed"
+            },
+            "match": {
+              "location": "ScenarioContext.init()"
+            }
+          }
+        ],
+        "line": 17,
+        "name": "Test for house professional report page",
+        "description": "",
+        "id": "check-export-button-can-be-found-on-the-page;test-for-house-professional-report-page;;2",
+        "after": [
+          {
+            "result": {
+              "duration": 130500,
+              "status": "passed"
+            },
+            "match": {
+              "location": "PageOperations.tearDown(Scenario)"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 2389506000,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I call app login api of \"prod\" with \"kenjjyftest1\" and \"12345678\" for \"jjyf\" for \"guiHouseProRpt_001\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "prod",
+                  "offset": 25
+                },
+                {
+                  "val": "kenjjyftest1",
+                  "offset": 37
+                },
+                {
+                  "val": "12345678",
+                  "offset": 56
+                },
+                {
+                  "val": "jjyf",
+                  "offset": 71
+                },
+                {
+                  "val": "guiHouseProRpt_001",
+                  "offset": 82
+                }
+              ],
+              "location": "AppApiTest.i_call_app_login_api_of_with_and_for_for(String,String,String,String,String)"
+            },
+            "matchedColumns": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 6221003500,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I open the house pofessional report page of \"171319\" and \"171322\" and \"142639\" and \"9064300\" and \"67679751\" for \"guiHouseProRpt_001\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "171319",
+                  "offset": 45
+                },
+                {
+                  "val": "171322",
+                  "offset": 58
+                },
+                {
+                  "val": "142639",
+                  "offset": 71
+                },
+                {
+                  "val": "9064300",
+                  "offset": 84
+                },
+                {
+                  "val": "67679751",
+                  "offset": 98
+                },
+                {
+                  "val": "guiHouseProRpt_001",
+                  "offset": 113
+                }
+              ],
+              "location": "PageOperations.i_open_the_house_pofessional_report_page_of_and_and_and_and_for(String,String,String,String,String,String)"
+            },
+            "matchedColumns": [
+              0,
+              5,
+              6,
+              7,
+              8,
+              9
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 2002121300,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "I wait for \"2\" seconds",
+            "match": {
+              "arguments": [
+                {
+                  "val": "2",
+                  "offset": 12
+                }
+              ],
+              "location": "ShareSteps.i_wait_for_seconds(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 126119700,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "I verify \"汇总分析\" can be found on the page and the summary contains \"本次查验共发现隐患66条\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "汇总分析",
+                  "offset": 10
+                },
+                {
+                  "val": "本次查验共发现隐患66条",
+                  "offset": 67
+                }
+              ],
+              "location": "PageOperations.i_verify_can_be_found_on_the_page_and_the_summary_contains(String,String)"
+            },
+            "matchedColumns": [
+              10,
+              11
+            ],
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 83332600,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "I click button \"完成查验\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "完成查验",
+                  "offset": 16
+                }
+              ],
+              "location": "PageOperations.i_click_button(String)"
+            },
+            "matchedColumns": [
+              12
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 580021100,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "I verify button \"按检查项下载\" can be found on the page",
+            "match": {
+              "arguments": [
+                {
+                  "val": "按检查项下载",
+                  "offset": 17
+                }
+              ],
+              "location": "PageOperations.i_verify_button_can_be_found_on_the_page(String)"
+            },
+            "matchedColumns": [
+              13
+            ],
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 32307400,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "I verify button \"按区域下载\" can be found on the page",
+            "match": {
+              "arguments": [
+                {
+                  "val": "按区域下载",
+                  "offset": 17
+                }
+              ],
+              "location": "PageOperations.i_verify_button_can_be_found_on_the_page(String)"
+            },
+            "matchedColumns": [
+              14
+            ],
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 44121600,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "Quit the driver",
+            "match": {
+              "location": "PageOperations.quit_the_driver()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "line": 1,
+            "name": "@houseProRpt"
+          },
+          {
+            "line": 1,
+            "name": "@gui"
+          }
+        ]
+      }
+    ],
+    "name": "Check export button can be found on the page",
+    "description": "",
+    "id": "check-export-button-can-be-found-on-the-page",
+    "keyword": "Feature",
+    "uri": "Gui/GUI_ProRptH5.feature",
+    "tags": [
+      {
+        "line": 1,
+        "name": "@gui"
+      },
+      {
+        "line": 1,
+        "name": "@houseProRpt"
+      }
+    ]
+  }
+]
