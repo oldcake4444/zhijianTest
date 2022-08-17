@@ -126,7 +126,7 @@ formatter.examples({
   "keyword": "Examples"
 });
 formatter.before({
-  "duration": 198100,
+  "duration": 248700,
   "status": "passed"
 });
 formatter.scenario({
@@ -241,7 +241,7 @@ formatter.match({
   "location": "AppApiTest.i_call_app_login_api_of_with_and_for_for(String,String,String,String,String)"
 });
 formatter.result({
-  "duration": 2389506000,
+  "duration": 2572532100,
   "status": "passed"
 });
 formatter.match({
@@ -274,7 +274,7 @@ formatter.match({
   "location": "PageOperations.i_open_the_house_pofessional_report_page_of_and_and_and_and_for(String,String,String,String,String,String)"
 });
 formatter.result({
-  "duration": 6221003500,
+  "duration": 6594291900,
   "status": "passed"
 });
 formatter.match({
@@ -287,7 +287,7 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 2002121300,
+  "duration": 2002020900,
   "status": "passed"
 });
 formatter.match({
@@ -304,7 +304,7 @@ formatter.match({
   "location": "PageOperations.i_verify_can_be_found_on_the_page_and_the_summary_contains(String,String)"
 });
 formatter.result({
-  "duration": 126119700,
+  "duration": 95797900,
   "status": "passed"
 });
 formatter.match({
@@ -317,7 +317,7 @@ formatter.match({
   "location": "PageOperations.i_click_button(String)"
 });
 formatter.result({
-  "duration": 83332600,
+  "duration": 93486200,
   "status": "passed"
 });
 formatter.match({
@@ -330,7 +330,7 @@ formatter.match({
   "location": "PageOperations.i_verify_button_can_be_found_on_the_page(String)"
 });
 formatter.result({
-  "duration": 580021100,
+  "duration": 551073800,
   "status": "passed"
 });
 formatter.match({
@@ -343,18 +343,18 @@ formatter.match({
   "location": "PageOperations.i_verify_button_can_be_found_on_the_page(String)"
 });
 formatter.result({
-  "duration": 32307400,
+  "duration": 27601700,
   "status": "passed"
 });
 formatter.match({
   "location": "PageOperations.quit_the_driver()"
 });
 formatter.result({
-  "duration": 44121600,
+  "duration": 36359500,
   "status": "passed"
 });
 formatter.after({
-  "duration": 130500,
+  "duration": 101600,
   "status": "passed"
 });
 });
