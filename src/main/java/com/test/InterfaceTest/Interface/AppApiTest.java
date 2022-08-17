@@ -428,7 +428,8 @@ public class AppApiTest {
 			usrName = usr.split("-")[1];
 		} else {
 			usrName = usr;
-		}		
+		}
+		log.info(configPath);
         String appHostName = GetConfigProperties.getValue(configPath, env);
 		String device_id = ApiShareSteps.deviceIdGenerator();	    
 	    String appApiPath = GetConfigProperties.getValue(configPath, "appLogin");
