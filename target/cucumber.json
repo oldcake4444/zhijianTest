@@ -6,7 +6,7 @@
         "before": [
           {
             "result": {
-              "duration": 248700,
+              "duration": 113400,
               "status": "passed"
             },
             "match": {
@@ -21,7 +21,7 @@
         "after": [
           {
             "result": {
-              "duration": 101600,
+              "duration": 3337943000,
               "status": "passed"
             },
             "match": {
@@ -34,8 +34,9 @@
         "steps": [
           {
             "result": {
-              "duration": 2572532100,
-              "status": "passed"
+              "duration": 127923100,
+              "error_message": "java.lang.NullPointerException\r\n\tat java.io.Reader.\u003cinit\u003e(Unknown Source)\r\n\tat java.io.InputStreamReader.\u003cinit\u003e(Unknown Source)\r\n\tat com.test.Util.GetConfigProperties.getValue(GetConfigProperties.java:26)\r\n\tat com.test.InterfaceTest.Interface.AppApiTest.i_call_app_login_api_of_with_and_for_for(AppApiTest.java:433)\r\n\tat ✽.Given I call app login api of \"prod\" with \"kenjjyftest1\" and \"12345678\" for \"jjyf\" for \"guiHouseProRpt_001\"(Gui/GUI_ProRptH5.feature:6)\r\n",
+              "status": "failed"
             },
             "line": 6,
             "name": "I call app login api of \"prod\" with \"kenjjyftest1\" and \"12345678\" for \"jjyf\" for \"guiHouseProRpt_001\"",
@@ -75,8 +76,7 @@
           },
           {
             "result": {
-              "duration": 6594291900,
-              "status": "passed"
+              "status": "skipped"
             },
             "line": 7,
             "name": "I open the house pofessional report page of \"171319\" and \"171322\" and \"142639\" and \"9064300\" and \"67679751\" for \"guiHouseProRpt_001\"",
@@ -121,8 +121,7 @@
           },
           {
             "result": {
-              "duration": 2002020900,
-              "status": "passed"
+              "status": "skipped"
             },
             "line": 8,
             "name": "I wait for \"2\" seconds",
@@ -139,8 +138,7 @@
           },
           {
             "result": {
-              "duration": 95797900,
-              "status": "passed"
+              "status": "skipped"
             },
             "line": 9,
             "name": "I verify \"汇总分析\" can be found on the page and the summary contains \"本次查验共发现隐患66条\"",
@@ -165,8 +163,7 @@
           },
           {
             "result": {
-              "duration": 93486200,
-              "status": "passed"
+              "status": "skipped"
             },
             "line": 10,
             "name": "I click button \"完成查验\"",
@@ -186,8 +183,7 @@
           },
           {
             "result": {
-              "duration": 551073800,
-              "status": "passed"
+              "status": "skipped"
             },
             "line": 11,
             "name": "I verify button \"按检查项下载\" can be found on the page",
@@ -207,8 +203,7 @@
           },
           {
             "result": {
-              "duration": 27601700,
-              "status": "passed"
+              "status": "skipped"
             },
             "line": 12,
             "name": "I verify button \"按区域下载\" can be found on the page",
@@ -228,8 +223,7 @@
           },
           {
             "result": {
-              "duration": 36359500,
-              "status": "passed"
+              "status": "skipped"
             },
             "line": 13,
             "name": "Quit the driver",
