@@ -24,7 +24,7 @@ public class AppApiTest {
 	
 	static Logger log = Logger.getLogger("InterfaceTest.class");
 	
-	private String configPath = "//Configuration//AppApi_zhijian.properties";
+	private String configPath = "../Configuration/AppApi_zhijian.properties";
 	private String acntConfigPath = "src/main/resources/Configuration/accountName.properties";
 	
 	@Given("^I call the \"([^\"]*)\" api of \"([^\"]*)\" with \"([^\"]*)\" and \"([^\"]*)\"in \"([^\"]*)\" for \"([^\"]*)\"$")
