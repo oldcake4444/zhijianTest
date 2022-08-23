@@ -26,14 +26,14 @@ public class SelectBrowser {
 	}
 	
 	public static WebDriver selectChrome() {
-		File file_chrome = new File("src/main/resources/webDrivers/chromedriver.exe");
+		File file_chrome = new File("src/main/resources/WebDrivers/chromedriver.exe");
 		System.setProperty("webdriver.chrome.driver", file_chrome.getAbsolutePath());
 		WebDriver driver = new ChromeDriver();
 		return driver;
 	}
 	
 	public static WebDriver selectChromeHeadless() {
-		File file_chrome = new File("src/main/resources/webDrivers/chromedriver.exe");
+		File file_chrome = new File("src/main/resources/WebDrivers/chromedriver.exe");
 		System.setProperty("webdriver.chrome.driver", file_chrome.getAbsolutePath());
 		ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless");
