@@ -31,6 +31,29 @@
                             </includes>  
                         </configuration>  
                     </plugin> 
+                    
+                    <plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>${org.codehaus.mojo.version}</version>
+						<executions>
+							<execution>
+								<id>script-chmod</id>
+								<phase>install</phase>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<configuration>
+                					<executable>chmod</executable>
+                					<arguments>
+                    					<argument>+x</argument>
+                    					<argument>chromedriver.exe</argument>
+                					</arguments>
+           		 				</configuration>
+        					</execution>
+    					</executions>
+					</plugin>
+                    
                 </plugins>  
             </build>  
         </profile>  
