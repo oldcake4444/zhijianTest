@@ -14,4 +14,4 @@ Feature: Check export button can be found on the page
 
     Examples: 
       | testCase             | env    | usr            | psw        | groupCode | groupId  | teamId   | projectId | taskId    | houseId    | pageInfo | summaryInfo    | finishButton | button1  | button2 |
-      | "guiHouseProRpt_001" | "prod" | "kenjjyftest1" | "12345678" | "jjyf"    | "171319" | "171322" | "142639"  | "9064300" | "67679751" | "汇总分析"   | "本次查验共发现隐患66条" | "完成查验"       | "按检查项下载" | "区域下载" |
+      | "guiHouseProRpt_001" | "prod" | "kenjjyftest1" | "12345678" | "jjyf"    | "171319" | "171322" | "142639"  | "9064300" | "67679751" | "汇总分析"   | "本次查验共发现隐患66条" | "完成查验"       | "按检查项下载" | "按区域下载" |
