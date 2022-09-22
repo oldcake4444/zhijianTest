@@ -1,5 +1,5 @@
 @gui @houseProRpt
-Feature: Check export button can be found on the page
+Feature: Verify the H5 report page of houseqm
 
   @gui @houseProRpt
   Scenario Outline: Test for house professional report page

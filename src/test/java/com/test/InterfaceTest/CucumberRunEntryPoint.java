@@ -14,7 +14,7 @@ import cucumber.api.junit.Cucumber;
 		plugin = {"pretty", "html:target/cucumber", "json:target/cucumber.json"}, 
 		features = {"src/main/resources/Features/"},
 	    glue = {""},
-		tags = {"@houseProRpt"}
+		tags = {"@houseProRpt", "@ownerInspection"}
 		)
 
 public class CucumberRunEntryPoint {
