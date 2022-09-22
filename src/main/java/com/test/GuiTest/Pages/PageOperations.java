@@ -700,9 +700,20 @@ public class PageOperations {
 				+ token + "&group_id=" + groupId + "&team_id=" + teamId + "&project_id=" + projectId
 				+ "&task_id=" + taskId + "&house_id=" + houseId + "#/";
 		this.webUtil.openUrl(url);
-		Thread.sleep(2000);
+		// Thread.sleep(2000);
 		// this.webUtil.toggleDeviceToolBar();		
 		
+	}
+		
+	@When("^I open the house pofessional report page of \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" for \"([^\"]*)\"$")
+	public void i_open_the_house_pofessional_report_page_of_and_and_and_for(String groupId, String teamId, String projectId, String taskId, String testCase) throws Throwable {
+		String token = (String) ScenarioContext.get(testCase + "token");
+		String url = "https://zj.buildingqm.com/public/app3/houseqm3/owner_report.html?token="
+				+ token + "&group_id=" + groupId + "&team_id=" + teamId + "&project_id=" + projectId
+				+ "&task_id=" + taskId + "#/";
+		this.webUtil.openUrl(url);
+//		Thread.sleep(2000);
+//		this.webUtil.toggleDeviceToolBar();
 	}
 	
 	@Then("^I verify \"([^\"]*)\" can be found on the page and the summary contains \"([^\"]*)\"$")
@@ -715,6 +726,14 @@ public class PageOperations {
 	@Then("^I verify button \"([^\"]*)\" can be found on the page$")
 	public void i_verify_button_can_be_found_on_the_page(String buttonElementPath) throws Throwable {
 		this.webUtil.isElementPresent(GetConfigProperties.getValue(this.configPath, buttonElementPath));
+	}
+	
+	@Then("^I verify \"([^\"]*)\" can be found on the page and the score is displayed$")
+	public void i_verify_can_be_found_on_the_page_and_the_score_is_displayed(String h5ElementPath) throws Throwable {
+	    this.webUtil.isElementPresent(GetConfigProperties.getValue(this.configPath, h5ElementPath));
+	    String scoreStr = this.webUtil.getText("//span[text()='房屋质量得分']/../..//span[@class='range-number_1']");
+	    Double score = Double.parseDouble(scoreStr);
+	    Assert.assertTrue(score >= 0);
 	}
 
 

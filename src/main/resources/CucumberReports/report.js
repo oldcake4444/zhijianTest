@@ -137,7 +137,7 @@ formatter.examples({
   "keyword": "Examples"
 });
 formatter.before({
-  "duration": 294750,
+  "duration": 138100,
   "status": "passed"
 });
 formatter.scenario({
@@ -246,7 +246,7 @@ formatter.match({
   "location": "PageOperations.i_am_testing_in_for(String,String)"
 });
 formatter.result({
-  "duration": 6273882913,
+  "duration": 4164795500,
   "status": "passed"
 });
 formatter.match({
@@ -271,7 +271,7 @@ formatter.match({
   "location": "PageOperations.i_login_with_by_and_for(String,String,String,String)"
 });
 formatter.result({
-  "duration": 4143814115,
+  "duration": 2056058499,
   "status": "passed"
 });
 formatter.match({
@@ -284,7 +284,7 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 3001436807,
+  "duration": 3000727600,
   "status": "passed"
 });
 formatter.match({
@@ -305,7 +305,7 @@ formatter.match({
   "location": "PageOperations.i_go_to_page_for_for(String,String,String)"
 });
 formatter.result({
-  "duration": 542203331,
+  "duration": 251458701,
   "status": "passed"
 });
 formatter.match({
@@ -318,7 +318,7 @@ formatter.match({
   "location": "ShareSteps.i_wait_for_seconds(String)"
 });
 formatter.result({
-  "duration": 3001699947,
+  "duration": 3000624100,
   "status": "passed"
 });
 formatter.match({

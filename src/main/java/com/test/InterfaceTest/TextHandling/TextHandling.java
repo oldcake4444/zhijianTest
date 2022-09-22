@@ -103,13 +103,17 @@ public class TextHandling {
         long yesterdayNow=System.currentTimeMillis()-24*60*60*1000;//昨天的这一时间的毫秒数
         long yesterdayZero = zero - 3600 * 24;
         long yesterdayEnd = zero - 1;
+        Calendar calendar = Calendar.getInstance();;
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String today = df.format((Date) calendar.getTime());
+
         
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
-        Date oneHourAgo = calendar.getTime();
-        System.out.print(oneHourAgo + "\n");        
-        long oneHourAgoLong = oneHourAgo.getTime()/1000;
-        System.out.print(oneHourAgoLong + "\n");
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1);
+//        Date oneHourAgo = calendar.getTime();
+//        System.out.print(oneHourAgo + "\n");        
+//        long oneHourAgoLong = oneHourAgo.getTime()/1000;
+//        System.out.print(oneHourAgoLong + "\n");
         
         Calendar calendar1 = Calendar.getInstance();
         calendar1.add(calendar1.MINUTE, -30);
@@ -126,7 +130,7 @@ public class TextHandling {
         
         Calendar calendar3 = Calendar.getInstance();
         calendar3.add(calendar3.DAY_OF_MONTH, -1);
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        // SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String yesterday = df.format((Date) calendar3.getTime());
         SimpleDateFormat df1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String yesterday2 = df1.format((Date) calendar3.getTime());
@@ -184,33 +188,67 @@ public class TextHandling {
         
         
         
-        URL webHookUrl = new URL("https://open.feishu2.cn/open-apis/bot/v2/hook/68350a1c-3bfe-4f3c-95c1-acbabf4ba8e4/");
-        connection = (HttpURLConnection)webHookUrl.openConnection();
+     // 发送飞书通，QA群
+//        URL webHookUrl1 = new URL("https://open.feishu1.cn/open-apis/bot/v2/hook/68350a1c-3bfe-4f3c-95c1-acbabf4ba8e4/");
+//        connection = (HttpURLConnection)webHookUrl1.openConnection();
+//        connection.setRequestMethod("POST");
+//        connection.setConnectTimeout(15000);
+//        connection.setReadTimeout(15000);
+//        connection.setDoOutput(true);
+//        connection.setDoInput(true);
+//        connection.setRequestProperty("Content-Type", "application/json;charset=utf-8"); // 声明格式是json
+//        String msgToSend1 = today + "导出PDF: " + exportCnt;
+//        String postMsg1 = "{\"msg_type\":\"text\",\"content\":{\"text\":\"" + msgToSend1 + "\"}}";        
+//        System.out.print(postMsg1);
+//        OutputStream feiShuOut1 = connection.getOutputStream();
+//        feiShuOut1.write(postMsg1.getBytes());
+//        feiShuOut1.flush();
+//        feiShuOut1.close();
+//        String feiShuMsg1 = "";
+//        int feiShuCode1 = connection.getResponseCode();
+//        if (feiShuCode1 == 200) {
+//            BufferedReader reader = new BufferedReader(
+//                    new InputStreamReader(connection.getInputStream()));
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                feiShuMsg1 += line + "\n";
+//            }
+//            reader.close();
+//        }
+//	connection.disconnect();
+	// 发送飞书通知，大群
+        URL webHookUrl2 = new URL("https://open.feishu1.cn/open-apis/bot/v2/hook/c6a7f889-745c-413f-8ee5-cff67f5e0b4c");
+        connection = (HttpURLConnection)webHookUrl2.openConnection();
         connection.setRequestMethod("POST");
         connection.setConnectTimeout(15000);
         connection.setReadTimeout(15000);
         connection.setDoOutput(true);
         connection.setDoInput(true);
-        connection.setRequestProperty("Content-Type", "application/json;charset=utf-8");
-        String msgToSend = yesterday + "导出PDF:" + exportCnt;
-        String postMsg = "{\"msg_type\":\"text\",\"content\":{\"text\":\"" + msgToSend + "\"}}";        
-        System.out.print(postMsg);
-        OutputStream feiShuOut = connection.getOutputStream();
-        feiShuOut.write(postMsg.getBytes());
-        feiShuOut.flush();
-        feiShuOut.close();
-        String feiShuMsg = "";
-        int feiShuCode = connection.getResponseCode();
-        if (feiShuCode == 200) {
+        connection.setRequestProperty("Content-Type", "application/json;charset=utf-8"); // 声明格式是json
+        String msgToSend2 = today + "导出PDF: " + exportCnt;
+        String postMsg2 = "{\"msg_type\":\"text\",\"content\":{\"text\":\"" + msgToSend2 + "\"}}";        
+        System.out.print(postMsg2);
+        OutputStream feiShuOut2 = connection.getOutputStream();
+        feiShuOut2.write(postMsg2.getBytes());
+        feiShuOut2.flush();
+        feiShuOut2.close();
+        String feiShuMsg2 = "";
+        int feiShuCode2 = connection.getResponseCode();
+        if (feiShuCode2 == 200) {
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(connection.getInputStream()));
             String line;
             while ((line = reader.readLine()) != null) {
-            	feiShuMsg += line + "\n";
+                feiShuMsg2 += line + "\n";
             }
             reader.close();
         }
-              
+	connection.disconnect();
+
+        
+        
+        
+
 
         
 //        JSONObject responseJson = JSONObject.fromObject(msg); 
