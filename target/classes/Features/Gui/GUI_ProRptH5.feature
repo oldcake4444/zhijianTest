@@ -14,5 +14,5 @@ Feature: Verify the H5 report page of houseqm
     And Quit the driver
 
     Examples: 
-      | testCase             | env    | usr            | psw        | groupCode | groupId  | teamId   | projectId | taskId    | houseId    | pageInfo | summaryInfo    | finishButton | button1  | button2 | fileName             |
-      | "guiHouseProRpt_001" | "prod" | "kenjjyftest1" | "12345678" | "jjyf"    | "171319" | "171322" | "142639"  | "9064300" | "67679751" | "汇总分析"   | "本次查验共发现隐患66条" | "完成查验"       | "按检查项下载" | "按区域下载" | "guiHouseProRpt_001" |
+      | testCase             | env    | usr         | psw        | groupCode | groupId  | teamId   | projectId | taskId    | houseId    | pageInfo | summaryInfo    | finishButton | button1  | button2 | fileName             |
+      | "guiHouseProRpt_001" | "prod" | "kentest46" | "12345678" | ""        | "100546" | "100547" | "100756"  | "8941379" | "52107954" | "汇总分析"   | "本次查验共发现隐患11条" | "完成查验"       | "按检查项下载" | "按区域下载" | "guiHouseProRpt_001" |

@@ -700,7 +700,7 @@ public class PageOperations {
 				+ token + "&group_id=" + groupId + "&team_id=" + teamId + "&project_id=" + projectId
 				+ "&task_id=" + taskId + "&house_id=" + houseId + "#/";
 		this.webUtil.openUrl(url);
-		// Thread.sleep(2000);
+		Thread.sleep(2000);
 		// this.webUtil.toggleDeviceToolBar();		
 		
 	}
