@@ -3,6 +3,7 @@ package com.test.GuiTest.Pages;
 import static org.hamcrest.CoreMatchers.containsString;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -58,8 +59,14 @@ public class PageOperations {
 //    }
 //
     @After (value = "@gui")
-    public void tearDown(Scenario scenario) {
-    	if (scenario.isFailed()) {
+    public void tearDown(Scenario scenario) throws IOException {
+    	if (scenario.isFailed()) {		
+    		File currentScreen = this.webUtil.captureExplorerScreenShot();
+    		Date day = new Date();
+    		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss"); 
+    		String curTime = df.format(day);
+    		String fileName ="Fail_" + curTime + ".jpg";
+    		FileUtil.copyFile(currentScreen, new File(GetConfigProperties.getValue(this.configPath, "screenshot.path") + fileName));
     		this.webUtil.closeDriver();
     	}
     }
