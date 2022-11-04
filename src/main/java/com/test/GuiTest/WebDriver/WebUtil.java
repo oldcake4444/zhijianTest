@@ -28,8 +28,8 @@ public class WebUtil {
 	
 	//protected WebDriver driver = SelectBrowser.selectIE();
 	//protected WebDriver driver = SelectBrowser.selectChrome();
-	//protected ScreenCaptureHtmlUnitDriver driver = SelectBrowser.selectGhost();
 	protected WebDriver driver = SelectBrowser.selectChromeHeadless();
+	//protected ScreenCaptureHtmlUnitDriver driver = SelectBrowser.selectGhost();
 	
 	Actions action = new Actions(driver);
 	
@@ -106,7 +106,8 @@ public class WebUtil {
 	public void clickButton(String buttonNameXPath) throws InterruptedException {
 		By path = By.xpath(buttonNameXPath);
 		if (this.isElementPresent(buttonNameXPath)) {
-			driver.findElement(path).click();
+			// driver.findElement(path).click();
+			action.click(driver.findElement(path)).build().perform();
 		}
 	}
 	
