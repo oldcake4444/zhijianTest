@@ -5,7 +5,7 @@ Feature: Verify the H5 report page of houseqm
   Scenario Outline: Test for house professional report page
     Given I call app login api of <env> with <usr> and <psw> for <groupCode> for <testCase>
     When I open the house pofessional report page of <groupId> and <teamId> and <projectId> and <taskId> and <houseId> for <testCase>
-    And I wait for "2" seconds
+    And I wait for "5" seconds
     Then I verify <pageInfo> can be found on the page and the summary contains <summaryInfo>
     When I click button <finishButton>
     Then I verify button <button1> can be found on the page
