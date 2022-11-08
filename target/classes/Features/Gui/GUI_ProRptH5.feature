@@ -8,6 +8,7 @@ Feature: Verify the H5 report page of houseqm
     And I wait for "5" seconds
     Then I verify <pageInfo> can be found on the page and the summary contains <summaryInfo>
     When I click button <finishButton>
+    And I wait for "5" seconds
     Then I verify button <button1> can be found on the page
     Then I verify button <button2> can be found on the page
     Then Capture the current page and save it as <fileName>
