@@ -16,4 +16,4 @@ Feature: Verify the H5 report page of owner inspection
 
     Examples: 
       | testCase             | env    | usr     | psw        | groupCode | groupId  | teamId   | projectId | taskId | houseId | pageInfo | summaryInfo | qualityScore | finishButton | button1  | button2 | fileName             |
-      | "guiOwnerProRpt_001" | "prod" | "moon1" | "12345678" | ""        | "146208" | "146210" | "128673"  | "46"   | ""      | "汇总分析"   | "分别为" | "房屋质量得分"     | "完成查验"       | "按检查项下载" | "按区域下载" | "guiOwnerProRpt_001" |
+      | "guiOwnerProRpt_001" | "prod" | "moon1" | "12345678" | ""        | "146208" | "146210" | "128673"  | "46"   | ""      | "汇总分析"   | "分别为" | "房屋质量得分"     | "生成报告"       | "按检查项下载" | "按区域下载" | "guiOwnerProRpt_001" |
