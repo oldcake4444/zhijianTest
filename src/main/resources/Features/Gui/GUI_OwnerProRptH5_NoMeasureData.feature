@@ -1,5 +1,5 @@
 @gui @ownerInspection
-Feature: Verify the H5 report page of owner inspection
+Feature: Verify the H5 report page of owner inspection without measure data
 
   @gui @ownerInspection
   Scenario Outline: Test for house professional report page
