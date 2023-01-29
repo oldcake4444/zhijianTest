@@ -10,10 +10,21 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
+import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 
 public class CountHouseqmExportFiles {
@@ -22,8 +33,8 @@ public class CountHouseqmExportFiles {
 	 
 	 private static final int perThreadCreatSnpNumber = 10;
 	 
-	 private static final String urlStr = "https://open.feishu1.cn/open-apis/bot/v2/hook/e7dcf547-85ca-46ca-bb3f-e6bb7e519549/;https://open.feishu1.cn/open-apis/bot/v2/hook/c6a7f889-745c-413f-8ee5-cff67f5e0b4c/";
-     
+	 private static final String urlStr = "https://open.feishu1.cn/open-apis/bot/v2/hook/d63f293b-9438-4c0c-a103-9dec1246d7bd/;https://open.feishu1.cn/open-apis/bot/v2/hook/ddd02a94-ae18-4454-9746-e9cc44f469b5/";
+	 
 	 public static void main(String[] args) {
         long current=System.currentTimeMillis();//当前时间毫秒数
         long zero=(current/(1000*3600*24)*(1000*3600*24)-TimeZone.getDefault().getRawOffset())/1000;//今天零点零分零秒的毫秒数
@@ -47,6 +58,8 @@ public class CountHouseqmExportFiles {
         String params = "sign=41d1c8a9dfbf41b74d74df0a9f0d5642&export_type=84&export_type=85&status=30&start_time=" + zero + 
                 "&end_time=" + currentLong 
                 + "&like_params=true";
+//        String params = "sign=41d1c8a9dfbf41b74d74df0a9f0d5642&export_type=84&export_type=85&status=30&start_time=1673452800&end_time=1673539199"
+//                + "&like_params=true";
 	    //System.out.print(params);
         OutputStream out = connection.getOutputStream();
         out.write(params.getBytes());
@@ -68,8 +81,67 @@ public class CountHouseqmExportFiles {
         // System.out.print(msg);
         String keyWord1 = "\"count\":";
         String exportCnt = msg.substring(msg.indexOf("\"count\":") + keyWord1.length(), msg.indexOf(",\"items\":["));
+        
+        // 从下载URL中截取项目名
+        ArrayList<String> projectList = new ArrayList<String>();
+        HashMap<String,Integer> map = new HashMap<String,Integer>();   
+        JSONObject jsonMsgJson = JSONObject.fromObject(msg);
+        JSONObject jsonMsgData = (JSONObject) jsonMsgJson.get("data");	    
+        JSONArray rptExpArray = (JSONArray) jsonMsgData.get("items");
+        for(int i=0; i<rptExpArray.size(); i++) {
+	    	JSONObject rptExpInfoJson = (JSONObject) rptExpArray.get(i);
+	    	String downloadUrl = (String) rptExpInfoJson.get("down_url");
+	        Matcher findMatcher1 = Pattern.compile("/").matcher(downloadUrl);
+	        int indexNum1=0;
+	        while(findMatcher1.find()) {
+	            indexNum1++;
+	            if(indexNum1 == 3){
+	                break;
+	            }
+	        }
+	        Matcher findMatcher2 = Pattern.compile("_").matcher(downloadUrl);
+	        int indexNum2=0;
+	        while(findMatcher2.find()) {
+	            indexNum2++;
+	            if(indexNum2 == 1){
+	                break;
+	            }
+	        }
+	        String projectName = downloadUrl.substring(findMatcher1.start()+1, findMatcher2.start());
+	        
+    		if(!projectList.contains(projectName)){
+    			projectList.add(projectName);
+	        	}  
+	        
+	    	if(!map.containsKey(projectName)) {
+	    		map.put(projectName, 0);
+	    	}	    	
+	    	if(map.containsKey(projectName)) {
+	    		map.put(projectName, map.get(projectName) + 1);
+	    	}	    
 
-        // 发送飞书通
+	    }
+        int projectCnt = map.size();
+        // 按项目出现次数的倒序排序
+        String exportDetail = "";
+        if(!map.isEmpty()) {
+    	    Map<String,Integer> sortMapDesc= map.entrySet()
+                    .stream()
+                    .sorted(Collections
+                            .reverseOrder(Map.Entry.comparingByValue()))
+                    .collect(Collectors
+                            .toMap(Map.Entry::getKey,Map.Entry::getValue,(e1,e2)->e1,LinkedHashMap::new));
+    	    
+    	    Iterator sortedMapIte = sortMapDesc.entrySet().iterator();	    
+    	    do {
+    	    	Entry projectNameCnt = (Entry)sortedMapIte.next();
+    	    	exportDetail = exportDetail + projectNameCnt.getKey() + ": " + projectNameCnt.getValue() + "\\n";
+    	    	} while(sortedMapIte.hasNext());     	
+        }
+
+      
+
+        // 发送飞书通知
         String[] urlString = urlStr.split(";");
         for(int i = 0; i < urlString.length; i++) {
         	URL webHookUrl = new URL(urlString[i]);
@@ -80,8 +152,18 @@ public class CountHouseqmExportFiles {
             connection.setDoOutput(true);
             connection.setDoInput(true);
             connection.setRequestProperty("Content-Type", "application/json;charset=utf-8"); // 声明格式是json
-            String msgToSend = today + "导出PDF: " + exportCnt;
-            String postMsg = "{\"msg_type\":\"text\",\"content\":{\"text\":\"" + msgToSend + "\"}}";        
+            String msgToSend = null;
+            String postMsg = null;
+            if(Integer.valueOf(exportCnt) == 0) {
+                msgToSend = today + "入伙验房没有PDF导出";
+                postMsg = "{\"msg_type\":\"text\",\"content\":{\"text\":\"" + msgToSend + "\"}}";  
+            	
+            } else {
+                msgToSend = today + "入伙验房导出PDF: " + exportCnt 
+                		+ "，涉及" + projectCnt + "个项目" + "\\n导出项目明细:\\n" + exportDetail;
+                postMsg = "{\"msg_type\":\"text\",\"content\":{\"text\":\"" + msgToSend + "\"}}";  
+            	
+            }
             System.out.print(postMsg);
             OutputStream feiShuOut = connection.getOutputStream();
             feiShuOut.write(postMsg.getBytes());

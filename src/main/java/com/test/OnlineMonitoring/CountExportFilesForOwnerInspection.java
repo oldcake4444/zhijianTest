@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import java.util.Iterator;
@@ -34,6 +33,8 @@ import java.util.Set;
 
 
 public class CountExportFilesForOwnerInspection {
+	
+    private static final String urlStr = "https://open.feishu.cn/open-apis/bot/v2/hook/d63f293b-9438-4c0c-a103-9dec1246d7bd/;https://open.feishu1.cn/open-apis/bot/v2/hook/ddd02a94-ae18-4454-9746-e9cc44f469b5/";
 
 	public static void main(String[] args) throws IOException {
         long current=System.currentTimeMillis();//当前时间毫秒数
@@ -56,7 +57,8 @@ public class CountExportFilesForOwnerInspection {
         connection.setDoInput(true);
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         String params = "sign=41d1c8a9dfbf41b74d74df0a9f0d5642&export_type=[5,10]&status=30&create_at_start=" + zero + 
-                "&create_at_end=" + currentLong;
+                "&create_at_end=" + currentLong;       
+        // String params = "sign=41d1c8a9dfbf41b74d74df0a9f0d5642&export_type=[5,10]&status=30&create_at_start=1673452800&create_at_end=1673539200";
         // System.out.print(params + "\n");
         OutputStream out = connection.getOutputStream();
         out.write(params.getBytes());
@@ -74,33 +76,111 @@ public class CountExportFilesForOwnerInspection {
             reader.close();
         }
 	    connection.disconnect();
+	    
         // 处理结果
 	    // 导出次数
-        String keyWord1 = "\"count\":";        
-        String exportCnt = msg.substring(msg.indexOf("\"count\":") + keyWord1.length(), msg.indexOf("}}"));
+//        String keyWord1 = "\"count\":";        
+//        String exportCnt = msg.substring(msg.indexOf("\"count\":") + keyWord1.length(), msg.indexOf("}}"));
         //System.out.println(exportCnt);
-        // 集团id列表
+        
+        // 集团id列表、任务id列表
         ArrayList<Integer> groupList = new ArrayList<Integer>();
+        ArrayList<Integer> taskList = new ArrayList<Integer>();
         JSONObject jsonMsgJson = JSONObject.fromObject(msg);
         JSONObject jsonMsgData = (JSONObject) jsonMsgJson.get("data");	    
         JSONArray rptExpArray = (JSONArray) jsonMsgData.get("report_export");
-        HashMap<Integer,Integer> map = new HashMap<Integer,Integer>();
+        HashMap<Integer,Integer> groupMap = new HashMap<Integer,Integer>();
+        HashMap<Integer,Integer> groupListMap = new HashMap<Integer,Integer>();
+        HashMap<Integer,Integer> taskMap = new HashMap<Integer,Integer>();
+        HashMap<Integer,Integer> taskGroupMap = new HashMap<Integer,Integer>();
+        HashMap<Integer,Integer> groupTaskCntMap = new HashMap<Integer,Integer>();
         for(int i=0; i<rptExpArray.size(); i++) {
 	    	JSONObject rptExpInfoJson = (JSONObject) rptExpArray.get(i);
 	    	int groupId = (int) rptExpInfoJson.get("group_id");
-	        if(!groupList.contains(groupId)){
-	        	groupList.add(groupId);
-	        	}  
-	        
-	    	if(!map.containsKey(groupId)) {
-	    		map.put(groupId, 0);
-	    	}	    	
-	    	if(map.containsKey(groupId)) {
-	    		map.put(groupId, map.get(groupId) + 1);
+	    	int taskId = (int) rptExpInfoJson.get("task_id");
+	    	if(groupId != 146208) { // 排除测试集团
+	    		if(!groupList.contains(groupId)){
+		        	groupList.add(groupId);
+		        	}
+	    		if(!taskList.contains(taskId)) {
+	    			taskList.add(taskId);
+	    		}
+		        
+		    	if(!groupMap.containsKey(groupId)) {
+		    		groupMap.put(groupId, 0);
+		    	}	    	
+		    	if(groupMap.containsKey(groupId)) {
+		    		groupMap.put(groupId, groupMap.get(groupId) + 1);
+		    	}
+		    	if(!groupListMap.containsKey(groupId)) {
+		    		groupListMap.put(groupId, 0);
+		    	}	 
+		    	if(!taskMap.containsKey(taskId)) {
+		    		taskMap.put(taskId, 0);
+		    	}	    	
+		    	if(taskMap.containsKey(taskId)) {
+		    		taskMap.put(taskId, taskMap.get(taskId) + 1);
+		    	}
+		    	taskGroupMap.put(taskId, groupId);
+		    	
 	    	}
+	    }
+        
 
-	    }      
-       
+        Iterator<Map.Entry<Integer, Integer>> groupListMapIterator = groupListMap.entrySet().iterator();
+    	while(groupListMapIterator.hasNext()) {
+    	    Entry<Integer, Integer> groupListEntry = groupListMapIterator.next();  
+    		int grpId = groupListEntry.getKey();
+            Iterator<Map.Entry<Integer, Integer>> taskGroupMapIterator = taskGroupMap.entrySet().iterator();
+            while(taskGroupMapIterator.hasNext()) {
+        	    Entry<Integer, Integer> taskGroupEntry = taskGroupMapIterator.next();
+        	    int groupgrpId = taskGroupEntry.getValue();
+        	    if(grpId == groupgrpId) {
+    		    	if(!groupTaskCntMap.containsKey(grpId)) {
+    		    		groupTaskCntMap.put(grpId, 0);
+    		    	}	    	
+    		    	if(groupTaskCntMap.containsKey(grpId)) {
+    		    		groupTaskCntMap.put(grpId, groupTaskCntMap.get(grpId) + 1);
+    		    	}
+        	    }
+            }    		
+    	}
+    	
+    	// 根据集团id的升序排列    	
+	    Map<Integer,Integer> sortGroupMap= groupMap.entrySet()
+        .stream().sorted(Map.Entry.comparingByKey())
+        .collect(Collectors
+                .toMap(Map.Entry::getKey,Map.Entry::getValue,(e1,e2)->e1,LinkedHashMap::new));
+//    	Iterator sortGroupMapIte = sortGroupMap.entrySet().iterator();
+//    	while (sortGroupMapIte.hasNext()){
+//            Map.Entry<Integer, Integer> next = (Entry<Integer, Integer>) sortGroupMapIte.next();
+//            System.out.println(next.getKey() + ":" + next.getValue());
+//        }
+    	
+	    Map<Integer,Integer> sortGroupTaskCntMap = groupTaskCntMap.entrySet()
+	            .stream().sorted(Map.Entry.comparingByKey())
+	            .collect(Collectors
+	                    .toMap(Map.Entry::getKey,Map.Entry::getValue,(e1,e2)->e1,LinkedHashMap::new));
+//	    Iterator sortGroupTaskCntMapIte = sortGroupTaskCntMap.entrySet().iterator();
+//	    while (sortGroupTaskCntMapIte.hasNext()){
+//	    	Map.Entry<Integer, Integer> next = (Entry<Integer, Integer>) sortGroupTaskCntMapIte.next();
+//	    	System.out.println(next.getKey() + ":" + next.getValue());
+//	    }
+
+        // 获取PDF导出总数
+        int exportPdfCntExcludeTest = 0;
+        Iterator<Map.Entry<Integer, Integer>> groupMapIterator = groupMap.entrySet().iterator();
+        while (groupMapIterator.hasNext()){
+            Map.Entry<Integer, Integer> next = groupMapIterator.next();
+            exportPdfCntExcludeTest = exportPdfCntExcludeTest + next.getValue();
+        }
+        // System.out.println(exportCntExcludeTest);
+        // 有发生导出的集团数
+        int groupCnt = groupMap.size();        
+        // 获取任务导出总数
+        int exportTaskCntExcludeTest = taskMap.size();
+        // System.out.println(exportTaskCntExcludeTest);
+
        // 登录管控平台并拿到cookie
        URL urlControlLogin = new URL("https://zj.buildingqm.com/control/v1/papi/login/login/?_ct=json&idempotent=" + currentLong);
        connection = (HttpURLConnection)urlControlLogin.openConnection();
@@ -174,49 +254,58 @@ public class CountExportFilesForOwnerInspection {
        
        // 获取集团名字以及写入导出次数
        HashMap<String,Integer> grpCntMap = new HashMap<String,Integer>();
-       String exportDetail = "";
-       Iterator ite = map.entrySet().iterator();
-	    do {
-	    	Entry grpIdCnt = (Entry)ite.next();
-	    	int grpId = (int) grpIdCnt.getKey();
-	    	URL urlGrpQuery = new URL("https://zj.buildingqm.com/control/v1/papi/customer/list/?");
-	           connection = (HttpURLConnection)urlGrpQuery.openConnection();
-	           connection.setRequestMethod("GET");
-	           connection.setConnectTimeout(15000);
-	           connection.setReadTimeout(15000);
-	           connection.setUseCaches(false);
-	           connection.setDoOutput(true);
-	           connection.setDoInput(true);
-	           // 写入cookie
-	           connection.setRequestProperty("Cookie", sessionid);
-	           connection.connect(); 
-	           String query = "text=" + grpId + "&page=1&page_size=10";
-	           OutputStream grpQueryOut = connection.getOutputStream();
-	           grpQueryOut.write(query.getBytes());
-	           out.flush();
-	           out.close();
-	           String grpQueryMsg = "";
-	           int grpQueryCode = connection.getResponseCode();
-	           if (grpQueryCode == 200) {
-	               BufferedReader reader = new BufferedReader(
-	                       new InputStreamReader(connection.getInputStream()));
-	               String line;
-	               while ((line = reader.readLine()) != null) {
-	            	   grpQueryMsg += line + "\n";
-	               }
-	               reader.close();
-	           }
+       HashMap<String,Integer> grpTaskCntMap = new HashMap<String,Integer>();
+       String exportGrpCntDetail = "";
+       String exportGrpTaskCntDetail = "";
+       if(!groupMap.isEmpty()) {
+           Iterator sortGroupMapIte = sortGroupMap.entrySet().iterator();
+           Iterator sortGroupTaskCntIte = sortGroupTaskCntMap.entrySet().iterator();
+           while(sortGroupMapIte.hasNext() && sortGroupTaskCntIte.hasNext()) {
+        	   Entry grpIdCnt = (Entry)sortGroupMapIte.next();
+        	   Entry grpTaskCnt = (Entry)sortGroupTaskCntIte.next();
+        	   int grpId = (int) grpIdCnt.getKey();
+      	    	URL urlGrpQuery = new URL("https://zj.buildingqm.com/control/v1/papi/customer/list/?");
+    	           connection = (HttpURLConnection)urlGrpQuery.openConnection();
+    	           connection.setRequestMethod("GET");
+    	           connection.setConnectTimeout(15000);
+    	           connection.setReadTimeout(15000);
+    	           connection.setUseCaches(false);
+    	           connection.setDoOutput(true);
+    	           connection.setDoInput(true);
+    	           // 写入cookie
+    	           connection.setRequestProperty("Cookie", sessionid);
+    	           connection.connect(); 
+    	           String query = "text=" + grpId + "&page=1&page_size=10";
+    	           OutputStream grpQueryOut = connection.getOutputStream();
+    	           grpQueryOut.write(query.getBytes());
+    	           out.flush();
+    	           out.close();
+    	           String grpQueryMsg = "";
+    	           int grpQueryCode = connection.getResponseCode();
+    	           if (grpQueryCode == 200) {
+    	               BufferedReader reader = new BufferedReader(
+    	                       new InputStreamReader(connection.getInputStream()));
+    	               String line;
+    	               while ((line = reader.readLine()) != null) {
+    	            	   grpQueryMsg += line + "\n";
+    	               }
+    	               reader.close();
+    	           }
 
-	    	   connection.disconnect();
-	    	    // 获取集团名
-	           JSONObject grpMsgJson = JSONObject.fromObject(grpQueryMsg);
-	           JSONObject grpMsgData = (JSONObject) grpMsgJson.get("data");	    
-	           JSONArray grpMsgArray = (JSONArray) grpMsgData.get("customer_list");
-	           JSONObject grpInfo = (JSONObject) grpMsgArray.get(0);
-	           String groupName = (String) grpInfo.get("name");
-	           grpCntMap.put(groupName, (Integer) grpIdCnt.getValue());
-	           } while(ite.hasNext()); 
-	    
+    	    	   connection.disconnect();
+    	    	    // 获取集团名
+    	           JSONObject grpMsgJson = JSONObject.fromObject(grpQueryMsg);
+    	           JSONObject grpMsgData = (JSONObject) grpMsgJson.get("data");	    
+    	           JSONArray grpMsgArray = (JSONArray) grpMsgData.get("customer_list");
+    	           if(grpMsgArray.size()>0) {
+    		           JSONObject grpInfo = (JSONObject) grpMsgArray.get(0);
+    		           String groupName = (String) grpInfo.get("name");
+    		           grpCntMap.put(groupName, (Integer)grpIdCnt.getValue());   	
+    		           grpTaskCntMap.put(groupName, (Integer)grpTaskCnt.getValue());
+    	           }
+        	   
+           }
+  
 	    // 无顺序输出
 //	    Iterator grpMapIte = grpCntMap.entrySet().iterator();
 //	    do {
@@ -236,80 +325,76 @@ public class CountExportFilesForOwnerInspection {
 //                         LinkedHashMap::new));
 	    
 	    // 根据value倒序排列
-	    Map<String,Integer> sortMapDesc= grpCntMap.entrySet()
+	    Map<String,Integer> sortGrpCntMapDesc= grpCntMap.entrySet()
+                .stream()
+                .sorted(Collections
+                        .reverseOrder(Map.Entry.comparingByValue()))
+                .collect(Collectors
+                        .toMap(Map.Entry::getKey,Map.Entry::getValue,(e1,e2)->e1,LinkedHashMap::new));
+	    Map<String,Integer> grpTaskCntMapDesc= grpTaskCntMap.entrySet()
                 .stream()
                 .sorted(Collections
                         .reverseOrder(Map.Entry.comparingByValue()))
                 .collect(Collectors
                         .toMap(Map.Entry::getKey,Map.Entry::getValue,(e1,e2)->e1,LinkedHashMap::new));
 	    
-	    Iterator sortedMapIte = sortMapDesc.entrySet().iterator();
+	    // 构建发送信息
+	    Iterator sortGrpCntMapIte = sortGrpCntMapDesc.entrySet().iterator();
 	    do {
-	    	Entry grpNameCnt = (Entry)sortedMapIte.next();
-	    	exportDetail = exportDetail + grpNameCnt.getKey() + ": " + grpNameCnt.getValue() + "\\n";
-	    	} while(sortedMapIte.hasNext()); 
-	    System.out.println(exportDetail);
+	    	Entry grpNameCnt = (Entry)sortGrpCntMapIte.next();
+	    	exportGrpCntDetail = exportGrpCntDetail + grpNameCnt.getKey() + ": " + grpNameCnt.getValue() + "\\n";
+	    	} while(sortGrpCntMapIte.hasNext()); 	   
+	    Iterator sortGrpTaskCntMapIte = grpTaskCntMapDesc.entrySet().iterator();
+	    do {
+	    	Entry grpTaskCnt = (Entry)sortGrpTaskCntMapIte.next();
+	    	exportGrpTaskCntDetail = exportGrpTaskCntDetail + grpTaskCnt.getKey() + ": " + grpTaskCnt.getValue() + "\\n";
+	    	} while(sortGrpTaskCntMapIte.hasNext()); 	   
+	    }
 
-
-        // 发送飞书通，QA群
-        URL webHookUrl1 = new URL("https://open.feishu1.cn/open-apis/bot/v2/hook/d63f293b-9438-4c0c-a103-9dec1246d7bd/");
-        connection = (HttpURLConnection)webHookUrl1.openConnection();
-        connection.setRequestMethod("POST");
-        connection.setConnectTimeout(15000);
-        connection.setReadTimeout(15000);
-        connection.setDoOutput(true);
-        connection.setDoInput(true);
-        connection.setRequestProperty("Content-Type", "application/json;charset=utf-8"); // 声明格式是json
-        String msgToSend1 = today + "新版业主验房导出PDF: " + exportCnt 
-        		+ ";" + "\\n导出明细:\\n" + exportDetail;
-        String postMsg1 = "{\"msg_type\":\"text\",\"content\":{\"text\":\"" + msgToSend1 + "\"}}";        
-        //System.out.print(postMsg1);
-        OutputStream feiShuOut1 = connection.getOutputStream();
-        feiShuOut1.write(postMsg1.getBytes());
-        feiShuOut1.flush();
-        feiShuOut1.close();
-        String feiShuMsg1 = "";
-        int feiShuCode1 = connection.getResponseCode();
-        if (feiShuCode1 == 200) {
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                feiShuMsg1 += line + "\n";
+	    // 发送飞书通知
+        String[] urlString = urlStr.split(";");
+        for(int i = 0; i < urlString.length; i++) {
+        	URL webHookUrl = new URL(urlString[i]);
+            connection = (HttpURLConnection)webHookUrl.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setConnectTimeout(15000);
+            connection.setReadTimeout(15000);
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+            connection.setRequestProperty("Content-Type", "application/json;charset=utf-8"); // 声明格式是json
+            String msgToSend = null;
+            String postMsg = null;
+            if(exportPdfCntExcludeTest == 0) {
+                msgToSend = today + "业主验房没有PDF导出";
+                postMsg = "{\"msg_type\":\"text\",\"content\":{\"text\":\"" + msgToSend + "\"}}";        
+                System.out.print(postMsg);            
+            } else {
+                msgToSend = today + "业主验房导出" + exportPdfCntExcludeTest + "个PDF文件，"
+                		+ "涉及" + groupCnt + "个集团，总共" +  
+                		exportTaskCntExcludeTest + "个任务" + 
+                		"\\n导出集团和任务数详情:\\n" + exportGrpTaskCntDetail;
+                postMsg = "{\"msg_type\":\"text\",\"content\":{\"text\":\"" + msgToSend + "\"}}";  
+                System.out.print(postMsg); 
             }
-            reader.close();
-        }
-	    connection.disconnect();
-        // 发送飞书通知，大群
-        URL webHookUrl2 = new URL("https://open.feishu1.cn/open-apis/bot/v2/hook/c6a7f889-745c-413f-8ee5-cff67f5e0b4c/");
-        connection = (HttpURLConnection)webHookUrl2.openConnection();
-        connection.setRequestMethod("POST");
-        connection.setConnectTimeout(15000);
-        connection.setReadTimeout(15000);
-        connection.setDoOutput(true);
-        connection.setDoInput(true);
-        connection.setRequestProperty("Content-Type", "application/json;charset=utf-8"); // 声明格式是json
-        String msgToSend2 = today + "新版业主验房导出PDF: " + exportCnt 
-        		+ ";" + "\\n导出明细:\\n" + exportDetail;
-        String postMsg2 = "{\"msg_type\":\"text\",\"content\":{\"text\":\"" + msgToSend2 + "\"}}";        
-        //System.out.print(postMsg2);
-        OutputStream feiShuOut2 = connection.getOutputStream();
-        feiShuOut2.write(postMsg2.getBytes());
-        feiShuOut2.flush();
-        feiShuOut2.close();
-        String feiShuMsg2 = "";
-        int feiShuCode2 = connection.getResponseCode();
-        if (feiShuCode2 == 200) {
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                feiShuMsg2 += line + "\n";
+            OutputStream feiShuOut = connection.getOutputStream();
+            feiShuOut.write(postMsg.getBytes());
+            feiShuOut.flush();
+            feiShuOut.close();
+            String feiShuMsg = "";
+            int feiShuCode = connection.getResponseCode();
+            if (feiShuCode == 200) {
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(connection.getInputStream()));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    feiShuMsg += line + "\n";
+                }
+                reader.close();
             }
-            reader.close();
+    	    connection.disconnect();
+        	
         }
-        connection.disconnect();
-
+        
         } catch (IOException e) {
             System.out.print("转发出错，错误信息："+e.getLocalizedMessage()+";"+e.getClass());
         }finally {

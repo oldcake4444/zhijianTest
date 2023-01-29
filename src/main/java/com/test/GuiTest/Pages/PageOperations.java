@@ -730,17 +730,53 @@ public class PageOperations {
 	    Assert.assertTrue(summary.contains(summaryInfo));
 	}
 	
+	@Then("^I verify \"([^\"]*)\" can be found on the page and the summary contains \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\"$")
+	public void i_verify_can_be_found_on_the_page_and_the_summary_contains_and_and(String h5ElementPath, String summaryInfo, String measureData, String issueData) throws Throwable {
+	    this.webUtil.isElementPresent(GetConfigProperties.getValue(this.configPath, h5ElementPath));
+	    String summary = this.webUtil.getText(GetConfigProperties.getValue(this.configPath, h5ElementPath));
+	    Assert.assertTrue(summary.contains(summaryInfo));
+	    this.webUtil.isElementPresent(GetConfigProperties.getValue(this.configPath, measureData));
+	    this.webUtil.isElementPresent(GetConfigProperties.getValue(this.configPath, issueData));
+	}
+	
+	@Then("^I verify \"([^\"]*)\" can be found on the page and the summary contains \"([^\"]*)\" and \"([^\"]*)\" but without \"([^\"]*)\"$")
+	public void i_verify_can_be_found_on_the_page_and_the_summary_contains_and_but_without(String h5ElementPath, String summaryInfo, String issueData, String measureData) throws Throwable {
+	    this.webUtil.isElementPresent(GetConfigProperties.getValue(this.configPath, h5ElementPath));
+	    String summary = this.webUtil.getText(GetConfigProperties.getValue(this.configPath, h5ElementPath));
+	    Assert.assertTrue(summary.contains(summaryInfo));
+	    this.webUtil.isElementPresent(GetConfigProperties.getValue(this.configPath, issueData));
+	 
+	    Boolean measurePresent = this.webUtil.isElementPresentNoException(GetConfigProperties.getValue(this.configPath, measureData));
+	    Assert.assertFalse(measurePresent);
+	}
+	
 	@Then("^I verify button \"([^\"]*)\" can be found on the page$")
 	public void i_verify_button_can_be_found_on_the_page(String buttonElementPath) throws Throwable {
-		this.webUtil.isElementPresent(GetConfigProperties.getValue(this.configPath, buttonElementPath));
+		this.webUtil.isElementPresent(GetConfigProperties.getValue(this.configPath, buttonElementPath), 60);
 	}
 	
 	@Then("^I verify \"([^\"]*)\" can be found on the page and the score is displayed$")
 	public void i_verify_can_be_found_on_the_page_and_the_score_is_displayed(String h5ElementPath) throws Throwable {
 	    this.webUtil.isElementPresent(GetConfigProperties.getValue(this.configPath, h5ElementPath));
-	    String scoreStr = this.webUtil.getText("//span[text()='房屋质量得分']/../..//span[@class='range-number_1']");
+	    String scoreStr = this.webUtil.getText("//span[text()='房屋质量得分']/../..//span[contains(@class,'range-number_')]");
 	    Double score = Double.parseDouble(scoreStr);
 	    Assert.assertTrue(score >= 0);
+	}
+	
+	@When("^I click button \"([^\"]*)\" and \"([^\"]*)\" to download the report$")
+	public void i_click_button_and_to_download_the_report(String button1Name, String button2Name) throws Throwable {
+		String button1XPath = GetConfigProperties.getValue(this.configPath, button1Name);
+		this.webUtil.clickButton(button1XPath);
+		Thread.sleep(1000);
+		String button2XPath = GetConfigProperties.getValue(this.configPath, button2Name);
+		this.webUtil.clickButton(button2XPath);
+		Thread.sleep(2000);
+	}
+	
+	@Then("^I verify \"([^\"]*)\" and \"([^\"]*)\" can be found on the page while the report is being generated$")
+	public void i_verify_and_can_be_found_on_the_page_while_the_report_is_being_generated(String waitingTips1, String waitingTips2) throws Throwable {
+		Assert.assertTrue(this.webUtil.isElementPresent(GetConfigProperties.getValue(this.configPath, waitingTips1)));
+		Assert.assertTrue(this.webUtil.isElementPresent(GetConfigProperties.getValue(this.configPath, waitingTips2)));
 	}
 
 

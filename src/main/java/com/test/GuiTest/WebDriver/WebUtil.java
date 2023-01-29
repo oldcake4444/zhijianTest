@@ -43,6 +43,16 @@ public class WebUtil {
 		return elementExist;
 	}
 	
+	public Boolean isElementPresent(String xPath, int second) throws InterruptedException {
+		By path = By.xpath(xPath); 
+		Boolean elementExist = false;
+		WebElement e = new WebDriverWait(driver, second).until(ExpectedConditions.presenceOfElementLocated(path));
+		if(e.isDisplayed()) {
+			elementExist = true;
+		}
+		return elementExist;
+	}
+	
 	public Boolean isElementPresentNoException(String xPath) throws InterruptedException {
 		By path = By.xpath(xPath); 
 		Boolean elementExist = false;
