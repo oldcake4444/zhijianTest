@@ -2,6 +2,7 @@ package com.test.OnlineMonitoring;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,6 +26,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -40,19 +42,7 @@ import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import java.util.Set;
 
-//===[PROCESS TIME]===
-//===REQUEST I: 11s===
-//===PART I PROCESSING: 110s、31s===
-//===REQUEST II: 32s===
-//===PART II PROCESSING: 648s、241s===
-//===REQUEST III: 0===
-//===PART III PROCESSING: 0===
-//===REQUEST IV: 19s、47s===
-//===PART IV PROCESSING: 0===
-//===TOTAL: 820s (13.667m)===
-
-
-public class CountExportFilesForOwnerInspection {
+public class CountExportFilesForOwnerInspectionUpgrade {
 	
     private static final String urlStr = "https://open.feishu.cn/open-apis/bot/v2/hook/83f2649d-f761-4d57-81cf-be1b955c3802/";
 //    private static final String urlStr = "https://open.feishu.cn/open-apis/bot/v2/hook/d63f293b-9438-4c0c-a103-9dec1246d7bd/;https://open.feishu1.cn/open-apis/bot/v2/hook/2aa5f361-f8fd-4808-9865-f39da532d1f8/";
@@ -63,7 +53,6 @@ public class CountExportFilesForOwnerInspection {
 //        PrintStream ps = new PrintStream("C:\\Users\\oldcake\\Desktop\\log.txt");
 //        System.setOut(ps);		
 		// 每天23点59分跑，跑今天的数据
-		System.out.println("PART I STARTED at " + System.currentTimeMillis()/1000);
         long current=System.currentTimeMillis();//当前时间毫秒数
         long zero=(current/(1000*3600*24)*(1000*3600*24)-TimeZone.getDefault().getRawOffset())/1000;//今天零点零分零秒的毫秒数
         long todayEnd = zero + 3600*24 - 1;
@@ -81,229 +70,254 @@ public class CountExportFilesForOwnerInspection {
         Date date = sdformat.parse("2022-09-14 00:00:00");       
         long dayOneZero = date.getTime()/1000;
         
-        // 先查除昨天以外的历史数据
-        // 如果时间跨度在3个月内，用一次查询
-        ArrayList<Integer> taskListHist = new ArrayList<Integer>();
-        if(yesterdayZero-dayOneZero <= 7776000) {
-            String msgHist = "";
-            HttpURLConnection connectionHist = null;
-            try {
-            URL url = new URL("https://zj.buildingqm.com/app_owner_inspection/v1/gapi/back_door/report_export/list/");
-            connectionHist = (HttpURLConnection)url.openConnection();
-            connectionHist.setRequestMethod("POST");
-            connectionHist.setConnectTimeout(15000);
-            connectionHist.setReadTimeout(15000);;
-            connectionHist.setDoOutput(true);
-            connectionHist.setDoInput(true);
-            connectionHist.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            String params = "sign=41d1c8a9dfbf41b74d74df0a9f0d5642&export_type=[5,10]&status=30&create_at_start=" + dayOneZero + 
-                    "&create_at_end=" + zero;       
-            // String params = "sign=41d1c8a9dfbf41b74d74df0a9f0d5642&export_type=[5,10]&status=30&create_at_start=1673452800&create_at_end=1673539200";
-            // System.out.print(params + "\n");
-            OutputStream out = connectionHist.getOutputStream();
-            out.write(params.getBytes());
-            out.flush();
-            out.close();
-            int code = connectionHist.getResponseCode();
-            if (code == 200) {
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(connectionHist.getInputStream()));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                	msgHist += line + "\n";
-                }
-                reader.close();
+        // 首先校验历史数据是否正常
+        ArrayList<Integer> taskListHistArray = new ArrayList<Integer>();
+        String pathStr = "C:\\Users\\oldcake\\Desktop\\定时运行脚本\\TaskHistory.txt";
+        Path path = Paths.get(pathStr);
+        File fileRead = new File (pathStr);
+        StringBuilder result = new StringBuilder();
+        try{
+            InputStreamReader isr = new InputStreamReader(new FileInputStream(fileRead), "UTF-8");
+            BufferedReader br = new BufferedReader(isr);//构造一个BufferedReader类来读取文件
+            String s = null;
+            while((s = br.readLine())!=null){//使用readLine方法，一次读一行
+                result.append(System.lineSeparator()+s);
             }
-            connectionHist.disconnect();
-            } catch (IOException e) {
-                System.out.print("转发出错，错误信息："+e.getLocalizedMessage()+";"+e.getClass());
-            }finally {
-                // 5. 断开连接
-                if (null != connectionHist){
-                    try {
-                    	connectionHist.disconnect();
-                    }catch (Exception e){
-                        System.out.print("httpURLConnection 流关闭异常："+ e.getLocalizedMessage());
-                    }
-                }
+            br.close();    
+        }catch(Exception e){
+            e.printStackTrace();
+        }       
+        
+        
+        if(result.toString().split(";")[0].toString().trim().equals(yesterday)) {
+        	// 历史数据正常的话把历史数据写入taskListHistArray
+        	System.out.println("历史数据正常");
+            String[] array = result.toString().split(";")[1].split(",");
+            for(int h = 0; h < array.length; h++) {
+                int arrayTaskId = Integer.valueOf(array[h]);
+                if(arrayTaskId != 146208) {
+                	taskListHistArray.add(arrayTaskId);
+                }        
             }
-            System.out.println("REQUEST PART I DONE at " + System.currentTimeMillis()/1000);
-
-            JSONObject jsonMsgJsonHist = JSONObject.fromObject(msgHist);
-            JSONObject jsonMsgDataHist = (JSONObject) jsonMsgJsonHist.get("data");	    
-            JSONArray rptExpArrayHist = (JSONArray) jsonMsgDataHist.get("report_export");
-            for(int i=0; i<rptExpArrayHist.size(); i++) {
-            	JSONObject rptExpInfoJsonHist = (JSONObject) rptExpArrayHist.get(i);
-    	    	int groupIdHist = (int) rptExpInfoJsonHist.get("group_id");
-    	    	int taskIdHist = (int) rptExpInfoJsonHist.get("task_id");
-    	    	if(groupIdHist != 146208) { // 排除测试集团
-    	    		if(!taskListHist.contains(taskIdHist)) {
-    	    			taskListHist.add(taskIdHist);
-    	    		}
-    	    	}
-            	
-            }
-        	
         } else {
-            // 如果时间跨度在3个月上，多次查询，因为一次查询无法返回所有数据。每次查3个月的数据
-        	long i = dayOneZero;
-        	while(i <= yesterdayZero) {
-                String msgElse = "";
-        		HttpURLConnection connectionElse = null;
+        	System.out.println("历史数据不正常，正在重新生成");
+        	// 历史数据不正常则重跑历史数据
+            // 先查除昨天以外的历史数据
+            // 如果时间跨度在3个月内，用一次查询
+            if(yesterdayZero-dayOneZero <= 7776000) {
+                String msgHist = "";
+                HttpURLConnection connectionHist = null;
                 try {
                 URL url = new URL("https://zj.buildingqm.com/app_owner_inspection/v1/gapi/back_door/report_export/list/");
-                connectionElse = (HttpURLConnection)url.openConnection();
-                connectionElse.setRequestMethod("POST");
-                connectionElse.setConnectTimeout(15000);
-                connectionElse.setReadTimeout(15000);;
-                connectionElse.setDoOutput(true);
-                connectionElse.setDoInput(true);
-                connectionElse.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                String params = "sign=41d1c8a9dfbf41b74d74df0a9f0d5642&export_type=[5,10]&status=30&create_at_start=" + i + 
-                        "&create_at_end=" + (i + 7776000);       
+                connectionHist = (HttpURLConnection)url.openConnection();
+                connectionHist.setRequestMethod("POST");
+                connectionHist.setConnectTimeout(15000);
+                connectionHist.setReadTimeout(15000);;
+                connectionHist.setDoOutput(true);
+                connectionHist.setDoInput(true);
+                connectionHist.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                String params = "sign=41d1c8a9dfbf41b74d74df0a9f0d5642&export_type=[5,10]&status=30&create_at_start=" + dayOneZero + 
+                        "&create_at_end=" + zero;       
                 // String params = "sign=41d1c8a9dfbf41b74d74df0a9f0d5642&export_type=[5,10]&status=30&create_at_start=1673452800&create_at_end=1673539200";
-                System.out.print(params + "\n");
-                OutputStream out = connectionElse.getOutputStream();
+                // System.out.print(params + "\n");
+                OutputStream out = connectionHist.getOutputStream();
                 out.write(params.getBytes());
                 out.flush();
                 out.close();
-
-                int code = connectionElse.getResponseCode();
+                int code = connectionHist.getResponseCode();
                 if (code == 200) {
                     BufferedReader reader = new BufferedReader(
-                            new InputStreamReader(connectionElse.getInputStream()));
+                            new InputStreamReader(connectionHist.getInputStream()));
                     String line;
                     while ((line = reader.readLine()) != null) {
-                    	msgElse += line + "\n";
+                    	msgHist += line + "\n";
                     }
                     reader.close();
                 }
-                connectionElse.disconnect();
+                connectionHist.disconnect();
                 } catch (IOException e) {
                     System.out.print("转发出错，错误信息："+e.getLocalizedMessage()+";"+e.getClass());
                 }finally {
                     // 5. 断开连接
-                    if (null != connectionElse){
+                    if (null != connectionHist){
                         try {
-                        	connectionElse.disconnect();
+                        	connectionHist.disconnect();
                         }catch (Exception e){
                             System.out.print("httpURLConnection 流关闭异常："+ e.getLocalizedMessage());
                         }
                     }
                 }
-                System.out.println("REQUEST PART I DONE at " + System.currentTimeMillis()/1000);
-                JSONObject jsonMsgJsonElse = JSONObject.fromObject(msgElse);
-                JSONObject jsonMsgDataElse = (JSONObject) jsonMsgJsonElse.get("data");	    
-                JSONArray rptExpArrayElse = (JSONArray) jsonMsgDataElse.get("report_export");
-                for(int j=0; j<rptExpArrayElse.size(); j++) {
-                	JSONObject rptExpInfoJsonElse = (JSONObject) rptExpArrayElse.get(j);
-        	    	int groupIdElse = (int) rptExpInfoJsonElse.get("group_id");
-        	    	int taskIdElse = (int) rptExpInfoJsonElse.get("task_id");
-        	    	if(groupIdElse != 146208) { // 排除测试集团
-        	    		if(!taskListHist.contains(taskIdElse)) {
-        	    			taskListHist.add(taskIdElse);
+
+                JSONObject jsonMsgJsonHist = JSONObject.fromObject(msgHist);
+                JSONObject jsonMsgDataHist = (JSONObject) jsonMsgJsonHist.get("data");	    
+                JSONArray rptExpArrayHist = (JSONArray) jsonMsgDataHist.get("report_export");
+                for(int i=0; i<rptExpArrayHist.size(); i++) {
+                	JSONObject rptExpInfoJsonHist = (JSONObject) rptExpArrayHist.get(i);
+        	    	int groupIdHist = (int) rptExpInfoJsonHist.get("group_id");
+        	    	int taskIdHist = (int) rptExpInfoJsonHist.get("task_id");
+        	    	if(groupIdHist != 146208) { // 排除测试集团
+        	    		if(!taskListHistArray.contains(taskIdHist)) {
+        	    			taskListHistArray.add(taskIdHist);
         	    		}
         	    	}
                 	
                 }
-                System.out.println("PART I DONE at " + System.currentTimeMillis()/1000);
-                i = i + 7776000;
-                System.out.println("PART II STARTED at " + System.currentTimeMillis()/1000);
-                if(i+7776000 > yesterdayZero) {
-                	// 最后一次的结束时间是昨天的零点
-                    String msgLast = "";
-            		HttpURLConnection connectionLast = null;
+            	
+            } else {
+                // 如果时间跨度在3个月上，多次查询，因为一次查询无法返回所有数据。每次查3个月的数据
+            	long i = dayOneZero;
+            	while(i <= yesterdayZero) {
+                    String msgElse = "";
+            		HttpURLConnection connectionElse = null;
                     try {
                     URL url = new URL("https://zj.buildingqm.com/app_owner_inspection/v1/gapi/back_door/report_export/list/");
-                    connectionLast = (HttpURLConnection)url.openConnection();
-                    connectionLast.setRequestMethod("POST");
-                    connectionLast.setConnectTimeout(15000);
-                    connectionLast.setReadTimeout(15000);;
-                    connectionLast.setDoOutput(true);
-                    connectionLast.setDoInput(true);
-                    connectionLast.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                    connectionElse = (HttpURLConnection)url.openConnection();
+                    connectionElse.setRequestMethod("POST");
+                    connectionElse.setConnectTimeout(15000);
+                    connectionElse.setReadTimeout(15000);;
+                    connectionElse.setDoOutput(true);
+                    connectionElse.setDoInput(true);
+                    connectionElse.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                     String params = "sign=41d1c8a9dfbf41b74d74df0a9f0d5642&export_type=[5,10]&status=30&create_at_start=" + i + 
-                            "&create_at_end=" + zero;       
+                            "&create_at_end=" + (i + 7776000);       
                     // String params = "sign=41d1c8a9dfbf41b74d74df0a9f0d5642&export_type=[5,10]&status=30&create_at_start=1673452800&create_at_end=1673539200";
                     System.out.print(params + "\n");
-                    OutputStream out = connectionLast.getOutputStream();
+                    OutputStream out = connectionElse.getOutputStream();
                     out.write(params.getBytes());
                     out.flush();
                     out.close();
-                    int code = connectionLast.getResponseCode();
+
+                    int code = connectionElse.getResponseCode();
                     if (code == 200) {
                         BufferedReader reader = new BufferedReader(
-                                new InputStreamReader(connectionLast.getInputStream()));
+                                new InputStreamReader(connectionElse.getInputStream()));
                         String line;
                         while ((line = reader.readLine()) != null) {
-                        	msgLast += line + "\n";
+                        	msgElse += line + "\n";
                         }
                         reader.close();
                     }
-                    connectionLast.disconnect();
+                    connectionElse.disconnect();
                     } catch (IOException e) {
                         System.out.print("转发出错，错误信息："+e.getLocalizedMessage()+";"+e.getClass());
                     }finally {
                         // 5. 断开连接
-                        if (null != connectionLast){
+                        if (null != connectionElse){
                             try {
-                            	connectionLast.disconnect();
+                            	connectionElse.disconnect();
                             }catch (Exception e){
                                 System.out.print("httpURLConnection 流关闭异常："+ e.getLocalizedMessage());
                             }
                         }
                     }
-                    System.out.println("REQUEST PART II DONE at " + System.currentTimeMillis()/1000);
-                    JSONObject jsonMsgJsonLast = JSONObject.fromObject(msgLast);
-                    JSONObject jsonMsgDataLast = (JSONObject) jsonMsgJsonLast.get("data");	    
-                    JSONArray rptExpArrayLast = (JSONArray) jsonMsgDataLast.get("report_export");
-                    for(int k=0; k<rptExpArrayLast.size(); k++) {
-                    	JSONObject rptExpInfoJsonLast = (JSONObject) rptExpArrayLast.get(k);
-            	    	int groupIdLast = (int) rptExpInfoJsonLast.get("group_id");
-            	    	int taskIdLast = (int) rptExpInfoJsonLast.get("task_id");
-            	    	if(groupIdLast != 146208) { // 排除测试集团
-            	    		if(!taskListHist.contains(taskIdLast)) {
-            	    			taskListHist.add(taskIdLast);
+                    JSONObject jsonMsgJsonElse = JSONObject.fromObject(msgElse);
+                    JSONObject jsonMsgDataElse = (JSONObject) jsonMsgJsonElse.get("data");	    
+                    JSONArray rptExpArrayElse = (JSONArray) jsonMsgDataElse.get("report_export");
+                    for(int j=0; j<rptExpArrayElse.size(); j++) {
+                    	JSONObject rptExpInfoJsonElse = (JSONObject) rptExpArrayElse.get(j);
+            	    	int groupIdElse = (int) rptExpInfoJsonElse.get("group_id");
+            	    	int taskIdElse = (int) rptExpInfoJsonElse.get("task_id");
+            	    	if(groupIdElse != 146208) { // 排除测试集团
+            	    		if(!taskListHistArray.contains(taskIdElse)) {
+            	    			taskListHistArray.add(taskIdElse);
             	    		}
             	    	}
                     	
-                    } 
-                    System.out.println("PART II DONE at " + System.currentTimeMillis()/1000);
-                	break;
-                }
-        		
-        	}      	
+                    }             
+                    i = i + 7776000;
+                    if(i+7776000 > yesterdayZero) {
+                    	// 最后一次的结束时间是昨天的零点
+                        String msgLast = "";
+                		HttpURLConnection connectionLast = null;
+                        try {
+                        URL url = new URL("https://zj.buildingqm.com/app_owner_inspection/v1/gapi/back_door/report_export/list/");
+                        connectionLast = (HttpURLConnection)url.openConnection();
+                        connectionLast.setRequestMethod("POST");
+                        connectionLast.setConnectTimeout(15000);
+                        connectionLast.setReadTimeout(15000);;
+                        connectionLast.setDoOutput(true);
+                        connectionLast.setDoInput(true);
+                        connectionLast.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                        String params = "sign=41d1c8a9dfbf41b74d74df0a9f0d5642&export_type=[5,10]&status=30&create_at_start=" + i + 
+                                "&create_at_end=" + zero;       
+                        // String params = "sign=41d1c8a9dfbf41b74d74df0a9f0d5642&export_type=[5,10]&status=30&create_at_start=1673452800&create_at_end=1673539200";
+                        System.out.print(params + "\n");
+                        OutputStream out = connectionLast.getOutputStream();
+                        out.write(params.getBytes());
+                        out.flush();
+                        out.close();
+                        int code = connectionLast.getResponseCode();
+                        if (code == 200) {
+                            BufferedReader reader = new BufferedReader(
+                                    new InputStreamReader(connectionLast.getInputStream()));
+                            String line;
+                            while ((line = reader.readLine()) != null) {
+                            	msgLast += line + "\n";
+                            }
+                            reader.close();
+                        }
+                        connectionLast.disconnect();
+                        } catch (IOException e) {
+                            System.out.print("转发出错，错误信息："+e.getLocalizedMessage()+";"+e.getClass());
+                        }finally {
+                            // 5. 断开连接
+                            if (null != connectionLast){
+                                try {
+                                	connectionLast.disconnect();
+                                }catch (Exception e){
+                                    System.out.print("httpURLConnection 流关闭异常："+ e.getLocalizedMessage());
+                                }
+                            }
+                        }
+                        JSONObject jsonMsgJsonLast = JSONObject.fromObject(msgLast);
+                        JSONObject jsonMsgDataLast = (JSONObject) jsonMsgJsonLast.get("data");	    
+                        JSONArray rptExpArrayLast = (JSONArray) jsonMsgDataLast.get("report_export");
+                        for(int k=0; k<rptExpArrayLast.size(); k++) {
+                        	JSONObject rptExpInfoJsonLast = (JSONObject) rptExpArrayLast.get(k);
+                	    	int groupIdLast = (int) rptExpInfoJsonLast.get("group_id");
+                	    	int taskIdLast = (int) rptExpInfoJsonLast.get("task_id");
+                	    	if(groupIdLast != 146208) { // 排除测试集团
+                	    		if(!taskListHistArray.contains(taskIdLast)) {
+                	    			taskListHistArray.add(taskIdLast);
+                	    		}
+                	    	}
+                        	
+                        } 
+                    	break;
+                    }
+            		
+            	}      	
 
+            }
+            
+          //重新写入历史数据
+          File fileWrite = new File(pathStr);
+          if(!fileWrite.exists() && !fileWrite.isDirectory()) {
+              System.out.println("文件不存在");
+              fileWrite.mkdirs();
+              fileWrite.createNewFile();
+          }
+          Writer writerOut = new FileWriter(fileWrite);
+          // BufferedWriter bw = new BufferedWriter(writerOut);
+          BufferedWriter bw = Files.newBufferedWriter(path, StandardCharsets.UTF_8);
+          
+          bw.write(yesterday);
+          bw.write(";");
+          bw.flush();             
+          for(int task: taskListHistArray) {
+              bw.write(String.valueOf(task));
+              bw.write(",");
+              bw.flush();
+          }
+          bw.close();
+          System.out.println("历史数据重新写入成功");
+            
+            
+//          ps.close(); 	
         }
-        
-        //把taskListHist的结果写进文件
-        String pathStr = "C:\\Users\\oldcake\\Desktop\\定时运行脚本\\TaskHistory.txt";
-        Path path = Paths.get(pathStr);
-        File fileWrite = new File(pathStr);
-        if(!fileWrite.exists() && !fileWrite.isDirectory()) {
-            System.out.println("文件不存在");
-            fileWrite.mkdirs();
-            fileWrite.createNewFile();
-        }
-        Writer writerOut = new FileWriter(fileWrite);
-        // BufferedWriter bw = new BufferedWriter(writerOut);
-        BufferedWriter bw = Files.newBufferedWriter(path, StandardCharsets.UTF_8);
-        
-        bw.write(yesterday);
-        bw.write(";");
-        bw.flush();             
-        for(int task: taskListHist) {
-            bw.write(String.valueOf(task));
-            bw.write(",");
-            bw.flush();
-        }
-        bw.close();
-        System.out.println("写入成功");
-
-//        ps.close();
-              
+             
         // 查询当天的导出数据
-        System.out.println("PART III STARTED at " + System.currentTimeMillis()/1000);
+        System.out.println("查询当天数据");
         HttpURLConnection connection = null;
         try {
         URL url = new URL("https://zj.buildingqm.com/app_owner_inspection/v1/gapi/back_door/report_export/list/");
@@ -334,7 +348,6 @@ public class CountExportFilesForOwnerInspection {
             reader.close();
         }
 	    connection.disconnect();
-	    System.out.println("REQUEST PART III DONE at " + System.currentTimeMillis()/1000);
 	    
         // 处理结果
 	    // 导出次数
@@ -366,7 +379,6 @@ public class CountExportFilesForOwnerInspection {
 	    		if(!taskList.contains(taskId)) {
 	    			taskList.add(taskId);
 	    		}
-		        
 		    	if(!groupMap.containsKey(groupId)) {
 		    		groupMap.put(groupId, 0);
 		    	}	    	
@@ -382,14 +394,15 @@ public class CountExportFilesForOwnerInspection {
 		    	if(taskMap.containsKey(taskId)) {
 		    		taskMap.put(taskId, taskMap.get(taskId) + 1);
 		    	}
-		    	if(!taskListHist.contains(taskId)) {
+		    	if(!taskListHistArray.contains(taskId)) {
+		    		taskListHistArray.add(taskId);
 		    		taskGroupMapNew.put(taskId, groupId);
 		    	}
 		    	taskGroupMap.put(taskId, groupId);
 		    	
 	    	}
 	    }
-        
+                
         // 集团以及其对应的任务数
         Iterator<Map.Entry<Integer, Integer>> groupListMapIterator = groupListMap.entrySet().iterator();
     	while(groupListMapIterator.hasNext()) {
@@ -459,10 +472,8 @@ public class CountExportFilesForOwnerInspection {
         int exportTaskCntExcludeTest = taskMap.size();
         // System.out.println(exportTaskCntExcludeTest);
         
-	   System.out.println("PART III DONE at " + System.currentTimeMillis()/1000);
 
        // 登录管控平台并拿到cookie
-       System.out.println("PART IV STARTED at " + System.currentTimeMillis()/1000);
        URL urlControlLogin = new URL("https://zj.buildingqm.com/control/v1/papi/login/login/?_ct=json&idempotent=" + currentLong);
        connection = (HttpURLConnection)urlControlLogin.openConnection();
        connection.setRequestMethod("POST");
@@ -534,6 +545,7 @@ public class CountExportFilesForOwnerInspection {
        }
        
        // 获取集团名字以及写入导出次数
+       System.out.println("获取集团信息");
        HashMap<String,Integer> grpCntMap = new HashMap<String,Integer>();
        HashMap<String,Integer> grpTaskCntMap = new HashMap<String,Integer>();
        HashMap<String,Integer> grpNewTaskCntMap = new HashMap<String,Integer>();       
@@ -599,7 +611,6 @@ public class CountExportFilesForOwnerInspection {
     	           }
         	   
            }
-        System.out.println("REQUEST PART IV DONE at " + System.currentTimeMillis()/1000); 
                   
   
 	    // 无顺序输出
@@ -662,8 +673,28 @@ public class CountExportFilesForOwnerInspection {
 		    }
 	    }
        
-       System.out.println("PART IV DONE at " + System.currentTimeMillis()/1000);
+       //重新写入最新的历史数据
+       System.out.println("正在更新历史数据");
+       File fileWrite = new File(pathStr);
+       if(!fileWrite.exists() && !fileWrite.isDirectory()) {
+           System.out.println("文件不存在");
+           fileWrite.mkdirs();
+           fileWrite.createNewFile();
+       }
+       Writer writerOut = new FileWriter(fileWrite);
+       // BufferedWriter bw = new BufferedWriter(writerOut);
+       BufferedWriter bw = Files.newBufferedWriter(path, StandardCharsets.UTF_8);
        
+       bw.write(today);
+       bw.write(";");
+       bw.flush();             
+       for(int task: taskListHistArray) {
+           bw.write(String.valueOf(task));
+           bw.write(",");
+           bw.flush();
+       }
+       bw.close();
+       System.out.println("历史数据更新成功");     
        
 	    // 发送飞书通知
         String[] urlString = urlStr.split(";");

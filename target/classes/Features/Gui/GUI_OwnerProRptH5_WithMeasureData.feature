@@ -9,8 +9,8 @@ Feature: Verify the H5 report page of owner inspection with measure data
     Then I verify <pageInfo> can be found on the page and the summary contains <summaryInfo> and <measureData> and <issueData>
     And I verify <qualityScore> can be found on the page and the score is displayed
     When I click button <finishButton>
-    #When I click button <regeneratePDFButton1> and <regeneratePDFButton2> to download the report
-    #Then I verify <generatingTips1> and <generatingTips2> can be found on the page while the report is being generated
+    When I click button <regeneratePDFButton1> and <regeneratePDFButton2> to download the report
+    Then I verify <generatingTips1> and <generatingTips2> can be found on the page while the report is being generated
     Then I verify button <button1> can be found on the page
     Then I verify button <button2> can be found on the page
     Then Capture the current page and save it as <fileName>

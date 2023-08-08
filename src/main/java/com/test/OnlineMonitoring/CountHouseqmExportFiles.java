@@ -33,17 +33,21 @@ public class CountHouseqmExportFiles {
 	 
 	 private static final int perThreadCreatSnpNumber = 10;
 	 
-	 private static final String urlStr = "https://open.feishu1.cn/open-apis/bot/v2/hook/d63f293b-9438-4c0c-a103-9dec1246d7bd/;https://open.feishu1.cn/open-apis/bot/v2/hook/ddd02a94-ae18-4454-9746-e9cc44f469b5/";
+	 private static final String urlStr = "https://open.feishu.cn/open-apis/bot/v2/hook/83f2649d-f761-4d57-81cf-be1b955c3802/";
+//	 private static final String urlStr = "https://open.feishu.cn/open-apis/bot/v2/hook/d63f293b-9438-4c0c-a103-9dec1246d7bd/;https://open.feishu1.cn/open-apis/bot/v2/hook/2aa5f361-f8fd-4808-9865-f39da532d1f8/";
 	 
 	 public static void main(String[] args) {
         long current=System.currentTimeMillis();//当前时间毫秒数
         long zero=(current/(1000*3600*24)*(1000*3600*24)-TimeZone.getDefault().getRawOffset())/1000;//今天零点零分零秒的毫秒数
+        long todayEnd = zero + 3600*24 - 1;
 	    long currentLong = current/1000;
         long yesterdayZero = zero - 3600 * 24;
         long yesterdayEnd = zero - 1;
         Calendar calendar = Calendar.getInstance();;
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String today = df.format((Date) calendar.getTime());
+        String today = df.format((Date) calendar.getTime());    
+        calendar.add(Calendar.DATE, -1);       
+        String yesterday = df.format((Date)calendar.getTime());       
 
         HttpURLConnection connection = null;
         try {
@@ -56,11 +60,11 @@ public class CountHouseqmExportFiles {
         connection.setDoInput(true);
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         String params = "sign=41d1c8a9dfbf41b74d74df0a9f0d5642&export_type=84&export_type=85&status=30&start_time=" + zero + 
-                "&end_time=" + currentLong 
+                "&end_time=" + todayEnd 
                 + "&like_params=true";
 //        String params = "sign=41d1c8a9dfbf41b74d74df0a9f0d5642&export_type=84&export_type=85&status=30&start_time=1673452800&end_time=1673539199"
 //                + "&like_params=true";
-	    //System.out.print(params);
+	    System.out.print(params);
         OutputStream out = connection.getOutputStream();
         out.write(params.getBytes());
         out.flush();
