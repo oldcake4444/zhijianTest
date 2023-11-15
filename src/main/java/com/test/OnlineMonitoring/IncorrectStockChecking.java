@@ -64,8 +64,8 @@ public class IncorrectStockChecking {
 	    HashMap<Integer,Integer> mistakeGroupUsedTotal = new HashMap<Integer,Integer>();
 	    HashMap<Integer,Integer> groupAvailableTotalAmount = new HashMap<Integer,Integer>();
 	    HashMap<Integer,Integer> groupUsedUsedTotal = new HashMap<Integer,Integer>();
-
-
+	    
+        System.out.println(msg);
         JSONObject jsonMsgJson = JSONObject.fromObject(msg);
         JSONObject jsonMsgData = (JSONObject) jsonMsgJson.get("data");	    
         JSONArray jsonStockArray = (JSONArray) jsonMsgData.get("stock");
@@ -133,7 +133,7 @@ public class IncorrectStockChecking {
        buffer.append("\r\n");
        buffer.append("Content-Disposition: form-data; name=\"password\"");
        buffer.append("\r\n\r\n");
-       buffer.append("12345678");
+       buffer.append("welovezhijianyun123");
        buffer.append("\r\n");
        //第三个提交的参数
        buffer.append("--").append(mimeBoundary);
