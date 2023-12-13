@@ -23,7 +23,7 @@ public class GetConfigProperties {
 		Properties prop = new Properties();
 		String value = null;		
 		try {
-			prop.load(new InputStreamReader(Object.class.getResourceAsStream(propertyPath), "UTF-8"));
+			prop.load(new InputStreamReader(GetConfigProperties.class.getResourceAsStream(propertyPath), "UTF-8"));
 		    value = prop.get(key).toString();
 		} catch (FileNotFoundException e) {
 			log.info("Can't find the property file");

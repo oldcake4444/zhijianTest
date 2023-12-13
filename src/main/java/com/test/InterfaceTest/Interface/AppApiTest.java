@@ -3,6 +3,10 @@ package com.test.InterfaceTest.Interface;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import io.cucumber.java.PendingException;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
 
 import com.test.Util.ApiShareSteps;
@@ -13,10 +17,7 @@ import com.test.Util.RestassureApiCalling;
 import com.test.Util.ScenarioContext;
 import com.test.Util.TextFormat;
 
-import cucumber.api.PendingException;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -26,29 +27,29 @@ public class AppApiTest {
 	
 	private String configPath = "/Configuration/AppApi_zhijian.properties";
 	private String acntConfigPath = "src/main/resources/Configuration/accountName.properties";
-	
-	@Given("^I call the \"([^\"]*)\" api of \"([^\"]*)\" with \"([^\"]*)\" and \"([^\"]*)\"in \"([^\"]*)\" for \"([^\"]*)\"$")
-	public void i_call_the_api_of_with_and_in(String apiName, String env, String apiParm1, String apiParm2, String apiParms, String testCase) throws Throwable {
+
+	@Given("I call the {string} api of {string} with {string} and {string} in {string} for {string}")
+	public void i_call_the_api_of_with_and_in_for(String apiName, String env, String apiParm1, String apiParm2, String apiParms, String testCase) throws Throwable {
 		String hostName = GetConfigProperties.getValue(configPath, env);
-		
+
 		String device_id = ApiShareSteps.deviceIdGenerator();
 	    String[]apiParmList = apiParms.split(";");
 	    String apiParmName1 = apiParmList[0];
 	    String apiParmName2 = apiParmList[1];
 	    String apiParmName3 = apiParmList[2];
-	    
+
 	    String apiPath = GetConfigProperties.getValue(configPath, apiName);
-	    String fullApiPath = apiPath + apiParmName1 + "=" + device_id + "&" + apiParmName2 + "=" + apiParm1 + "&" + apiParmName3 + "=" + apiParm2;
+	    String fullApiPath = apiPath + apiParmName1 + "=" + device_id + "&" + apiParmName2 + "=" + apiParm2 + "&" + apiParmName3 + "=" + apiParm1;
 	    log.info(hostName+fullApiPath);
-	    
+
 	    String response = RestassureApiCalling.getMethod(hostName, fullApiPath);
-	    
+
 	    ScenarioContext.put(testCase, response);
 	    ScenarioContext.put("loginInfo", response);
 	    ScenarioContext.put("deviceId", device_id);
 	}
-	
-	@Then("^Verify the calling is successful with \"([^\"]*)\" for \"([^\"]*)\"$")
+
+	@Then("Verify the calling is successful with {string} for {string}")
 	public void verify_the_calling_is_successful_with_for(String msg, String testCase) throws Throwable {
 	    String response = (String) ScenarioContext.get(testCase);
 //	    log.info(ApiShareSteps.strToJson(response).toString());
@@ -61,7 +62,7 @@ public class AppApiTest {
 	    
 	}
 
-	@Then("^Verify the return message is expected as \"([^\"]*)\" in \"([^\"]*)\" for \"([^\"]*)\"$")
+	@Then("Verify the return message is expected as {string} in {string} for {string}")
 	public void verify_the_return_message_is_expected_as_in_for(String expValueList, String returnMsgFieldList, String testCase) throws Throwable {
 		String response = (String) ScenarioContext.get(testCase);;
 	    JSONObject responseJson = ApiShareSteps.strToJson(response);
@@ -70,6 +71,7 @@ public class AppApiTest {
 //	    log.info(usrData.toString());
 	    String[]usrDataFields = returnMsgFieldList.split(";");
 	    String[]expValue = expValueList.split(";");
+		System.out.println("I'm running");
 	    for (int i = 0; i < expValue.length; i++) {
 	    	Assert.assertEquals(expValue[i], usrData.get(usrDataFields[i]).toString());
 	    }

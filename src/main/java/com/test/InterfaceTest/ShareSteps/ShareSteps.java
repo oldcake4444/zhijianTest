@@ -2,7 +2,10 @@ package com.test.InterfaceTest.ShareSteps;
 
 import java.util.logging.Logger;
 
-import cucumber.api.java.en.When;
+import io.cucumber.java.PendingException;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 public class ShareSteps {
 	

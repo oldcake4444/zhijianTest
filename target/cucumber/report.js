@@ -1,84 +1,76 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("Gui/GUI_ProRptH5.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("src/main/resources/Features/Interface/AppApi_UserRelatedOrgInfo.feature");
 formatter.feature({
   "line": 2,
-  "name": "Check export button can be found on the page",
+  "name": "App login API test for different envs",
   "description": "",
-  "id": "check-export-button-can-be-found-on-the-page",
+  "id": "app-login-api-test-for-different-envs",
   "keyword": "Feature",
   "tags": [
     {
       "line": 1,
-      "name": "@gui"
-    },
-    {
-      "line": 1,
-      "name": "@houseProRpt"
+      "name": "@AppApiTest"
     }
   ]
 });
 formatter.scenarioOutline({
   "line": 5,
-  "name": "Test for house professional report page",
+  "name": "Test for app login api",
   "description": "",
-  "id": "check-export-button-can-be-found-on-the-page;test-for-house-professional-report-page",
+  "id": "app-login-api-test-for-different-envs;test-for-app-login-api",
   "type": "scenario_outline",
   "keyword": "Scenario Outline",
   "tags": [
     {
       "line": 4,
-      "name": "@gui"
-    },
-    {
-      "line": 4,
-      "name": "@houseProRpt"
+      "name": "@AppApi"
     }
   ]
 });
 formatter.step({
   "line": 6,
-  "name": "I call app login api of \u003cenv\u003e with \u003cusr\u003e and \u003cpsw\u003e for \u003cgroupCode\u003e for \u003ctestCase\u003e",
+  "name": "I call the \"login\" api of \u003cenv\u003e with \u003cpsw\u003e and \u003cusr\u003ein \u003capiParameters\u003e for \u003ctestCase\u003e",
   "keyword": "Given "
 });
 formatter.step({
   "line": 7,
-  "name": "I open the house pofessional report page of \u003cgroupId\u003e and \u003cteamId\u003e and \u003cprojectId\u003e and \u003ctaskId\u003e and \u003chouseId\u003e for \u003ctestCase\u003e",
-  "keyword": "When "
+  "name": "Verify the calling is successful with \"登录成功\" for \u003ctestCase\u003e",
+  "keyword": "Then "
 });
 formatter.step({
   "line": 8,
-  "name": "I wait for \"2\" seconds",
-  "keyword": "And "
+  "name": "I call the GetUsrOrg api of \u003cenv\u003e for \u003ctestCase\u003e",
+  "keyword": "When "
 });
 formatter.step({
   "line": 9,
-  "name": "I verify \u003cpageInfo\u003e can be found on the page and the summary contains \u003csummaryInfo\u003e",
+  "name": "Verify the related product list is expected as \u003cexpProductInfoPath\u003e for \u003ctestCase\u003e",
   "keyword": "Then "
 });
 formatter.step({
   "line": 10,
-  "name": "I click button \u003cfinishButton\u003e",
-  "keyword": "When "
+  "name": "Verify the related group info is expected as \u003cexpGrpInfo\u003e for \u003ctestCase\u003e",
+  "keyword": "And "
 });
 formatter.step({
   "line": 11,
-  "name": "I verify button \u003cbutton1\u003e can be found on the page",
-  "keyword": "Then "
+  "name": "Verify the related company info is expected as \u003cexpComInfoPath\u003e for \u003ctestCase\u003e",
+  "keyword": "And "
 });
 formatter.step({
   "line": 12,
-  "name": "I verify button \u003cbutton2\u003e can be found on the page",
-  "keyword": "Then "
+  "name": "Verify the related project info is expected as \u003cexpProjInfoPath\u003e for \u003ctestCase\u003e",
+  "keyword": "And "
 });
 formatter.step({
   "line": 13,
-  "name": "Quit the driver",
+  "name": "Verify the follow app info is expected as \u003cexpFollowApps\u003e for \u003ctestCase\u003e",
   "keyword": "And "
 });
 formatter.examples({
   "line": 15,
   "name": "",
   "description": "",
-  "id": "check-export-button-can-be-found-on-the-page;test-for-house-professional-report-page;",
+  "id": "app-login-api-test-for-different-envs;test-for-app-login-api;",
   "rows": [
     {
       "cells": [
@@ -86,70 +78,56 @@ formatter.examples({
         "env",
         "usr",
         "psw",
-        "groupCode",
-        "groupId",
-        "teamId",
-        "projectId",
-        "taskId",
-        "houseId",
-        "pageInfo",
-        "summaryInfo",
-        "finishButton",
-        "button1",
-        "button2"
+        "apiParameters",
+        "expProductInfoPath",
+        "expGrpInfo",
+        "expComInfoPath",
+        "expProjInfoPath",
+        "expFollowApps"
       ],
       "line": 16,
-      "id": "check-export-button-can-be-found-on-the-page;test-for-house-professional-report-page;;1"
+      "id": "app-login-api-test-for-different-envs;test-for-app-login-api;;1"
     },
     {
       "cells": [
-        "\"guiHouseProRpt_001\"",
+        "\"UsrRelatedInfo001\"",
         "\"prod\"",
-        "\"kenjjyftest1\"",
+        "\"kentest46\"",
         "\"12345678\"",
-        "\"jjyf\"",
-        "\"171319\"",
-        "\"171322\"",
-        "\"142639\"",
-        "\"9064300\"",
-        "\"67679751\"",
-        "\"汇总分析\"",
-        "\"本次查验共发现隐患66条\"",
-        "\"完成查验\"",
-        "\"按检查项下载\"",
-        "\"按区域下载\""
+        "\"device_id;password;username\"",
+        "\"src/main/resources/TestData/relatedAppInfo/appInfo_kentest46.csv\"",
+        "\"\"",
+        "\"\"",
+        "\"\"",
+        "\"\""
       ],
       "line": 17,
-      "id": "check-export-button-can-be-found-on-the-page;test-for-house-professional-report-page;;2"
+      "id": "app-login-api-test-for-different-envs;test-for-app-login-api;;2"
     }
   ],
   "keyword": "Examples"
 });
-formatter.before({
-  "duration": 113400,
-  "status": "passed"
-});
 formatter.scenario({
   "line": 17,
-  "name": "Test for house professional report page",
+  "name": "Test for app login api",
   "description": "",
-  "id": "check-export-button-can-be-found-on-the-page;test-for-house-professional-report-page;;2",
+  "id": "app-login-api-test-for-different-envs;test-for-app-login-api;;2",
   "type": "scenario",
   "keyword": "Scenario Outline",
   "tags": [
     {
-      "line": 1,
-      "name": "@houseProRpt"
+      "line": 4,
+      "name": "@AppApi"
     },
     {
       "line": 1,
-      "name": "@gui"
+      "name": "@AppApiTest"
     }
   ]
 });
 formatter.step({
   "line": 6,
-  "name": "I call app login api of \"prod\" with \"kenjjyftest1\" and \"12345678\" for \"jjyf\" for \"guiHouseProRpt_001\"",
+  "name": "I call the \"login\" api of \"prod\" with \"12345678\" and \"kentest46\"in \"device_id;password;username\" for \"UsrRelatedInfo001\"",
   "matchedColumns": [
     0,
     1,
@@ -161,194 +139,234 @@ formatter.step({
 });
 formatter.step({
   "line": 7,
-  "name": "I open the house pofessional report page of \"171319\" and \"171322\" and \"142639\" and \"9064300\" and \"67679751\" for \"guiHouseProRpt_001\"",
+  "name": "Verify the calling is successful with \"登录成功\" for \"UsrRelatedInfo001\"",
+  "matchedColumns": [
+    0
+  ],
+  "keyword": "Then "
+});
+formatter.step({
+  "line": 8,
+  "name": "I call the GetUsrOrg api of \"prod\" for \"UsrRelatedInfo001\"",
   "matchedColumns": [
     0,
-    5,
-    6,
-    7,
-    8,
-    9
+    1
   ],
   "keyword": "When "
 });
 formatter.step({
-  "line": 8,
-  "name": "I wait for \"2\" seconds",
-  "keyword": "And "
-});
-formatter.step({
   "line": 9,
-  "name": "I verify \"汇总分析\" can be found on the page and the summary contains \"本次查验共发现隐患66条\"",
+  "name": "Verify the related product list is expected as \"src/main/resources/TestData/relatedAppInfo/appInfo_kentest46.csv\" for \"UsrRelatedInfo001\"",
   "matchedColumns": [
-    10,
-    11
+    0,
+    5
   ],
   "keyword": "Then "
 });
 formatter.step({
   "line": 10,
-  "name": "I click button \"完成查验\"",
+  "name": "Verify the related group info is expected as \"\" for \"UsrRelatedInfo001\"",
   "matchedColumns": [
-    12
+    0,
+    6
   ],
-  "keyword": "When "
+  "keyword": "And "
 });
 formatter.step({
   "line": 11,
-  "name": "I verify button \"按检查项下载\" can be found on the page",
+  "name": "Verify the related company info is expected as \"\" for \"UsrRelatedInfo001\"",
   "matchedColumns": [
-    13
+    0,
+    7
   ],
-  "keyword": "Then "
+  "keyword": "And "
 });
 formatter.step({
   "line": 12,
-  "name": "I verify button \"按区域下载\" can be found on the page",
+  "name": "Verify the related project info is expected as \"\" for \"UsrRelatedInfo001\"",
   "matchedColumns": [
-    14
+    0,
+    8
+  ],
+  "keyword": "And "
+});
+formatter.step({
+  "line": 13,
+  "name": "Verify the follow app info is expected as \"\" for \"UsrRelatedInfo001\"",
+  "matchedColumns": [
+    0,
+    9
+  ],
+  "keyword": "And "
+});
+formatter.match({});
+formatter.result({
+  "status": "undefined"
+});
+formatter.match({});
+formatter.result({
+  "status": "undefined"
+});
+formatter.match({});
+formatter.result({
+  "status": "undefined"
+});
+formatter.match({});
+formatter.result({
+  "status": "undefined"
+});
+formatter.match({});
+formatter.result({
+  "status": "undefined"
+});
+formatter.match({});
+formatter.result({
+  "status": "undefined"
+});
+formatter.match({});
+formatter.result({
+  "status": "undefined"
+});
+formatter.match({});
+formatter.result({
+  "status": "undefined"
+});
+formatter.uri("src/main/resources/Features/Interface/AppApi_ZJLogin.feature");
+formatter.feature({
+  "line": 2,
+  "name": "App login API test for different envs",
+  "description": "",
+  "id": "app-login-api-test-for-different-envs",
+  "keyword": "Feature",
+  "tags": [
+    {
+      "line": 1,
+      "name": "@AppApiTest"
+    }
+  ]
+});
+formatter.scenarioOutline({
+  "line": 5,
+  "name": "Test for app login api",
+  "description": "",
+  "id": "app-login-api-test-for-different-envs;test-for-app-login-api",
+  "type": "scenario_outline",
+  "keyword": "Scenario Outline",
+  "tags": [
+    {
+      "line": 4,
+      "name": "@AppApi"
+    }
+  ]
+});
+formatter.step({
+  "line": 6,
+  "name": "I call the \"login\" api of \u003cenv\u003e with \u003cusr\u003e and \u003cpsw\u003e in \u003capiParameters\u003e for \u003ctestCase\u003e",
+  "keyword": "Given "
+});
+formatter.step({
+  "line": 7,
+  "name": "Verify the calling is successful with \"登录成功\" for \u003ctestCase\u003e",
+  "keyword": "Then "
+});
+formatter.step({
+  "line": 8,
+  "name": "Verify the return message is expected as \u003cexpValueList\u003e in \u003creturnMsgFieldList\u003e for \u003ctestCase\u003e",
+  "keyword": "And "
+});
+formatter.examples({
+  "line": 10,
+  "name": "",
+  "description": "",
+  "id": "app-login-api-test-for-different-envs;test-for-app-login-api;",
+  "rows": [
+    {
+      "cells": [
+        "testCase",
+        "env",
+        "usr",
+        "psw",
+        "apiParameters",
+        "expValueList",
+        "returnMsgFieldList"
+      ],
+      "line": 11,
+      "id": "app-login-api-test-for-different-envs;test-for-app-login-api;;1"
+    },
+    {
+      "cells": [
+        "\"appapilogin_001\"",
+        "\"prod\"",
+        "\"kentest40\"",
+        "\u002712345678\u0027",
+        "\"device_id;password;username\"",
+        "\"115430;肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆;kentest40;0\"",
+        "\"id;real_name;user_name;delete_at\""
+      ],
+      "line": 12,
+      "id": "app-login-api-test-for-different-envs;test-for-app-login-api;;2"
+    }
+  ],
+  "keyword": "Examples"
+});
+formatter.scenario({
+  "line": 12,
+  "name": "Test for app login api",
+  "description": "",
+  "id": "app-login-api-test-for-different-envs;test-for-app-login-api;;2",
+  "type": "scenario",
+  "keyword": "Scenario Outline",
+  "tags": [
+    {
+      "line": 4,
+      "name": "@AppApi"
+    },
+    {
+      "line": 1,
+      "name": "@AppApiTest"
+    }
+  ]
+});
+formatter.step({
+  "line": 6,
+  "name": "I call the \"login\" api of \"prod\" with \"kentest40\" and \u002712345678\u0027 in \"device_id;password;username\" for \"appapilogin_001\"",
+  "matchedColumns": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "keyword": "Given "
+});
+formatter.step({
+  "line": 7,
+  "name": "Verify the calling is successful with \"登录成功\" for \"appapilogin_001\"",
+  "matchedColumns": [
+    0
   ],
   "keyword": "Then "
 });
 formatter.step({
-  "line": 13,
-  "name": "Quit the driver",
+  "line": 8,
+  "name": "Verify the return message is expected as \"115430;肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆肆;kentest40;0\" in \"id;real_name;user_name;delete_at\" for \"appapilogin_001\"",
+  "matchedColumns": [
+    0,
+    5,
+    6
+  ],
   "keyword": "And "
 });
-formatter.match({
-  "arguments": [
-    {
-      "val": "prod",
-      "offset": 25
-    },
-    {
-      "val": "kenjjyftest1",
-      "offset": 37
-    },
-    {
-      "val": "12345678",
-      "offset": 56
-    },
-    {
-      "val": "jjyf",
-      "offset": 71
-    },
-    {
-      "val": "guiHouseProRpt_001",
-      "offset": 82
-    }
-  ],
-  "location": "AppApiTest.i_call_app_login_api_of_with_and_for_for(String,String,String,String,String)"
-});
+formatter.match({});
 formatter.result({
-  "duration": 127923100,
-  "error_message": "java.lang.NullPointerException\r\n\tat java.io.Reader.\u003cinit\u003e(Unknown Source)\r\n\tat java.io.InputStreamReader.\u003cinit\u003e(Unknown Source)\r\n\tat com.test.Util.GetConfigProperties.getValue(GetConfigProperties.java:26)\r\n\tat com.test.InterfaceTest.Interface.AppApiTest.i_call_app_login_api_of_with_and_for_for(AppApiTest.java:433)\r\n\tat ✽.Given I call app login api of \"prod\" with \"kenjjyftest1\" and \"12345678\" for \"jjyf\" for \"guiHouseProRpt_001\"(Gui/GUI_ProRptH5.feature:6)\r\n",
-  "status": "failed"
+  "status": "undefined"
 });
-formatter.match({
-  "arguments": [
-    {
-      "val": "171319",
-      "offset": 45
-    },
-    {
-      "val": "171322",
-      "offset": 58
-    },
-    {
-      "val": "142639",
-      "offset": 71
-    },
-    {
-      "val": "9064300",
-      "offset": 84
-    },
-    {
-      "val": "67679751",
-      "offset": 98
-    },
-    {
-      "val": "guiHouseProRpt_001",
-      "offset": 113
-    }
-  ],
-  "location": "PageOperations.i_open_the_house_pofessional_report_page_of_and_and_and_and_for(String,String,String,String,String,String)"
-});
+formatter.match({});
 formatter.result({
-  "status": "skipped"
+  "status": "undefined"
 });
-formatter.match({
-  "arguments": [
-    {
-      "val": "2",
-      "offset": 12
-    }
-  ],
-  "location": "ShareSteps.i_wait_for_seconds(String)"
-});
+formatter.match({});
 formatter.result({
-  "status": "skipped"
-});
-formatter.match({
-  "arguments": [
-    {
-      "val": "汇总分析",
-      "offset": 10
-    },
-    {
-      "val": "本次查验共发现隐患66条",
-      "offset": 67
-    }
-  ],
-  "location": "PageOperations.i_verify_can_be_found_on_the_page_and_the_summary_contains(String,String)"
-});
-formatter.result({
-  "status": "skipped"
-});
-formatter.match({
-  "arguments": [
-    {
-      "val": "完成查验",
-      "offset": 16
-    }
-  ],
-  "location": "PageOperations.i_click_button(String)"
-});
-formatter.result({
-  "status": "skipped"
-});
-formatter.match({
-  "arguments": [
-    {
-      "val": "按检查项下载",
-      "offset": 17
-    }
-  ],
-  "location": "PageOperations.i_verify_button_can_be_found_on_the_page(String)"
-});
-formatter.result({
-  "status": "skipped"
-});
-formatter.match({
-  "arguments": [
-    {
-      "val": "按区域下载",
-      "offset": 17
-    }
-  ],
-  "location": "PageOperations.i_verify_button_can_be_found_on_the_page(String)"
-});
-formatter.result({
-  "status": "skipped"
-});
-formatter.match({
-  "location": "PageOperations.quit_the_driver()"
-});
-formatter.result({
-  "status": "skipped"
-});
-formatter.after({
-  "duration": 3337943000,
-  "status": "passed"
+  "status": "undefined"
 });
 });

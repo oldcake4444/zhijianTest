@@ -1,9 +1,9 @@
-@AppApi
+@AppApiTest
 Feature: App login API test for different envs
 
   @AppApi
   Scenario Outline: Test for app login api
-    Given I call the "login" api of <env> with <psw> and <usr>in <apiParameters> for <testCase>
+    Given I call the "login" api of <env> with <usr> and <psw> in <apiParameters> for <testCase>
     Then Verify the calling is successful with "登录成功" for <testCase>
     When I call the GetUsrOrg api of <env> for <testCase>
     Then Verify the related product list is expected as <expProductInfoPath> for <testCase>

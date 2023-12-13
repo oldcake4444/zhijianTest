@@ -1,9 +1,12 @@
 package com.test.Util;
 
+
+
+import io.cucumber.java.Before;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import cucumber.api.java.Before;
 
 public class ScenarioContext { 
 	 
@@ -24,7 +27,7 @@ public class ScenarioContext {
         context.get().put(name, obj); 
     } 
  
-    @Before 
+    @Before
     public void init() { 
         context.set(new HashMap<String, Object>()); 
     } 

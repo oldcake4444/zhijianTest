@@ -17,8 +17,10 @@ import com.test.Util.ScenarioContext;
 import com.test.db.Util.DbConnector;
 import com.test.db.Util.DbQuery;
 
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
+import io.cucumber.java.PendingException;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import net.sf.json.JSONObject;
 
 public class ApiRequest {

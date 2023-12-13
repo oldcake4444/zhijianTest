@@ -37,7 +37,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-import cucumber.deps.com.thoughtworks.xstream.core.util.Base64Encoder;
 
 public class ScreenCaptureHtmlUnitDriver extends HtmlUnitDriver implements TakesScreenshot {
 
@@ -74,9 +73,9 @@ public <X> X getScreenshotAs(OutputType<X> target) throws WebDriverException {
         archive = downloadCssAndImages(getWebClient(), (HtmlPage) getCurrentWindow().getEnclosedPage());
     } catch (Exception e) {
     }
-    if(target.equals(OutputType.BASE64)){
-        return target.convertFromBase64Png(new Base64Encoder().encode(archive));
-    }
+//    if(target.equals(OutputType.BASE64)){
+//        return target.convertFromBase64Png(new Base64Encoder().encode(archive));
+//    }
     if(target.equals(OutputType.BYTES)){
         return (X) archive;
     }

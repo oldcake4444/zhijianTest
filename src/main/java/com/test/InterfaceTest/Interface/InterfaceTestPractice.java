@@ -9,8 +9,10 @@ import com.test.Util.HttpUtil;
 import com.test.Util.ScenarioContext;
 import com.test.Util.TextFormat;
 
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
+import io.cucumber.java.PendingException;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import net.sf.json.JSONObject;
 
 public class InterfaceTestPractice {
