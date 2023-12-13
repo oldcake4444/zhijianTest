@@ -35,7 +35,7 @@ public class GetConfigProperties {
 		Properties prop = new Properties();
 		String value = null;		
 		try {
-			prop.load(new InputStreamReader(Object.class.getResourceAsStream(propertyPath), "UTF-8"));
+			prop.load(new InputStreamReader(GetConfigProperties.class.getResourceAsStream(propertyPath), "UTF-8"));
 			
 			
 			
@@ -53,7 +53,7 @@ public class GetConfigProperties {
 	
 	@Test
 	public void testGetProperties() throws IOException {
-			log.info(getValue("/Configuration/GUI_zhijian.properties", "prod"));
+			log.info(getValue("src/main/resources/Configuration/interface.properties", "DailyWeather"));
 	}
 
 }

@@ -19,7 +19,7 @@ public class InterfaceTestPractice {
 	
 	static Logger log = Logger.getLogger("InterfaceTest.class");
 	
-	private String configPath = "src/main/resources/Configuration/interface.properties";
+	private String configPath = "/Configuration/interface.properties";
 	
 	@Given("^I call the interface \"([^\"]*)\" for city \"([^\"]*)\" for \"([^\"]*)\"$")
 	public void i_call_the_interface_for_city_for(String interfaceName, String cityCode, String testCase) throws Throwable {
