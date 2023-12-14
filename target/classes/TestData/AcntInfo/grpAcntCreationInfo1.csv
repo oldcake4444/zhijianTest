@@ -1,6 +1,0 @@
-grpName,acntName,psw,realName,phone,email,role,grpcode,duplicate
-60test,kantest1,12345678,侃测试1,13316099770,kantest@automation.com,集团管理员,ll,
-60test,kantest2,12345678,侃测试2,13316099770,kantest@automation.com,集团员工,ll,
-60test,kantest3,12345678,侃测试3,13316099770,kantest@automation.com,集团员工,ll,
-60test,kantest4,12345678,侃测试4,13316099770,kantest@automation.com,集团员工,ll,
-60test,kantest15,12345678,侃测试15,13316099770,kantest@automation.com,集团管理员,ll,
