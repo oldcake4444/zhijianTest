@@ -197,12 +197,62 @@
           <version>7.14.1</version>
           <scope>compile</scope>
       </dependency>
+
       <dependency>
           <groupId>io.cucumber</groupId>
           <artifactId>cucumber-junit</artifactId>
           <version>7.14.1</version>
           <scope>compile</scope>
       </dependency>
+
+      <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
+      <dependency>
+          <groupId>io.cucumber</groupId>
+          <artifactId>cucumber-testng</artifactId>
+          <version>7.14.1</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/com.intuit.karate/karate-apache -->
+      <dependency>
+          <groupId>com.intuit.karate</groupId>
+          <artifactId>karate-apache</artifactId>
+          <version>0.9.6</version>
+          <scope>test</scope>
+      </dependency>
+
+
+      <!-- https://mvnrepository.com/artifact/com.intuit.karate/karate-junit4 -->
+      <dependency>
+          <groupId>com.intuit.karate</groupId>
+          <artifactId>karate-junit4</artifactId>
+          <version>1.4.0.RC3</version>
+          <scope>test</scope>
+      </dependency>
+
+
+      <dependency>
+          <groupId>com.intuit.karate</groupId>
+          <artifactId>karate-testng</artifactId>
+          <version>0.8.0</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/jakarta.xml.bind/jakarta.xml.bind-api -->
+      <dependency>
+          <groupId>jakarta.xml.bind</groupId>
+          <artifactId>jakarta.xml.bind-api</artifactId>
+          <version>4.0.0</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+      <dependency>
+          <groupId>javax.xml.bind</groupId>
+          <artifactId>jaxb-api</artifactId>
+          <version>2.4.0-b180830.0359</version>
+      </dependency>
+
+
+
+
 
 
   </dependencies>

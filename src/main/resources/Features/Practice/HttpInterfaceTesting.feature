@@ -3,7 +3,7 @@ Feature: Sample test for http interface test
 
   @interface
   Scenario Outline: Test for the http interface
-  Given I test call the interface <whetherRptInterfacce> for city <cityCode> for <testCase>
+  Given I call the interface <whetherRptInterfacce> for city <cityCode> for <testCase>
   Then Verify city <city> <cityCode> can be found in the return message for <testCase>
   
   Examples:

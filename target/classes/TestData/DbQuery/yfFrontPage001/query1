@@ -1,0 +1,3 @@
+select t1.issueCount/t2.areaCount from 
+(select count(id) as issueCount from house_qm_check_task_issue where category_cls = 26 and delete_at is null and typ = 1 and project_id = 100756) as t1,
+(select count(distinct area_id) as areaCount from repossession_status where project_id = 100756 and delete_at is null and status > 0) as t2
